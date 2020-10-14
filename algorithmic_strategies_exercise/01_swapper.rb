@@ -4,7 +4,7 @@
 
 def swapper(arr, idx_1, idx_2)
     arr[idx_1], arr[idx_2] = arr[idx_2], arr[idx_1]
-    return arr
+    arr
 end
 
 p swapper(["a", "b", "c", "d"], 0, 2)               # => ["c", "b", "a", "d"]

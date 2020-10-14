@@ -4,11 +4,9 @@
 
 def is_sorted(arr)
     (0...arr.length-1).each do |i|
-        if arr[i] > arr[i+1]
-            return false
-        end
+        return false if arr[i] > arr[i+1]
     end
-    return true
+    true
 end
 
 p is_sorted([1, 4, 10, 13, 15])       # => true
