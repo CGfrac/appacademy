@@ -2,7 +2,7 @@
 # The method should return an array containing all elements of the given arrays.
 
 def union(*arrays)
-    arrays.flatten
+    arrays.inject { |acc, ele| acc + ele }
 end
 
 p union(["a", "b"], [1, 2, 3]) # => ["a", "b", 1, 2, 3]
