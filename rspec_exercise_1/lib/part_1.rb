@@ -9,3 +9,7 @@ end
 def repeat(str, amt)
     str * amt
 end
+
+def yell(str)
+    str.upcase! + "!"
+end
