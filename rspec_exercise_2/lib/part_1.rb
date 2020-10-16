@@ -1,15 +1,18 @@
 VOWELS = "aeiou"
 
 def partition(arr, n)
-    parts = [ [], [] ]
+    less = []
+    greater = []
+
     arr.each do |num|
         if num < n
-            parts[0] << num
+            less << num
         else
-            parts[1] << num
+            greater << num
         end
     end
-    parts
+
+    [less, greater]
 end
 
 def merge(hash_1, hash_2)
