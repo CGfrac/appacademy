@@ -28,3 +28,15 @@ def censor(sentence, curses)
     end
     censored.join(" ")
 end
+
+def power_of_two?(n)
+    return true if n == 1
+    
+    i = 2
+    while i <= n
+        return true if i == n
+        i *= 2
+    end
+
+    false
+end
