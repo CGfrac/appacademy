@@ -1,7 +1,6 @@
 def palindrome?(str)
-    reverse = ""
-    str.each_char { |char| reverse = char + reverse }
-    str == reverse
+    str.each_char.with_index { |char, i| return false if str[i] != str[-i - 1] }
+    true
 end
 
 def substrings(str)
