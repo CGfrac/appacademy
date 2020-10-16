@@ -25,11 +25,16 @@ end
 def censor(sentence, curses)
     censored = sentence.split.map do |word|
         if curses.include?(word.downcase)
-            word.each_char.with_index { |char, i| word[i] = "*" if VOWELS.include?(char.downcase) }
+            star_vowels(word)
+        else
+            word
         end
-        word
     end
     censored.join(" ")
+end
+
+def star_vowels(word)
+    word.each_char.with_index { |char, i| word[i] = "*" if VOWELS.include?(char.downcase) }
 end
 
 def power_of_two?(n)
