@@ -5,7 +5,7 @@ end
 
 def substrings(str)
     arr = []
-    str.each_char.with_index do |char, i|
+    (0...str.length).each do |i|
         (i...str.length).each { |j| arr << str[i..j] }
     end
     arr
