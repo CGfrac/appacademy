@@ -38,13 +38,9 @@ def star_vowels(word)
 end
 
 def power_of_two?(n)
-    return true if n == 1
-    
-    i = 2
-    while i <= n
-        return true if i == n
+    i = 1
+    while i < n
         i *= 2
     end
-
-    false
+    i == n
 end
