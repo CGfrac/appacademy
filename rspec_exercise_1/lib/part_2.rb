@@ -11,3 +11,9 @@ def hipsterfy(word)
     end
     word
 end
+
+def vowel_counts(str)
+    counts = Hash.new(0)
+    str.downcase.each_char { |char| counts[char] += 1 if VOWELS.include?(char) }
+    counts
+end
