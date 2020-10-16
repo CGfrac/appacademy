@@ -1,4 +1,4 @@
-ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+ALPHABET = ("a".."z").to_a
 VOWELS = "aeiou"
 
 def hipsterfy(word)
