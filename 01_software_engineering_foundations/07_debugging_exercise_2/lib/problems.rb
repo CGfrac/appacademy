@@ -9,27 +9,8 @@ def is_prime?(num)
     (2...num).none? { |i| num % i == 0 }
 end
 
-def divisors(num)
-    factors = []
-    i = 2
-    while i <= num
-        if num % i == 0
-            factors << i
-        end
-        i += 1
-    end
-    factors
-end
-
 def largest_prime_factor(num)
-    candidates = divisors(num)
-    i = candidates.length - 1
-    while i >= 0 
-        n = candidates[i]
-        return n if is_prime?(n)
-        i -= 1
-    end
-    1
+    num.downto(2) { |i| return i if num % i == 0 && is_prime?(i) }
 end
 
 def unique_chars?(str)
