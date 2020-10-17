@@ -55,5 +55,5 @@ def counter(arr)
 end
 
 def ana_array(arr_1, arr_2)
-    count_1 = Hash.new(0)
+    counter(arr_1) == counter(arr_2)
 end
