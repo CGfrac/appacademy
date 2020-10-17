@@ -32,3 +32,12 @@ def largest_prime_factor(num)
     end
     1
 end
+
+def unique_chars?(str)
+    counter = Hash.new(0)
+    str.each_char do |char|
+        return false if counter[char] == 1
+        counter[char] = 1
+    end
+    true
+end
