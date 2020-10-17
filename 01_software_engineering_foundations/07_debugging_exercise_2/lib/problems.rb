@@ -47,3 +47,13 @@ def dupe_indices(arr)
     arr.each.with_index { |ele, i| indices[ele] += [i] }
     indices.select! { |k, v| v.length > 1 }
 end
+
+def counter(arr)
+    counter = Hash.new(0)
+    arr.each { |ele| counter[ele] += 1}
+    counter
+end
+
+def ana_array(arr_1, arr_2)
+    count_1 = Hash.new(0)
+end
