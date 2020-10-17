@@ -41,3 +41,9 @@ def unique_chars?(str)
     end
     true
 end
+
+def dupe_indices(arr)
+    indices = Hash.new([])
+    arr.each.with_index { |ele, i| indices[ele] += [i] }
+    indices.select! { |k, v| v.length > 1 }
+end
