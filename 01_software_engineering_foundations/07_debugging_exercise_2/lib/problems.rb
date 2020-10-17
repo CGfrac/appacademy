@@ -15,17 +15,21 @@ end
 
 def unique_chars?(str)
     counter = Hash.new(0)
+
     str.each_char do |char|
         return false if counter[char] == 1
         counter[char] = 1
     end
+
     true
 end
 
 def dupe_indices(arr)
-    indices = Hash.new([])
-    arr.each.with_index { |ele, i| indices[ele] += [i] }
-    indices.select! { |k, v| v.length > 1 }
+    indices = Hash.new { |h, k| h[k] = [] }
+
+    arr.each.with_index { |ele, i| indices[ele] << i }
+
+    indices.select { |ele, arr| arr.length > 1 }
 end
 
 def counter(arr)
