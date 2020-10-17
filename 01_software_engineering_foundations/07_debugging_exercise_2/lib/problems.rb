@@ -8,15 +8,15 @@ def is_prime?(num)
 end
 
 def divisors(num)
-    divisors = []
-    factor = 2
-    while factor < num
-        if num % factor == 0
-            divisors << factor
-            num /= factor
+    factors = []
+    i = 2
+    while i < num
+        if num % i == 0
+            factors << i
+            num /= i
         else
-            factor += 1
+            i += 1
         end
     end
-    divisors
+    factors
 end
