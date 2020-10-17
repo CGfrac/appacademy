@@ -13,10 +13,8 @@ def divisors(num)
     while i < num
         if num % i == 0
             factors << i
-            num /= i
-        else
-            i += 1
         end
+        i += 1
     end
     factors
 end
