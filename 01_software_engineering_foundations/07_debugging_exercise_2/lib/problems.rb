@@ -32,12 +32,12 @@ def dupe_indices(arr)
     indices.select { |ele, arr| arr.length > 1 }
 end
 
-def counter(arr)
+def count_ele(arr)
     counter = Hash.new(0)
     arr.each { |ele| counter[ele] += 1}
     counter
 end
 
 def ana_array(arr_1, arr_2)
-    counter(arr_1) == counter(arr_2)
+    count_ele(arr_1) == count_ele(arr_2)
 end
