@@ -7,3 +7,16 @@ def is_prime?(num)
     true
 end
 
+def divisors(num)
+    divisors = []
+    factor = 2
+    while factor < num
+        if num % factor == 0
+            divisors << factor
+            num /= factor
+        else
+            factor += 1
+        end
+    end
+    divisors
+end
