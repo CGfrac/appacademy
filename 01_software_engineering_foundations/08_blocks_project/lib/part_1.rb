@@ -14,7 +14,7 @@ end
 
 def aba_translate(str)
     translation = ""
-    str.each_char.with_index do |char, i|
+    str.each_char do |char|
         translation += char
         translation += ("b" + char) if VOWELS.include?(char)
     end
