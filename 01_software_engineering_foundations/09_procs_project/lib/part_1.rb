@@ -21,3 +21,8 @@ def my_count(arr, &prc)
 
     count
 end
+
+def my_any?(arr, &prc)
+    arr.each { |ele| return true if prc.call(ele) }
+    false
+end
