@@ -3,8 +3,10 @@ def all_words_capitalized?(arr)
 end
 
 def no_valid_url?(arr)
-    valid_urls = ["com", "net", "io", "org"]
-    arr.none? { |url| valid_urls.include?(url.split(".")[-1]) }
+    valid_endings = [".com", ".net", ".io", ".org"]
+    arr.none? do |url| 
+        valid_endings.any? { |ending| url.end_with?(ending) }
+    end
 end
 
 def any_passing_students?(students)
