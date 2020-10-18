@@ -6,3 +6,13 @@ def word_changer(str, &prc)
     new_str = str.split.map { |word| prc.call(word) }
     new_str.join(" ")
 end
+
+def greater_proc_value(num, prc_1, prc_2)
+    num_1 = prc_1.call(num)
+    num_2 = prc_2.call(num)
+    if num_1 > num_2
+        return num_1
+    else
+        return num_2
+    end
+end
