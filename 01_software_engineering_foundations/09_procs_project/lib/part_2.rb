@@ -3,8 +3,9 @@ def reverser(str, &prc)
 end
 
 def word_changer(str, &prc)
-    new_str = str.split.map { |word| prc.call(word) }
-    new_str.join(" ")
+    words = str.split
+    new_words = words.map { |word| prc.call(word) }
+    new_words.join(" ")
 end
 
 def greater_proc_value(num, prc_1, prc_2)
