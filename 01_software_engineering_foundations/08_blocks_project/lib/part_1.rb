@@ -1,3 +1,5 @@
+VOWELS = "aeiou"
+
 def select_even_nums(arr)
     arr.select(&:even?)
 end
@@ -9,4 +11,13 @@ end
 def count_positive_subarrays(arr)
     arr.select! { |sub_arr| sub_arr.sum > 0 }
     arr.count
+end
+
+def aba_translate(str)
+    translation = ""
+    str.each_char.with_index do |char, i|
+        translation += char
+        translation += ("b" + char) if VOWELS.include?(char)
+    end
+    translation
 end
