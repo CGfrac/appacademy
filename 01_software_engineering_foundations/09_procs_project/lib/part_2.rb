@@ -24,3 +24,17 @@ def and_selector(arr, prc_1, prc_2)
 
     new_arr
 end
+
+def alternating_mapper(arr, prc_1, prc_2)
+    new_arr = []
+
+    arr.each.with_index do |ele, i|
+        if i.even?
+            new_arr << prc_1.call(ele)
+        else
+            new_arr << prc_2.call(ele)
+        end
+    end
+
+    new_arr
+end
