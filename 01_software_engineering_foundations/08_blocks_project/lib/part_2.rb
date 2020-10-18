@@ -1,10 +1,10 @@
-def all_words_capitalized?(arr)
-    arr.all? { |word| word == word.capitalize }
+def all_words_capitalized?(words)
+    words.all? { |word| word == word.capitalize }
 end
 
-def no_valid_url?(arr)
+def no_valid_url?(url)
     valid_endings = [".com", ".net", ".io", ".org"]
-    arr.none? do |url| 
+    url.none? do |url| 
         valid_endings.any? { |ending| url.end_with?(ending) }
     end
 end

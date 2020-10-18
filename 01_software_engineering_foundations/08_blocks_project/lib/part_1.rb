@@ -1,7 +1,7 @@
 VOWELS = "aeiou"
 
-def select_even_nums(arr)
-    arr.select(&:even?)
+def select_even_nums(nums)
+    nums.select(&:even?)
 end
 
 def reject_puppies(dogs)
@@ -12,9 +12,9 @@ def count_positive_subarrays(arr)
     arr.count { |sub_arr| sub_arr.sum > 0 }
 end
 
-def aba_translate(str)
+def aba_translate(word)
     translation = ""
-    str.each_char do |char|
+    word.each_char do |char|
         translation += char
         translation += ("b" + char) if VOWELS.include?(char)
     end
