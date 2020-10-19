@@ -40,4 +40,8 @@ class Bootcamp
             return false
         end
     end
+
+    def enrolled?(student)
+        students.include?(student)
+    end
 end
