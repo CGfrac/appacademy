@@ -31,4 +31,13 @@ class Bootcamp
     def hire(teacher)
         @teachers << teacher
     end
+
+    def enroll(student)
+        if @students.length < @student_capacity
+            students << student
+            return true
+        else
+            return false
+        end
+    end
 end
