@@ -25,4 +25,10 @@ class Bootcamp
     def students
         @students
     end
+
+    # Instance methods
+
+    def hire(teacher)
+        @teachers << teacher
+    end
 end
