@@ -36,7 +36,6 @@ class Dog
     end
 
     def favorite_food?(food)
-        # food.capitalize works but ideally it should handle cases regardless of the formating in @favorite_foods as well
-        @favorite_foods.include?(food.capitalize)
+        @favorite_foods.map(&:downcase).include?(food.downcase)
     end
 end
