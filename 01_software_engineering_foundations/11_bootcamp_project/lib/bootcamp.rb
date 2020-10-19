@@ -57,4 +57,8 @@ class Bootcamp
             return false
         end
     end
+
+    def num_grades(student)
+        @grades[student].length
+    end
 end
