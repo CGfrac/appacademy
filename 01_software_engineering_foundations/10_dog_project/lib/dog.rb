@@ -7,6 +7,8 @@ class Dog
         @favorite_foods = favorite_foods
     end
 
+    # Getters
+
     def name
         @name
     end
@@ -19,9 +21,17 @@ class Dog
         @age
     end
 
+    def favorite_foods
+        @favorite_foods
+    end
+
+    # Setters
+
     def age=(new_age)
         @age = new_age
     end
+
+    # Instance methods
 
     def bark
         if @age > 3
@@ -29,10 +39,6 @@ class Dog
         else
             return @bark.downcase
         end
-    end
-
-    def favorite_foods
-        @favorite_foods
     end
 
     def favorite_food?(food)
