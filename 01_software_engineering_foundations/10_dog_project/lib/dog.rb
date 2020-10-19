@@ -23,6 +23,14 @@ class Dog
         @age = new_age
     end
 
+    def bark
+        if @age > 3
+            return @bark.upcase
+        else
+            return @bark.downcase
+        end
+    end
+
     def favorite_foods
         @favorite_foods
     end
