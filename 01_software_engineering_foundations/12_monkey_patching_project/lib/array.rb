@@ -1,24 +1,19 @@
 # Monkey-Patch Ruby's existing Array class to add your own custom methods
 class Array
     def span
-        if self.length > 0
-            minmax = self.minmax
-            return minmax[1] - minmax[0]
-        else
-            return nil
-        end
+        return nil if self.empty?
+        
+        self.max - self.min
     end
 
     def average
-        if self.length > 0
-            return self.sum / (self.length * 1.0)
-        else
-            return nil
-        end
+        return nil if self.empty?
+        
+        self.sum / (self.length * 1.0)
     end
 
     def median
-        return nil if self.length == 0
+        return nil if self.empty?
 
         if self.length.odd?
             return self.sort[self.length / 2]
