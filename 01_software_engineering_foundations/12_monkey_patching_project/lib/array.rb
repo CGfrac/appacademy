@@ -56,4 +56,14 @@ class Array
             end
         end
     end
+
+    def my_transpose
+        new_arr = Array.new(self.length) { Array.new(self[0].length) }
+        self.each.with_index do |row, i|
+            row.each_with_index do |column, j|
+                new_arr[j][i] = self[i][j]
+            end
+        end
+        new_arr
+    end
 end
