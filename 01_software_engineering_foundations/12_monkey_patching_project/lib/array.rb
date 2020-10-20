@@ -31,14 +31,14 @@ class Array
         counter
     end
 
-    def my_count(value)
+    def my_count(target)
         count = 0
-        self.each { |ele| count += 1 if ele == value }
+        self.each { |ele| count += 1 if ele == target }
         count
     end
 
-    def my_index(value)
-        self.each.with_index { |ele, idx| return idx if ele == value }
+    def my_index(target)
+        self.each.with_index { |ele, idx| return idx if ele == target }
         nil
     end
 
