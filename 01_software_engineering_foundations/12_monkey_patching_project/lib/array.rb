@@ -43,13 +43,9 @@ class Array
     end
 
     def my_uniq
-        visited = Hash.new(false)
-        self.select do |ele|
-            if !visited[ele]
-                visited[ele] = true
-                ele
-            end
-        end
+        hash = {}
+        self.each { |ele| hash[ele] = true }
+        hash.keys
     end
 
     def my_transpose
