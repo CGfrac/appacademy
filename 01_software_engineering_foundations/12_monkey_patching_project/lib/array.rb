@@ -29,4 +29,10 @@ class Array
             return (sorted[middle_left] + sorted[middle_right]) / 2.0
         end
     end
+
+    def counts
+        counter = Hash.new(0)
+        self.each { |ele| counter[ele] += 1 }
+        counter
+    end
 end
