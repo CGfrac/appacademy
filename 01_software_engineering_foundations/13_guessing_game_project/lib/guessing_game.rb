@@ -24,6 +24,14 @@ class GuessingGame
         else
             p "too small"
         end
-        
+
+    end
+
+    def ask_user
+        p "enter a number"
+
+        num = gets.chomp.to_i
+
+        check_num(num)
     end
 end
