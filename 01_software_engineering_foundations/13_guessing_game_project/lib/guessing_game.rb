@@ -16,13 +16,13 @@ class GuessingGame
     def check_num(num)
         @num_attempts += 1
         
-        if num == @secret_num
+        if num > @secret_num
+            p "too big"
+        elsif num < @secret_num
+            p "too small"
+        else
             p "you win"
             @game_over = true
-        elsif num > @secret_num
-            p "too big"
-        else
-            p "too small"
         end
 
     end
