@@ -46,4 +46,14 @@ class Array
         self.each.with_index { |ele, idx| return idx if ele == value }
         nil
     end
+
+    def my_uniq
+        visited = Hash.new(false)
+        self.select do |ele|
+            if !visited[ele]
+                visited[ele] = true
+                ele
+            end
+        end
+    end
 end
