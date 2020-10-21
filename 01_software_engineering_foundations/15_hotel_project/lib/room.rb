@@ -17,4 +17,8 @@ class Room
     def full?
         @occupants.length == @capacity
     end
+
+    def available_space
+        @capacity - @occupants.length
+    end
 end
