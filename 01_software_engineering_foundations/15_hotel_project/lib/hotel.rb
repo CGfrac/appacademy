@@ -32,7 +32,7 @@ class Hotel
     end
 
     def has_vacancy?
-        @rooms.any? { |name, room| !room.full? }
+        @rooms.values.any? { |room| !room.full? }
     end
 
     def list_rooms
