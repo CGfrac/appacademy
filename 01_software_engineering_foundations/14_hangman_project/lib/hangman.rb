@@ -46,7 +46,7 @@ class Hangman
     
     @attempted_chars << char
 
-    indices = get_matching_indices(char)
+    indices = self.get_matching_indices(char)
     self.fill_indices(char, indices)
 
     @remaining_incorrect_guesses -= 1 if indices.empty?
@@ -78,7 +78,7 @@ class Hangman
   end
 
   def game_over?
-    if win? || lose?
+    if self.win? || self.lose?
       p @secret_word
       return true
     end
