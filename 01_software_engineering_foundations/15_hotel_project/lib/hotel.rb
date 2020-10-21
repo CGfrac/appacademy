@@ -8,8 +8,7 @@ class Hotel
     end
 
     def name
-        capitalize = @name.split.map(&:capitalize)
-        capitalize.join(" ")
+        @name.split.map(&:capitalize).join(" ")
     end
 
     def rooms
