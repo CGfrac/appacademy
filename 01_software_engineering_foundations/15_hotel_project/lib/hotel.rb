@@ -36,6 +36,6 @@ class Hotel
     end
 
     def list_rooms
-        @rooms.each_key { |name| puts "#{name}.*#{@rooms[name].available_space}" }
+        @rooms.each { |name, room| puts "#{name} #{room.available_space}" }
     end
 end
