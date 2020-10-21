@@ -31,4 +31,9 @@ class Hotel
             p "sorry, room does not exist"
         end
     end
+
+    def has_vacancy?
+        @rooms.any? { |name, room| !room.full? }
+    end
+    
 end
