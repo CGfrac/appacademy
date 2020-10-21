@@ -69,9 +69,18 @@ class Hangman
     if @guess_word.join == @secret_word
       p "WIN"
       return true
-    else
-      return false
     end
+
+    false
+  end
+
+  def lose?
+    if @remaining_incorrect_guesses == 0
+      p "LOSE"
+      return true
+    end
+
+    false
   end
 
 end
