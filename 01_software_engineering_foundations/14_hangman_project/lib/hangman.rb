@@ -56,8 +56,7 @@ class Hangman
 
   def ask_user_for_guess
     p "Enter a char:"
-    char = gets.chomp
-    try_guess(char)
+    self.try_guess(gets.chomp)
   end
 
   def win?
