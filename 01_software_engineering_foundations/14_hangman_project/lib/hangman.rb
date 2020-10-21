@@ -1,3 +1,5 @@
+require "byebug"
+
 class Hangman
   DICTIONARY = ["cat", "dog", "bootcamp", "pizza"]
 
@@ -54,6 +56,21 @@ class Hangman
       end
 
       return true
+    end
+  end
+
+  def ask_user_for_guess
+    p "Enter a char:"
+    char = gets.chomp
+    try_guess(char)
+  end
+
+  def win?
+    if @guess_word.join == @secret_word
+      p "WIN"
+      return true
+    else
+      return false
     end
   end
 
