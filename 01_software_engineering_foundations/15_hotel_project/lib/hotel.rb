@@ -35,5 +35,8 @@ class Hotel
     def has_vacancy?
         @rooms.any? { |name, room| !room.full? }
     end
-    
+
+    def list_rooms
+        @rooms.each_key { |name| print "#{name}.*#{@rooms[name].available_space}\n" }
+    end
 end
