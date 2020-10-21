@@ -24,4 +24,8 @@ class Hangman
     @remaining_incorrect_guesses
   end
 
+  def already_attempted?(char)
+    attempted_chars.include?(char)
+  end
+
 end
