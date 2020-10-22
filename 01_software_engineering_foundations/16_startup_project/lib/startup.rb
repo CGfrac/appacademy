@@ -39,4 +39,8 @@ class Startup
             raise "Insufficient funds, employee can not be paid"
         end
     end
+
+    def payday
+        @employees.each { |employee| self.pay_employee(employee) }
+    end
 end
