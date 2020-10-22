@@ -24,5 +24,19 @@ class Startup
         else
             raise "Invalid title"
         end
-    end    
+    end
+
+    def size
+        @employees.length
+    end
+
+    def pay_employee(employee)
+        salary = @salaries[employee.title]
+        if @funding - salary >= 0
+            @funding -= salary
+            employee.pay(salary)
+        else
+            raise "Insufficient funds, employee can not be paid"
+        end
+    end
 end
