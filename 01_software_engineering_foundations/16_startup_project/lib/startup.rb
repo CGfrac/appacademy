@@ -13,4 +13,8 @@ class Startup
   def valid_title?(title)
     @salaries.has_key?(title)
   end
+
+  def >(startup)
+    self.funding > startup.funding
+  end
 end
