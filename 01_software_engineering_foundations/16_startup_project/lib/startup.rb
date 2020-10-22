@@ -32,7 +32,7 @@ class Startup
 
     def pay_employee(employee)
         salary = @salaries[employee.title]
-        if @funding - salary >= 0
+        if @funding >= salary
             @funding -= salary
             employee.pay(salary)
         else
