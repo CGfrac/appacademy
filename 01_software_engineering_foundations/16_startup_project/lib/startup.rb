@@ -20,7 +20,7 @@ class Startup
 
     def hire(employee_name, title)
         if self.valid_title?(title)
-            employees << Employee.new(employee_name, title)
+            @employees << Employee.new(employee_name, title)
         else
             raise "Invalid title"
         end
