@@ -14,8 +14,8 @@ class Startup
         @salaries.has_key?(title)
     end
 
-    def >(startup)
-        @funding > startup.funding
+    def >(other_startup)
+        @funding > other_startup.funding
     end
 
     def hire(employee_name, title)
@@ -55,10 +55,10 @@ class Startup
         @funding = 0
     end
 
-    def acquire(startup)
-        @funding += startup.funding
-        startup.salaries.each { |title, salary| @salaries[title] = salary if !@salaries.has_key?(title) }
-        @employees.concat(startup.employees)
-        startup.close
+    def acquire(other_startup)
+        @funding += other_startup.funding
+        other_startup.salaries.each { |title, salary| @salaries[title] = salary if !@salaries.has_key?(title) }
+        @employees.concat(other_startup.employees)
+        other_startup.close
     end
 end
