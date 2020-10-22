@@ -10,4 +10,7 @@ class Startup
     @employees = []
   end
 
+  def valid_title?(title)
+    @salaries.has_key?(title)
+  end
 end
