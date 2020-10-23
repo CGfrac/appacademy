@@ -22,7 +22,7 @@ class Code
 
   def self.random(length)
     chars = []
-    length.times { chars << POSSIBLE_PEGS.keys[rand(0..3)] }
+    length.times { chars << POSSIBLE_PEGS.keys.sample }
     Code.new(chars)
   end
 
