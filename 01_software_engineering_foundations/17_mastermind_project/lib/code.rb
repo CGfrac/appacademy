@@ -49,4 +49,8 @@ class Code
     guess.pegs.each_with_index { |char, idx| matches += 1 if char != @pegs[idx] && @pegs.include?(char) }
     matches
   end
+
+  def ==(guess)
+    self.length == guess.length && guess.pegs == @pegs 
+  end
 end
