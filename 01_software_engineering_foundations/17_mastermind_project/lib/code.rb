@@ -12,6 +12,14 @@ class Code
     chars.all? { |char| POSSIBLE_PEGS.has_key?(char.upcase) }
   end
 
+  def initialize(chars)
+    if Code.valid_pegs?(chars)
+      @pegs = chars.map(&:upcase)
+    else
+      raise "Invalid peg(s)"
+    end
+  end
+
   def self.random(length)
     chars = []
     length.times { chars << POSSIBLE_PEGS.keys.sample }
@@ -20,14 +28,6 @@ class Code
 
   def self.from_string(string)
     Code.new(string.split(""))
-  end
-
-  def initialize(chars)
-    if Code.valid_pegs?(chars)
-      @pegs = chars.map(&:upcase)
-    else
-      raise "Invalid peg(s)"
-    end
   end
 
   def [](index)
@@ -40,13 +40,13 @@ class Code
 
   def num_exact_matches(guess)
     matches = 0
-    guess.pegs.each_with_index { |char, idx| matches += 1 if char == @pegs[idx] }
+    (0...guess.length).each { |i| matches += 1 if guess[i] == self[i] }
     matches
   end
 
   def num_near_matches(guess)
     matches = 0
-    guess.pegs.each_with_index { |char, idx| matches += 1 if char != @pegs[idx] && @pegs.include?(char) }
+    (0...guess.length).each { |i| matches += 1 if guess[i] != self[i] && @pegs.include?(guess[i]) }
     matches
   end
 
