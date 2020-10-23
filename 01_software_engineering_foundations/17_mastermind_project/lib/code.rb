@@ -6,6 +6,8 @@ class Code
     "Y" => :yellow
   }
 
+  attr_reader :pegs
+
   def self.valid_pegs?(chars)
     chars.all? { |char| POSSIBLE_PEGS.has_key?(char.upcase) }
   end
@@ -16,5 +18,11 @@ class Code
     else
       raise "Invalid peg(s)"
     end
+  end
+
+  def self.random(length)
+    chars = []
+    length.times { chars << POSSIBLE_PEGS.keys[rand(0..3)] }
+    Code.new(chars)
   end
 end
