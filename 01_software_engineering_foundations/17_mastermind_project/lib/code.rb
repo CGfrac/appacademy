@@ -25,4 +25,8 @@ class Code
     length.times { chars << POSSIBLE_PEGS.keys[rand(0..3)] }
     Code.new(chars)
   end
+
+  def self.from_string(string)
+    Code.new(string.split(""))
+  end
 end
