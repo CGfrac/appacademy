@@ -9,4 +9,11 @@ class Mastermind
     puts "Exact matches: #{@secret_code.num_exact_matches(guess)}"
     puts "Near matches: #{@secret_code.num_near_matches(guess)}"
   end
+
+  def ask_user_for_guess
+    puts "Enter a code"
+    guess = Code.from_string(gets.chomp)
+    self.print_matches(guess)
+    @secret_code == guess
+  end
 end
