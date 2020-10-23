@@ -51,6 +51,6 @@ class Code
   end
 
   def ==(guess)
-    self.length == guess.length && guess.pegs == @pegs 
+    guess.pegs == @pegs 
   end
 end
