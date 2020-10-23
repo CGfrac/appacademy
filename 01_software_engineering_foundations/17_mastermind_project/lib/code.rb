@@ -37,4 +37,10 @@ class Code
   def length
     @pegs.length
   end
+
+  def num_exact_matches(guess)
+    matches = 0
+    guess.pegs.each_with_index { |char, idx| matches += 1 if char == @pegs[idx] }
+    matches
+  end
 end
