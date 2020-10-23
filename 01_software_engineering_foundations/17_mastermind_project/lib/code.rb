@@ -43,4 +43,10 @@ class Code
     guess.pegs.each_with_index { |char, idx| matches += 1 if char == @pegs[idx] }
     matches
   end
+
+  def num_near_matches(guess)
+    matches = 0
+    guess.pegs.each_with_index { |char, idx| matches += 1 if char != @pegs[idx] && @pegs.include?(char) }
+    matches
+  end
 end
