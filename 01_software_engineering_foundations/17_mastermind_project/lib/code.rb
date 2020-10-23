@@ -29,4 +29,8 @@ class Code
   def self.from_string(string)
     Code.new(string.split(""))
   end
+
+  def [](index)
+    @pegs[index]
+  end
 end
