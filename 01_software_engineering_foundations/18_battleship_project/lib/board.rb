@@ -23,4 +23,15 @@ class Board
     @grid.each { |row| count += row.count(:S) }
     count
   end
+
+  def attack(pos)
+    if self[pos] == :S
+        self[pos] = :H
+        puts "you sunk my battleship!"
+        return true
+    else
+        self[pos] = :X
+        return false
+    end
+  end
 end
