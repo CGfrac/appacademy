@@ -28,9 +28,7 @@ class Board
     end
 
     def num_ships
-        count = 0
-        @grid.each { |row| count += row.count(:S) }
-        count
+        @grid.flatten.count { |ele| ele == :S }
     end
 
     def attack(pos)
