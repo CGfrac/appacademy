@@ -33,4 +33,8 @@ class Battleship
             return false
         end
     end
+
+    def game_over?
+        self.lose? || self.win? 
+    end
 end
