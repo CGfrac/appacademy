@@ -18,14 +18,12 @@ class Board
     end
 
     def [](pos)
-        row = pos[0]
-        col = pos[1]
+        row, col = pos
         @grid[row][col]
     end
 
     def []=(pos, value)
-        row = pos[0]
-        col = pos[1]
+        row, col = pos
         @grid[row][col] = value
     end
 
