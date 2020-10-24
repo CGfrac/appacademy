@@ -34,4 +34,19 @@ class Board
         return false
     end
   end
+
+  def place_random_ships
+    n = @grid[0].length
+    max_ships = @size / 4
+    ships = 0
+    while ships < max_ships
+        row = rand(0...n)
+        col = rand(0...n)
+        pos = [row, col]
+        if self[pos] != :S
+            self[pos] = :S
+            ships += 1
+        end
+    end
+  end
 end
