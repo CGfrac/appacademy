@@ -74,4 +74,8 @@ class Board
         end
         hidden
     end
+
+    def cheat
+        Board.print_grid(@grid)
+    end
 end
