@@ -24,4 +24,13 @@ class Battleship
             return false
         end
     end
+
+    def win?
+        if @board.num_ships == 0
+            puts "you win"
+            return true
+        else
+            return false
+        end
+    end
 end
