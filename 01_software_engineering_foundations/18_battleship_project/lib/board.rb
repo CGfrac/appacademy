@@ -54,9 +54,8 @@ class Board
     end
 
     def hidden_ships_grid
-        hidden = []
-        @grid.each do |row|
-            hidden << row.map do |ele|
+        @grid.map do |row|
+            row.map do |ele|
                 if ele == :S
                     ele = :N
                 else
@@ -64,7 +63,6 @@ class Board
                 end
             end
         end
-        hidden
     end
 
     def cheat
