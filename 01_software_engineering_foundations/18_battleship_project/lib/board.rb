@@ -2,14 +2,7 @@ class Board
     attr_reader :size
 
     def self.print_grid(grid)
-        grid.each do |row|
-            line = ""
-            row.each do |ele|
-                line += "#{ele} "
-            end
-            line[-1] = ""
-            puts line
-        end
+        grid.each { |row| puts row.join(" ") }
     end
 
     def initialize(n)
