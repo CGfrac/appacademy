@@ -49,4 +49,18 @@ class Board
             end
         end
     end
+
+    def hidden_ships_grid
+        hidden = []
+        @grid.each do |row|
+            hidden << row.map do |ele|
+                if ele == :S
+                    ele = :N
+                else
+                    ele
+                end
+            end
+        end
+        hidden
+    end
 end
