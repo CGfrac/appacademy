@@ -78,4 +78,8 @@ class Board
     def cheat
         Board.print_grid(@grid)
     end
+
+    def print
+        Board.print_grid(self.hidden_ships_grid)
+    end
 end
