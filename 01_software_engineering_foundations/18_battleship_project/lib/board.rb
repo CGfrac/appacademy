@@ -17,4 +17,10 @@ class Board
     col = pos[1]
     @grid[row][col] = value
   end
+
+  def num_ships
+    count = 0
+    @grid.each { |row| count += row.count(:S) }
+    count
+  end
 end
