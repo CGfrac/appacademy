@@ -105,5 +105,7 @@ end
 #     2-dimensional array: [['some data']]
 #     3-dimensional array: [[['some data']]]
 def flatten(data)
-
+    return [data] if !data.is_a?(Array)
+    return data if data.empty?
+    flatten(data[0]) + flatten(data[1..-1])
 end
