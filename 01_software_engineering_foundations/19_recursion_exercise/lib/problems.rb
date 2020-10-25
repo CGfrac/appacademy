@@ -55,7 +55,7 @@ end
 # sum_array([4, 10, -1, 2]) # => 15
 def sum_array(array)
     return 0 if array.empty?
-    array[-1] + sum_array(array[0...-1])
+    array[0] + sum_array(array[1..-1])
 end
 
 
