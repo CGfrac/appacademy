@@ -12,7 +12,8 @@
 # pow(3, 4) # => 81
 # pow(4, 3) # => 64
 def pow(base, exponent)
-
+    return 1 if exponent == 0
+    base * pow(base, exponent - 1)
 end
 
 
