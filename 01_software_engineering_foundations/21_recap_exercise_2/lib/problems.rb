@@ -8,6 +8,14 @@ end
 # Write a method, most_frequent_bigram, that takes in a string and returns the two adjacent letters that appear the
 # most in the string.
 def most_frequent_bigram(str)
+    counter = Hash.new(0)
+    most_frequent = nil
+    (0...str.length-1).each do |idx|
+        bigram = str[idx..idx+1]
+        counter[bigram] += 1
+        most_frequent = bigram if counter[bigram] > counter[most_frequent]
+    end
+    most_frequent
 end
 
 
