@@ -73,7 +73,18 @@ class String
     # "cats".substrings     # => ["c", "ca", "cat", "cats", "a", "at", "ats", "t", "ts", "s"]
     # "cats".substrings(2)  # => ["ca", "at", "ts"]
     def substrings(length = nil)
-
+        sub = []
+        (0...self.length).each do |i|
+            (i...self.length).each do |j|
+                slice = self[i..j]
+                if length
+                    sub << slice if slice.length == length
+                else
+                    sub << slice
+                end
+            end
+        end
+        sub
     end
 
 
