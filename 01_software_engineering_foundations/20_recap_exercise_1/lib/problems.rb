@@ -97,7 +97,7 @@ class String
         cipher = ""
         self.each_char do |char| 
             index = (alpha.index(char) + num) % 26
-            cipher << alpha[index]
+            cipher += alpha[index]
         end
         cipher
     end
