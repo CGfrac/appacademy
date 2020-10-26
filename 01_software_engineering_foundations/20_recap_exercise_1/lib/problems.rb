@@ -76,12 +76,7 @@ class String
         sub = []
         (0...self.length).each do |i|
             (i...self.length).each do |j|
-                slice = self[i..j]
-                if length
-                    sub << slice if slice.length == length
-                else
-                    sub << slice
-                end
+                sub << self[i..j] if length.nil? || (j-i)+1 == length
             end
         end
         sub
