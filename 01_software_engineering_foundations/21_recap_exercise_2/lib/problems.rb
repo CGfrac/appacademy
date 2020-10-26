@@ -1,17 +1,8 @@
 # Write a method, least_common_multiple, that takes in two numbers and returns the smallest number that is a mutiple
 # of both of the given numbers
 def least_common_multiple(num_1, num_2)
-    num_1, num_2 = num_2, num_1 if num_1 > num_2
-    i = 1
-    j = 2
-    while true
-        return num_1 * i if num_1 * i == num_2
-        i += 1
-        if num_1 * i > num_2
-            num_2 *= j
-            j += 1
-        end
-    end
+    start = [num_1, num_2].max
+    (start..num_1 * num_2).each { |i| return i if i % num_1 == 0 && i % num_2 == 0 }
 end
 
 
