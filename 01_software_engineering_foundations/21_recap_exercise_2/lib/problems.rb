@@ -1,14 +1,13 @@
 # Write a method, least_common_multiple, that takes in two numbers and returns the smallest number that is a mutiple
 # of both of the given numbers
 def least_common_multiple(num_1, num_2)
-
+    num_1.lcm(num_2)
 end
 
 
 # Write a method, most_frequent_bigram, that takes in a string and returns the two adjacent letters that appear the
 # most in the string.
 def most_frequent_bigram(str)
-
 end
 
 
