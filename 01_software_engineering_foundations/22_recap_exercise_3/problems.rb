@@ -147,3 +147,31 @@ p vigenere_cipher("toerrishuman", [1, 2, 3])  # => "uqhstltjxncq"
 p vigenere_cipher("zebra", [3, 0])            # => "ceerd"
 p vigenere_cipher("yawn", [5, 1])             # => "dbbo"
 puts "---------------------------------"
+
+# Write a method vowel_rotate(str) that accepts a string as an arg and returns the string where every vowel is replaced with the vowel the appears
+# before it sequentially in the original string.
+# The first vowel of the string should be replaced with the last vowel.
+
+def vowel_rotate(str)
+    vowels = "aeiou"
+    first = nil
+    prev = " "
+    str.each_char.with_index do |char, idx|
+        if vowels.include?(char)
+            first ||= idx
+            str[idx] = prev
+            prev = char
+        end
+    end
+    str[first] = prev
+    str
+end
+
+puts "vowel_rotate"
+puts "---------------------------------"
+p vowel_rotate('computer')      # => "cempotur"
+p vowel_rotate('oranges')       # => "erongas"
+p vowel_rotate('headphones')    # => "heedphanos"
+p vowel_rotate('bootcamp')      # => "baotcomp"
+p vowel_rotate('awesome')       # => "ewasemo"
+puts "---------------------------------"
