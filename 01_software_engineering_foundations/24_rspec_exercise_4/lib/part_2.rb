@@ -9,3 +9,13 @@ end
 def perfect_number?(num)
     num == aliquot_sum(num)
 end
+
+def ideal_numbers(n)
+    i = 1
+    arr = []
+    while arr.length < n
+        arr << i if perfect_number?(i)
+        i += 1
+    end
+    arr
+end
