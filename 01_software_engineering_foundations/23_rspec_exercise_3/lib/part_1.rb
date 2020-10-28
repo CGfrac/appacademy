@@ -14,3 +14,7 @@ def nth_prime(n)
     end
     i
 end
+
+def prime_range(min, max)
+    (min..max).select { |i| is_prime?(i) }
+end
