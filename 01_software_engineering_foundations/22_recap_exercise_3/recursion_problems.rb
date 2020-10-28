@@ -37,8 +37,8 @@ puts "---------------------------------"
 def lucas_sequence(n)
     return [] if n == 0
     return [2] if n == 1
+    return [2, 1] if n == 2
     sequence = lucas_sequence(n - 1)
-    return sequence + [1] if n == 2
     sequence << sequence[-2] + sequence[-1]
 end
 
