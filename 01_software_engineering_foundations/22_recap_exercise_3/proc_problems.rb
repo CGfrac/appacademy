@@ -4,8 +4,8 @@ class String
     # If no block is passed, then return the empty string. Do not use the built-in Array#select in your solution.
 
     def select(&prc)
-        prc ||= Proc.new { false }
         new_string = ""
+        return new_string if prc.nil?
         self.each_char { |char| new_string += char if prc.call(char) }
         new_string
     end
