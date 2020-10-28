@@ -18,11 +18,7 @@ puts "---------------------------------"
 # The method should return true if an element never appears consecutively in the array; it should return false otherwise.
 
 def no_consecutive_repeats?(arr)
-    prev = nil
-    arr.each do |ele|
-        return false if ele == prev
-        prev = ele
-    end
+    (0...arr.length - 1).each { |i| return false if arr[i] == arr[i + 1] }
     true
 end
 
