@@ -15,3 +15,7 @@ end
 def xor_select(arr, prc_1, prc_2)
     arr.select { |ele| (prc_1.call(ele) && !prc_2.call(ele)) || (!prc_1.call(ele) && prc_2.call(ele)) }
 end
+
+def proc_count(val, procs)
+    procs.count { |prc| prc.call(val) }
+end
