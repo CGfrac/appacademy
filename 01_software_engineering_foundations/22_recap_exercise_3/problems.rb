@@ -84,11 +84,8 @@ puts "---------------------------------"
 #     24 is not a bi-prime because no two prime numbers have a product of 24
 
 def bi_prime?(num)
-    i = 2
-    while i < (num / 2)
-        return prime?(num / i) if prime?(i) && num % i == 0
-        i += 1
-    end
+    factors = prime_factors(num)
+    factors.each { |f| return true if prime?(num / f) }
     false
 end
 
@@ -96,6 +93,10 @@ def prime?(num)
     return false if num < 2
     (2..Integer.sqrt(num)).each { |i| return false if num % i == 0 }
     true
+end
+
+def prime_factors(num)
+    (2...num / 2).select { |i| prime?(i) && num % i == 0 }
 end
 
 puts "bi_prime?"
