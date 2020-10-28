@@ -59,15 +59,14 @@ puts "---------------------------------"
 # The array returned should contain numbers in ascending order.
 # Do this recursively.
 
-require_relative "problems"
-
 def prime_factorization(num)
-    return [] if num == 1
-    (2..num).each do |i|
-        if prime?(i) && num % i == 0
-            return [i] + prime_factorization(num / i)
+    (2...num).each do |factor|
+        if num % factor == 0
+            other_factor = num / factor
+            return [*prime_factorization(factor), *prime_factorization(other_factor)]
         end
     end
+    [num]
 end
 
 puts "prime_factorization"
