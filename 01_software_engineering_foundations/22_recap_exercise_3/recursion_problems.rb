@@ -5,14 +5,11 @@
 
 def multiply(a, b)
     return 0 if b == 0
-    if a < 0 && b < 0
-        a = a.abs
-        b = b.abs
-    elsif b < 0
-        a = -a
-        b = b.abs
+    if b < 0
+        -(a + multiply(a, (-b) - 1))
+    else
+        a + multiply(a, b - 1)
     end
-    a + multiply(a, b - 1)
 end
 
 puts "---------------------------------"
