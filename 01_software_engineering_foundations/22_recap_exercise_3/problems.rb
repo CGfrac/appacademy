@@ -148,18 +148,12 @@ puts "---------------------------------"
 # The first vowel of the string should be replaced with the last vowel.
 
 def vowel_rotate(str)
+    new_str = str[0..-1]
     vowels = "aeiou"
-    first = nil
-    prev = " "
-    str.each_char.with_index do |char, idx|
-        if vowels.include?(char)
-            first ||= idx
-            str[idx] = prev
-            prev = char
-        end
-    end
-    str[first] = prev
-    str
+    vowels_indices = (0...str.length).select { |i| vowels.include?(str[i]) }
+    rotated_vowel_indices = vowels_indices.rotate(-1)
+    vowels_indices.each_with_index { |vowel_idx, i| new_str[vowel_idx] = str[rotated_vowel_indices[i]] }
+    new_str
 end
 
 puts "vowel_rotate"
