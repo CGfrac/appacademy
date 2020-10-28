@@ -4,7 +4,7 @@
 #     You must not use the multiplication (*) operator
 
 def multiply(a, b)
-    return a if b == 1
+    return 0 if b == 0
     if a < 0 && b < 0
         a = a.abs
         b = b.abs
