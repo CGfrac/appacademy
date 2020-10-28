@@ -124,13 +124,11 @@ puts "---------------------------------"
 
 def vigenere_cipher(message, keys)
     alphabet = ("a".."z").to_a
-    rotation = 0
     cipher = ""
 
-    message.each_char do |char|
-        index = (alphabet.index(char) + keys[rotation]) % 26
-        cipher += alphabet[index]
-        rotation = (rotation + 1) % keys.length
+    message.each_char.with_index do |char, idx|
+        position = (alphabet.index(char) + keys[idx % keys.length]) % alphabet.length
+        cipher += alphabet[position]
     end
 
     cipher
