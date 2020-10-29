@@ -6,8 +6,6 @@ def prizz_proc(arr, prc_1, prc_2)
     arr.select { |ele| (prc_1.call(ele) && !prc_2.call(ele)) || (!prc_1.call(ele) && prc_2.call(ele)) }
 end
 
-require "byebug"
-
 def zany_zip(*arrs)
     length = 0
     arrs.each { |row| length = row.length if row.length > length }
