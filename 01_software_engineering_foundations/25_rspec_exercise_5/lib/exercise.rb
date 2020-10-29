@@ -21,3 +21,9 @@ def zany_zip(*arrs)
 
     new_arr
 end
+
+def maximum(arr, &prc)
+    max = nil
+    arr.each { |ele| max = ele if !max || prc.call(ele) >= prc.call(max) }
+    max
+end
