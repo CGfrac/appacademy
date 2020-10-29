@@ -31,3 +31,62 @@ p matrix_addition_reloaded(matrix_e)                        # [[0, 0], [12, 4], 
 p matrix_addition_reloaded(matrix_d, matrix_e)              # [[2, -5], [19, 14], [6, 4]]
 p matrix_addition_reloaded(matrix_a, matrix_b, matrix_e)    # nil
 p matrix_addition_reloaded(matrix_d, matrix_e, matrix_c)    # nil
+
+# Write a method squarocol? that accepts a 2-dimensional array as an argument.
+# The method should return a boolean indicating whether or not any row or column is completely filled with the same element.
+# You may assume that the 2-dimensional array has "square" dimensions, meaning it's height is the same as it's width.
+
+def squarocol?(arr)
+    # rows
+    (0...arr.length).each do |i|
+        prev = arr[i][0]
+        combo = true
+        (1...arr[i].length).each { |j| combo = false if arr[i][j] != prev }
+        return true if combo
+    end
+
+    # cols
+    (0...arr[0].length).each do |i|
+        prev = arr[0][i]
+        combo = true
+        (1...arr.length).each { |j| combo = false if arr[j][i] != prev }
+        return true if combo
+    end
+
+    false
+end
+
+puts "-----------------------------------"
+puts "squarocol?"
+puts "-----------------------------------"
+p squarocol?([
+    [:a, :x , :d],
+    [:b, :x , :e],
+    [:c, :x , :f],
+]) # true
+
+p squarocol?([
+    [:x, :y, :x],
+    [:x, :z, :x],
+    [:o, :o, :o],
+]) # true
+
+p squarocol?([
+    [:o, :x , :o],
+    [:x, :o , :x],
+    [:o, :x , :o],
+]) # false
+
+p squarocol?([
+    [1, 2, 2, 7],
+    [1, 6, 6, 7],
+    [0, 5, 2, 7],
+    [4, 2, 9, 7],
+]) # true
+
+p squarocol?([
+    [1, 2, 2, 7],
+    [1, 6, 6, 0],
+    [0, 5, 2, 7],
+    [4, 2, 9, 7],
+]) # false
