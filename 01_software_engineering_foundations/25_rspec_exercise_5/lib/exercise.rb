@@ -33,3 +33,13 @@ def my_group_by(arr, &prc)
     arr.each { |ele| groups[prc.call(ele)] << ele }
     groups
 end
+
+def max_tie_breaker(array, tie_breaker, &prc)
+    max = nil
+    array.each do |ele|
+        if (!max || prc.call(ele) > prc.call(max)) || (prc.call(ele) == prc.call(max) && tie_breaker.call(ele) > tie_breaker.call(max))
+            max = ele
+        end
+    end
+    max
+end
