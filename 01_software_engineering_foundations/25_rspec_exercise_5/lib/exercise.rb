@@ -57,8 +57,8 @@ def silly_slicer(word)
     last_index = nil
 
     word.each_char.with_index do |ch, i|
-        if !first_vowel
-            first_vowel = ch if vowels.include?(ch)
+        if !first_vowel && vowels.include?(ch)
+            first_vowel = ch
             first_index = i
         elsif vowels.include?(ch)
             last_vowel = ch 
