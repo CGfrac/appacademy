@@ -43,3 +43,29 @@ def max_tie_breaker(array, tie_breaker, &prc)
     end
     max
 end
+
+def silly_syllables(sentence)
+    silly_sentence = sentence.split.map { |word| silly_slicer(word) }
+    silly_sentence.join(" ")
+end
+
+def silly_slicer(word)
+    vowels = "aeiou"
+    first_vowel = nil
+    first_index = nil
+    last_vowel = nil
+    last_index = nil
+
+    word.each_char.with_index do |ch, i|
+        if !first_vowel
+            first_vowel = ch if vowels.include?(ch)
+            first_index = i
+        elsif vowels.include?(ch)
+            last_vowel = ch 
+            last_index = i
+        end
+    end
+    
+    return word[first_index..last_index] if first_vowel && last_vowel
+    word
+end
