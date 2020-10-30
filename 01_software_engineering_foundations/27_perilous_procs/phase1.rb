@@ -121,3 +121,23 @@ p at_most?([4, 100, 3], 1) { |el| el > 0 }                           # false
 p at_most?(['r', 'q', 'e', 'z'], 2) { |el| 'aeiou'.include?(el) }    # true
 p at_most?(['r', 'i', 'e', 'z'], 2) { |el| 'aeiou'.include?(el) }    # true
 p at_most?(['r', 'i', 'e', 'o'], 2) { |el| 'aeiou'.include?(el) }    # false
+
+# Write a method first_index that accepts an array and a block as arguments. 
+# The method should return the index of the first element of the array that returns true when giben to the block. 
+# If no element of returns true, then the method should return nil. 
+# Solve this using Array#each.
+
+def first_index(arr, &prc)
+    arr.each.with_index { |ele, idx| return idx if prc.call(ele) }
+    nil
+end
+
+puts "-----------------------------------"
+puts "first_index"
+puts "-----------------------------------"
+p first_index(['bit', 'cat', 'byte', 'below']) { |el| el.length > 3 }           # 2
+p first_index(['bitten', 'bit', 'cat', 'byte', 'below']) { |el| el.length > 3 } # 0
+p first_index(['bitten', 'bit', 'cat', 'byte', 'below']) { |el| el.length > 6 } # nil
+p first_index(['bit', 'cat', 'byte', 'below']) { |el| el[0] == 'b' }            # 0
+p first_index(['bit', 'cat', 'byte', 'below']) { |el| el.include?('a') }        # 1
+p first_index(['bit', 'cat', 'byte', 'below']) { |el| el[0] == 't' }            # nil
