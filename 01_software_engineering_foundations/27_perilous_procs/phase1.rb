@@ -57,3 +57,27 @@ p filter_out([10, 6, 3, 2, 5 ]) { |x| x.odd? }      # [10, 6, 2]
 p filter_out([1, 7, 3, 5 ]) { |x| x.odd? }          # []
 p filter_out([10, 6, 3, 2, 5 ]) { |x| x.even? }     # [3, 5]
 p filter_out([1, 7, 3, 5 ]) { |x| x.even? }         # [1, 7, 3, 5]
+
+# Write a method at_least? that accepts an array, a number (n), and a block as an arguments. 
+# The method should return a boolean indicating whether or not at least n elements of the array return true when given to the block. 
+# Solve this using Array#each.
+
+def at_least?(arr, n, &prc)
+    count = 0
+    arr.each { |ele| count += 1 if prc.call(ele) }
+    count >= n
+end
+
+puts "-----------------------------------"
+puts "at_least?"
+puts "-----------------------------------"
+p at_least?(['sad', 'quick', 'timid', 'final'], 2) { |s| s.end_with?('ly') }        # false
+p at_least?(['sad', 'quickly', 'timid', 'final'], 2) { |s| s.end_with?('ly') }      # false
+p at_least?(['sad', 'quickly', 'timidly', 'final'], 2) { |s| s.end_with?('ly') }    # true
+p at_least?(['sad', 'quickly', 'timidly', 'finally'], 2) { |s| s.end_with?('ly') }  # true
+p at_least?(['sad', 'quickly', 'timid', 'final'], 1) { |s| s.end_with?('ly') }      # true
+p at_least?(['sad', 'quick', 'timid', 'final'], 1) { |s| s.end_with?('ly') }        # false
+p at_least?([false, false, false], 3) { |bool| bool }                               # false
+p at_least?([false, true, true], 3) { |bool| bool }                                 # false
+p at_least?([true, true, true], 3) { |bool| bool }                                  # true
+p at_least?([true, true, true, true], 3) { |bool| bool }                            # true
