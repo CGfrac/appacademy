@@ -39,3 +39,21 @@ p exactly?(['cat', 'dog', 'bird'], 0) { |el| el == el.upcase }  # true
 p exactly?([4, 5], 3) { |n| n > 0 }                             # false
 p exactly?([4, 5, 2], 3) { |n| n > 0 }                          # true
 p exactly?([42, -9, 7, -3, -6], 2) { |n| n > 0 }                # true
+
+# Write a method filter_out that accepts an array and a block as arguments. 
+# The method should return a new array where elements of the original array are removed if they return true when given to the block. 
+# Solve this using Array#each.
+
+def filter_out(arr, &prc)
+    new_arr = []
+    arr.each { |ele| new_arr << ele if !prc.call(ele) }
+    new_arr
+end
+
+puts "-----------------------------------"
+puts "filter_out"
+puts "-----------------------------------"
+p filter_out([10, 6, 3, 2, 5 ]) { |x| x.odd? }      # [10, 6, 2]
+p filter_out([1, 7, 3, 5 ]) { |x| x.odd? }          # []
+p filter_out([10, 6, 3, 2, 5 ]) { |x| x.even? }     # [3, 5]
+p filter_out([1, 7, 3, 5 ]) { |x| x.even? }         # [1, 7, 3, 5]
