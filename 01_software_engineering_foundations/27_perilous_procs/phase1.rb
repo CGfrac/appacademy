@@ -81,3 +81,22 @@ p at_least?([false, false, false], 3) { |bool| bool }                           
 p at_least?([false, true, true], 3) { |bool| bool }                                 # false
 p at_least?([true, true, true], 3) { |bool| bool }                                  # true
 p at_least?([true, true, true, true], 3) { |bool| bool }                            # true
+
+# Write a method every? that accepts an array and a block as arguments. 
+# The method should return a boolean indicating whether or not all elements of the array return true when given to the block. 
+# Solve this using Array#each.
+
+def every?(arr, &prc)
+    arr.each { |ele| return false if !prc.call(ele) }
+    true
+end
+
+puts "-----------------------------------"
+puts "every?"
+puts "-----------------------------------"
+p every?([3, 1, 11, 5]) { |n| n.even? }                                 # false
+p every?([2, 4, 4, 8]) { |n| n.even? }                                  # true
+p every?([8, 2]) { |n| n.even? }                                        # true
+p every?(['squash', 'corn', 'kale', 'carrot']) { |str| str[0] == 'p' }  # false
+p every?(['squash', 'pea', 'kale', 'potato']) { |str| str[0] == 'p' }   # false
+p every?(['parsnip', 'potato', 'pea']) { |str| str[0] == 'p' }          # true
