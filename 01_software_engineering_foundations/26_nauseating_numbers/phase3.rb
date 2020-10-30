@@ -187,6 +187,9 @@ def pascals_triangle(n)
     triangle
 end
 
+puts "-----------------------------------"
+puts "pascals_triangle"
+puts "-----------------------------------"
 p pascals_triangle(5)
 # [
 #     [1],
