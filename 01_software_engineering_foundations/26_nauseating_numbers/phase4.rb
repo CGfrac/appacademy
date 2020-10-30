@@ -10,6 +10,20 @@
 # Write a method mersenne_prime that accepts a number, n, as an argument and returns the n-th Mersenne prime.
 
 def mersenne_prime(n)
+    count = 0
+    exponent = 2
+    while count < n
+        candidate = 2**exponent - 1
+        count += 1 if prime?(candidate)
+        exponent += 1
+    end
+    candidate
+end
+
+def prime?(num)
+    return false if num < 2
+    (2..Integer.sqrt(num)).each { |i| return false if num % i == 0 }
+    true
 end
 
 puts "-----------------------------------"
