@@ -39,17 +39,27 @@ p matrix_addition_reloaded(matrix_d, matrix_e, matrix_c)    # nil
 def squarocol?(arr)
     # rows
     (0...arr.length).each do |i|
-        prev = arr[i][0]
+        first = arr[i][0]
         combo = true
-        (1...arr[i].length).each { |j| combo = false if arr[i][j] != prev }
+        (1...arr[i].length).each do |j|
+            if arr[i][j] != first
+                combo = false
+                break
+            end
+        end
         return true if combo
     end
 
     # cols
     (0...arr[0].length).each do |i|
-        prev = arr[0][i]
+        first = arr[0][i]
         combo = true
-        (1...arr.length).each { |j| combo = false if arr[j][i] != prev }
+        (1...arr.length).each do |j|
+            if arr[j][i] != first 
+                combo = false
+                break
+            end
+        end
         return true if combo
     end
 
@@ -89,4 +99,67 @@ p squarocol?([
     [1, 6, 6, 0],
     [0, 5, 2, 7],
     [4, 2, 9, 7],
+]) # false
+
+# Write a method squaragonal? that accepts 2-dimensional array as an argument.
+# The method should return a boolean indicating whether or not the array contains all of the same element across either of its diagonals.
+# You may assume that the 2-dimensional array has "square" dimensions, meaning it's height is the same as it's width.
+
+def squaragonal?(arr)
+    i = 1
+    first = arr[0][0]
+    combo = true
+    while i < arr.length
+        if arr[i][i] != first
+            combo = false
+            break
+        end
+        i += 1
+    end
+    return true if combo
+
+    i = 0
+    j = arr.length - 1
+    first = arr[0][-1]
+    combo = true
+    while i < arr.length
+        if arr[i][j] != first
+            combo = false
+            break
+        end
+        i += 1
+        j -= 1
+    end
+    return true if combo
+
+    false
+end
+
+puts "-----------------------------------"
+puts "squaragonal?"
+puts "-----------------------------------"
+p squaragonal?([
+    [:x, :y, :o],
+    [:x, :x, :x],
+    [:o, :o, :x],
+]) # true
+
+p squaragonal?([
+    [:x, :y, :o],
+    [:x, :o, :x],
+    [:o, :o, :x],
+]) # true
+
+p squaragonal?([
+    [1, 2, 2, 7],
+    [1, 1, 6, 7],
+    [0, 5, 1, 7],
+    [4, 2, 9, 1],
+]) # true
+
+p squaragonal?([
+    [1, 2, 2, 5],
+    [1, 6, 5, 0],
+    [0, 2, 2, 7],
+    [5, 2, 9, 7],
 ]) # false
