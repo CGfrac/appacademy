@@ -163,3 +163,46 @@ p squaragonal?([
     [0, 2, 2, 7],
     [5, 2, 9, 7],
 ]) # false
+
+# Pascal's triangle is a 2-dimensional array with the shape of a pyramid. The top of the pyramid is the number 1. 
+# To generate further levels of the pyramid, every element is the sum of the element above and to the left with the element above and to the right. 
+# Nonexisting elements are treated as 0 when calculating the sum. For example, here are the first 5 levels of Pascal's triangle:
+
+#       1
+#      1 1
+#     1 2 1
+#    1 3 3 1
+#   1 4 6 4 1
+
+# Write a method pascals_triangle that accepts a positive number, n, as an argument 
+# and returns a 2-dimensional array representing the first n levels of pascal's triangle.
+
+def pascals_triangle(n)
+    triangle = []
+    (1..n).each do |i|
+        row = Array.new(i, 1)
+        (1...row.length-1).each { |j| row[j] = triangle[-1][j-1] + triangle[-1][j] }
+        triangle << row
+    end
+    triangle
+end
+
+p pascals_triangle(5)
+# [
+#     [1],
+#     [1, 1],
+#     [1, 2, 1],
+#     [1, 3, 3, 1],
+#     [1, 4, 6, 4, 1]
+# ]
+
+p pascals_triangle(7)
+# [
+#     [1],
+#     [1, 1],
+#     [1, 2, 1],
+#     [1, 3, 3, 1],
+#     [1, 4, 6, 4, 1],
+#     [1, 5, 10, 10, 5, 1],
+#     [1, 6, 15, 20, 15, 6, 1]
+# ]
