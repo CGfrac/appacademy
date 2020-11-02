@@ -1,3 +1,5 @@
+VOWELS = "aeiou"
+
 # Write a method conjunct_select that accepts an array and one or more procs as arguments. 
 # The method should return a new array containing the elements that return true when passed into all of the given procs.
 
@@ -32,15 +34,14 @@ p conjunct_select([4, 8, -2, 11, 7, -3, 13], is_positive, is_odd, less_than_ten)
 
 def convert_pig_latin(sentence)
     new_sentence = []
-    vowels = "aeiou"
     sentence.split.each do |word|
         if word.length < 3
             new_sentence << word
-        elsif vowels.include?(word[0].downcase)
+        elsif VOWELS.include?(word[0].downcase)
             new_sentence << word + "yay"
         else
             word.each_char.with_index do |char, idx|
-                if vowels.include?(char)
+                if VOWELS.include?(char)
                     new_word = word[idx..-1] + word[0...idx].downcase + "ay"
                     new_word.capitalize! if word == word.capitalize
                     new_sentence << new_word
