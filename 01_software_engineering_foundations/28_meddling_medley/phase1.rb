@@ -84,3 +84,30 @@ p counted_characters("that's alright folks") # ["t"]
 p counted_characters("mississippi") # ["i", "s"]
 p counted_characters("hot potato soup please") # ["o", "t", " ", "p"]
 p counted_characters("runtime") # []
+
+# Write a method triplet_true? that accepts a string as an argument and returns a boolean indicating 
+# whether or not the string contains three of the same character consecutively.
+
+def triplet_true?(str)
+    prev = ""
+    combo = 0
+    str.each_char do |char|
+        if char == prev
+            combo += 1
+            return true if combo == 3
+        else
+            combo = 1
+            prev = char
+        end
+    end
+    false
+end
+
+puts "-----------------------------------"
+puts "triplet_true?"
+puts "-----------------------------------"
+p triplet_true?('caaabb')        # true
+p triplet_true?('terrrrrible')   # true
+p triplet_true?('runninggg')     # true
+p triplet_true?('bootcamp')      # false
+p triplet_true?('e')             # false
