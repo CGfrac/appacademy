@@ -147,3 +147,28 @@ p energetic_encoding('hello world',
 ) # '?arri ?i?r?'
 
 p energetic_encoding('bike', {}) # '????'
+
+# Write a method uncompress that accepts a string as an argument. 
+# The string will be formatted so every letter is followed by a number. 
+# The method should return an "uncompressed" version of the string where every letter is repeated multiple times 
+# given based on the number that appears directly after the letter.
+
+def uncompress(str)
+    uncompressed = ""
+    curr = ""
+    str.each_char.with_index do |char, idx|
+        if idx.even?
+            curr = char
+        else
+            uncompressed += curr * char.to_i
+        end
+    end
+    uncompressed
+end
+
+puts "-----------------------------------"
+puts "uncompress"
+puts "-----------------------------------"
+p uncompress('a2b4c1') # 'aabbbbc'
+p uncompress('b1o2t1') # 'boot'
+p uncompress('x3y1x2z4') # 'xxxyxxzzzz'
