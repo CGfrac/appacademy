@@ -129,3 +129,49 @@ p disjunct_select(['ace', 'dog', 'apple', 'teeming', 'boot', 'zip'],
     contains_o,
     starts_a
 ) # ["ace", "dog", "apple", "teeming", "boot"]
+
+# Write a method alternating_vowel that accepts a sentence as an argument. 
+# The method should return a new sentence where the words alternate between having their first or last vowel removed. 
+# For example:
+
+#     the 1st word should be missing its first vowel
+#     the 2nd word should be missing its last vowel
+#     the 3rd word should be missing its first vowel
+#     the 4th word should be missing its last vowel
+#     ... and so on
+
+# Note that words that contain no vowels should remain unchanged. 
+# Vowels are the letters a, e, i, o, u.
+
+def alternating_vowel(sentence)
+    new_sentence = []
+    sentence.split.each_with_index do |word, idx|
+        i = 0
+        if idx.even?
+            while i < word.length 
+                break if VOWELS.include?(word[i])
+                i += 1
+            end
+        else
+            i = word.length - 1
+            while i >= 0
+                break if VOWELS.include?(word[i])
+                i -= 1
+            end
+        end
+        if i >= 0 && i < word.length 
+            new_sentence << word[0...i] + word[i+1..-1]
+        else
+            new_sentence << word
+        end
+    end
+    new_sentence.join(" ")
+end
+
+puts "-----------------------------------"
+puts "alternating_vowel"
+puts "-----------------------------------"
+p alternating_vowel('panthers are great animals') # "pnthers ar grat animls"
+p alternating_vowel('running panthers are epic') # "rnning panthrs re epc"
+p alternating_vowel('code properly please') # "cde proprly plase"
+p alternating_vowel('my forecast predicts rain today') # "my forecst prdicts ran tday"
