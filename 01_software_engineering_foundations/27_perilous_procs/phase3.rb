@@ -59,3 +59,50 @@ p chain_map(25, [half, add_5])          # 17.5
 p chain_map(25, [add_5, half, square])  # 225
 p chain_map(4, [square, half])          # 8
 p chain_map(4, [half, square])          # 4
+
+# Write a method proc_suffix that accepts a sentence and a hash as arguments. 
+# The hash contains procs as keys and suffix strings as values. 
+# The method should return a new sentence where each word of the original sentence is appended 
+# with a suffix if the original word returns true when given to the corresponding proc key. 
+# If an original word returns true for multiple procs, then the suffixes should be appended in the order that they appear in the input hash.
+
+def proc_suffix(sentence, hash)
+    new_sentence = []
+    sentence.split.each do |word|
+        new_word = word[0..-1]
+        hash.each_key do |prc|
+            new_word += hash[prc] if prc.call(word)
+        end
+        new_sentence << new_word
+    end
+    new_sentence.join(" ")
+end
+
+puts "-----------------------------------"
+puts "proc_suffix"
+puts "-----------------------------------"
+contains_a = Proc.new { |w| w.include?('a') }
+three_letters = Proc.new { |w| w.length == 3 }
+four_letters = Proc.new { |w| w.length == 4 }
+
+p proc_suffix('dog cat',
+    contains_a => 'ly',
+    three_letters => 'o'
+)   # "dogo catlyo"
+
+p proc_suffix('dog cat',
+    three_letters => 'o',
+    contains_a => 'ly'
+)   # "dogo catoly"
+
+p proc_suffix('wrong glad cat',
+    contains_a => 'ly',
+    three_letters => 'o',
+    four_letters => 'ing'
+)   # "wrong gladlying catlyo"
+
+p proc_suffix('food glad rant dog cat',
+    four_letters => 'ing',
+    contains_a => 'ly',
+    three_letters => 'o'
+)   # "fooding gladingly rantingly dogo catlyo"
