@@ -41,12 +41,17 @@ def convert_pig_latin(sentence)
             new_sentence << word + "yay"
         else
             i = 0
-            while !VOWELS.include?(word[i])
+            while i < word.length
+                break if VOWELS.include?(word[i])
                 i += 1
             end
-            new_word = word[i..-1] + word[0...i].downcase + "ay"
-            new_word.capitalize! if word == word.capitalize
-            new_sentence << new_word
+            if i < word.length
+                new_word = word[i..-1] + word[0...i].downcase + "ay"
+                new_word.capitalize! if word == word.capitalize
+                new_sentence << new_word
+            else
+                new_sentence << word
+            end
         end
     end
     new_sentence.join(" ")
@@ -82,10 +87,15 @@ def reverberate(sentence)
             new_sentence << word + word.downcase
         else
             i = word.length - 1
-            while !VOWELS.include?(word[i])
+            while i >= 0
+                break if VOWELS.include?(word[i])
                 i -= 1
             end
-            new_sentence << word + word[i..-1]
+            if i >= 0
+                new_sentence << word + word[i..-1]
+            else
+                new_sentence << word
+            end
         end
     end
     new_sentence.join(" ")
