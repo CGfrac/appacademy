@@ -40,14 +40,13 @@ def convert_pig_latin(sentence)
         elsif VOWELS.include?(word[0].downcase)
             new_sentence << word + "yay"
         else
-            word.each_char.with_index do |char, idx|
-                if VOWELS.include?(char)
-                    new_word = word[idx..-1] + word[0...idx].downcase + "ay"
-                    new_word.capitalize! if word == word.capitalize
-                    new_sentence << new_word
-                    break
-                end
+            i = 0
+            while !VOWELS.include?(word[i])
+                i += 1
             end
+            new_word = word[i..-1] + word[0...i].downcase + "ay"
+            new_word.capitalize! if word == word.capitalize
+            new_sentence << new_word
         end
     end
     new_sentence.join(" ")
