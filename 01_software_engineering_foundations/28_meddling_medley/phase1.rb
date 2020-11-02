@@ -66,3 +66,21 @@ p hash_mapped({'a'=>4, 'x'=>7, 'c'=>-3}, double) { |k| k.upcase + '!!' }
 first = Proc.new { |a| a[0] }
 p hash_mapped({-5=>['q', 'r', 's'], 6=>['w', 'x']}, first) { |n| n * n }
 # {25=>"q", 36=>"w"}
+
+# Write a method counted_characters that accepts a string as an argument. 
+# The method should return an array containing the characters of the string that appeared more than twice.
+# The characters in the output array should appear in the same order they occur in the input string.
+
+def counted_characters(str)
+    counter = Hash.new(0)
+    str.each_char { |char| counter[char] += 1 }
+    counter.keys.select { |k| counter[k] > 2 }
+end
+
+puts "-----------------------------------"
+puts "counted_characters"
+puts "-----------------------------------"
+p counted_characters("that's alright folks") # ["t"]
+p counted_characters("mississippi") # ["i", "s"]
+p counted_characters("hot potato soup please") # ["o", "t", " ", "p"]
+p counted_characters("runtime") # []
