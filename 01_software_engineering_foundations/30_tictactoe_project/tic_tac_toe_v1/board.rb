@@ -6,4 +6,9 @@ class Board
     def valid?(position)
         position.all? { |coord| coord >= 0 && coord < @grid.length }
     end
+
+    def empty?(position)
+        x, y = position
+        @grid[x][y] == '_'
+    end
 end
