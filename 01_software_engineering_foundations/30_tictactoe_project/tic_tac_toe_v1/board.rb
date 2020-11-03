@@ -24,4 +24,10 @@ class Board
     def print
         @grid.each { |row| puts row.join(" ") }
     end
+
+    def win_row?(mark)
+        @grid.any? do |row|
+            row.all? { |ele| ele == mark }
+        end
+    end
 end
