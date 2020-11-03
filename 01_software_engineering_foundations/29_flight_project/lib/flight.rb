@@ -6,4 +6,8 @@ class Flight
         @capacity = capacity
         @passengers = []
     end
+
+    def full?
+        @passengers.length >= @capacity
+    end
 end
