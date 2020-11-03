@@ -14,4 +14,8 @@ class Flight
     def board_passenger(passenger)
         @passengers << passenger if !self.full? && passenger.has_flight?(@flight_number)
     end
+
+    def list_passengers
+        @passengers.map { |passenger| passenger.name }
+    end
 end
