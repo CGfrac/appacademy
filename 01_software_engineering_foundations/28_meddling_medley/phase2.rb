@@ -219,3 +219,31 @@ p silly_talk('Kids like cats and dogs') # "Kibids likee cabats aband dobogs"
 p silly_talk('Stop that scooter') # "Stobop thabat scobooboteber"
 p silly_talk('They can code') # "Thebey caban codee"
 p silly_talk('He flew to Italy') # "Hee flebew too Ibitabaly"
+
+# Write a method compress that accepts a string as an argument. 
+# The method should return a "compressed" version of the string where streaks of consecutive letters are 
+# translated to a single appearance of the letter followed by the number of times it appears in the streak. 
+# If a letter does not form a streak (meaning that it appears alone), then do not add a number after it.
+
+def compress(str)
+    compressed = ""
+    count = 0
+    str.each_char do |char|
+        if char == compressed[-1]
+            count += 1
+        else
+            compressed += count.to_s if count > 1
+            compressed += char
+            count = 1
+        end
+    end
+    compressed += count.to_s if count > 1
+    compressed
+end
+
+puts "-----------------------------------"
+puts "compress"
+puts "-----------------------------------"
+p compress('aabbbbc')   # "a2b4c"
+p compress('boot')      # "bo2t"
+p compress('xxxyxxzzzz')# "x3yx2z4"
