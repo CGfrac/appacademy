@@ -62,4 +62,8 @@ class Board
 
         diagonal
     end
+
+    def win?(mark)
+        win_row?(mark) || win_col?(mark) || win_diagonal?(mark)
+    end
 end
