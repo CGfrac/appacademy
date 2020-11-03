@@ -10,4 +10,8 @@ class Flight
     def full?
         @passengers.length >= @capacity
     end
+
+    def board_passenger(passenger)
+        @passengers << passenger if !self.full? && passenger.has_flight?(@flight_number)
+    end
 end
