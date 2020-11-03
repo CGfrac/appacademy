@@ -22,4 +22,8 @@ class Flight
     def [](index)
         @passengers[index]
     end
+
+    def <<(passenger)
+        self.board_passenger(passenger)
+    end
 end
