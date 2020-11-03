@@ -37,4 +37,29 @@ class Board
         end
         false
     end
+
+    def win_diagonal?(mark)
+        # left to right
+        diagonal = true
+        (0...@grid.length).each do |i|
+            if @grid[i][i] != mark
+                diagonal = false
+                break
+            end
+        end
+        return true if diagonal
+
+        # right to left
+        diagonal = true
+        j = @grid.length - 1
+        (0...@grid.length).each do |i|
+            if @grid[i][j] != mark
+                diagonal = false
+                break
+            end
+            j -= 1
+        end
+
+        diagonal
+    end
 end
