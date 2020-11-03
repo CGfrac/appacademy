@@ -11,4 +11,13 @@ class Board
         x, y = position
         @grid[x][y] == '_'
     end
+
+    def place_mark(position, mark)
+        if self.valid?(position) && self.empty?(position)
+            x, y = position
+            @grid[x][y] = mark
+        else
+            raise "Invalid position!"
+        end
+    end
 end
