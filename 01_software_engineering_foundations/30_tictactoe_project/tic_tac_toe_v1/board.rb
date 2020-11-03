@@ -30,4 +30,11 @@ class Board
             row.all? { |ele| ele == mark }
         end
     end
+
+    def win_col?(mark)
+        (0...@grid.length).each do |i|
+            return true if @grid.all? { |row| row[i] == mark }
+        end
+        false
+    end
 end
