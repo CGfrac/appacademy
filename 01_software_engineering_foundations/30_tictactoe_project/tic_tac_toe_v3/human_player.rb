@@ -6,20 +6,30 @@ class HumanPlayer
         @mark_value = mark_value
     end
 
-    def get_position
+    def get_position(legal_positions)
         puts "#{@mark_value} turn"
-        puts "Enter the position of your mark by leaving a space between each of the two numbers, e.g. 0 2"
-        position = gets.chomp
+        valid = false
+        while !valid
+            puts "Enter the position of your mark using the format 'row col', e.g. 0 2"
+            input = gets.chomp
 
-        if position.count(' ') != 1 || position.split.length != 2
-            raise "Wrong input"
-        end
-        position.each_char do |char|
-            if !VALID_INPUTS.include?(char)
+            if input.count(' ') != 1 || input.split.length != 2
                 raise "Wrong input"
             end
+            input.each_char do |char|
+                if !VALID_INPUTS.include?(char)
+                    raise "Wrong input"
+                end
+            end
+            
+            position = input.split.map { |coord| coord.to_i }
+
+            if legal_positions.include?(position)
+                valid = true
+            else
+                puts "#{position} is not a legal position"
+            end
         end
-        
-        position.split.map { |coord| coord.to_i }
+        position
     end
 end
