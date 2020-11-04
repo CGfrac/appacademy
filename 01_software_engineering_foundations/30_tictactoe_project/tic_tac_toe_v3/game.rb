@@ -27,13 +27,15 @@ class Game
             position = @current_player.get_position(legal_positions)
             @board.place_mark(position, @current_player.mark_value)
             if @board.win?(@current_player.mark_value)
-                puts "Victory"
                 @board.print
+                puts "Victory"
                 return
             end
             self.switch_turn
         end
-        puts "Tie"
+        
         @board.print
+
+        puts "Tie"
     end
 end
