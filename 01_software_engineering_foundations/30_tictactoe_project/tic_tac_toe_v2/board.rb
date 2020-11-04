@@ -22,10 +22,11 @@ class Board
     end
 
     def print
-        puts '_' * 9
-        puts '|' + ' ' * 7 + '|'
+        padding = (@grid.length * 2) + 1
+        puts '_' * (padding + 2)
+        puts '|' + ' ' * padding + '|'
         @grid.each { |row| puts "| " + row.join(" ") + " |" }
-        puts '|' + '_' * 7 + '|'
+        puts '|' + '_' * padding + '|'
     end
 
     def win_row?(mark)
