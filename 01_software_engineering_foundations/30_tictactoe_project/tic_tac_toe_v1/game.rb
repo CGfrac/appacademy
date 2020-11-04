@@ -16,4 +16,17 @@ class Game
             @current_player = @player_1
         end
     end
+
+    def play
+        while @board.empty_positions?
+            @board.print
+            @board.place_mark(@current_player.get_position, @current_player.mark_value)
+            if @board.win?(@current_player.mark_value)
+                puts "Victory"
+                @board.print
+                return
+            end
+            self.switch_turn
+        end
+    end
 end
