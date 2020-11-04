@@ -2,10 +2,10 @@ require_relative "board.rb"
 require_relative "human_player.rb"
 
 class Game
-    def initialize(player_1_mark, player_2_mark)
+    def initialize(player_1_mark=:X, player_2_mark=:O, board_size=3)
         @player_1 = HumanPlayer.new(player_1_mark)
         @player_2 = HumanPlayer.new(player_2_mark)
-        @board = Board.new
+        @board = Board.new(board_size)
         @current_player = @player_1
     end
 
