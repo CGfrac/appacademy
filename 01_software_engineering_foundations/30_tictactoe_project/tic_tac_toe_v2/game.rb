@@ -11,7 +11,7 @@ class Game
 
     def switch_turn
         @players.rotate!
-        @current_player == @players[0]
+        @current_player = @players[0]
     end
 
     def play
