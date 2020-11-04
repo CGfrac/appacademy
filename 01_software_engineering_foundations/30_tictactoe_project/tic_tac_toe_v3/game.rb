@@ -23,19 +23,21 @@ class Game
     def play
         while @board.empty_positions?
             @board.print
+
             legal_positions = @board.legal_positions
             position = @current_player.get_position(legal_positions)
             @board.place_mark(position, @current_player.mark_value)
+
             if @board.win?(@current_player.mark_value)
                 @board.print
                 puts "Victory"
                 return
             end
+
             self.switch_turn
         end
         
         @board.print
-
         puts "Tie"
     end
 end
