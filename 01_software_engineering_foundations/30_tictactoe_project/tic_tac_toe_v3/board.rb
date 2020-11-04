@@ -1,6 +1,7 @@
 class Board
     def initialize(n)
         @grid = Array.new(n) { Array.new(n, '_') }
+        @legal_pos = nil
     end
 
     def valid?(position)
@@ -79,13 +80,14 @@ class Board
     end
 
     def legal_positions
-        positions = []
-        (0...@grid.length).each do |i|
-            (0...@grid.length).each do |j|
-                coord = [i, j]
-                positions << coord if self.empty?(coord)
+        if @legal_pos
+            @legal_pos.select! { |pos| self.empty?(pos) }
+        else
+            @legal_pos = []
+            (0...@grid.length).each do |i|
+                (0...@grid.length).each { |j| @legal_pos << [i, j] }
             end
         end
-        positions
+        @legal_pos
     end
 end
