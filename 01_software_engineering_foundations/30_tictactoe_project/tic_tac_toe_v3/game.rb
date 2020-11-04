@@ -2,9 +2,15 @@ require_relative "board.rb"
 require_relative "human_player.rb"
 
 class Game
-    def initialize(board_size=3, *player_marks)
-        player_marks = [:X, :O] if player_marks.empty?
-        @players = player_marks.map { |player_mark| HumanPlayer.new(player_mark) }
+    def initialize(board_size=3, player_marks={X: false, O: true})
+        @players = []
+        player_marks.each do |player_mark, computer|
+            if computer
+                @players << ComputerPlayer.new(player_mark)
+            else
+                @players << HumanPlayer.new(player_mark)
+            end
+        end
         @board = Board.new(board_size)
         @current_player = @players[0]
     end
