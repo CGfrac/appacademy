@@ -27,6 +27,7 @@ class Board
         puts '|' + ' ' * padding + '|'
         @grid.each { |row| puts "| " + row.join(" ") + " |" }
         puts '|' + '_' * padding + '|'
+        puts
     end
 
     def win_row?(mark)
