@@ -28,5 +28,7 @@ class Game
             end
             self.switch_turn
         end
+        puts "Tie"
+        @board.print
     end
 end
