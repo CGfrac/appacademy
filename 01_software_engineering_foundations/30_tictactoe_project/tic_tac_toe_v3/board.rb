@@ -76,4 +76,15 @@ class Board
             row.any? { |ele| ele == '_' }
         end
     end
+
+    def legal_positions
+        positions = []
+        (0...@grid.length).each do |i|
+            (0...@grid.length).each do |j|
+                coord = [i, j]
+                positions << coord if self.empty?(coord)
+            end
+        end
+        positions
+    end
 end
