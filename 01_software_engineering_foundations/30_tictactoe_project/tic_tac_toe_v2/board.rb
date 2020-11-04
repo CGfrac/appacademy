@@ -1,6 +1,6 @@
 class Board
-    def initialize
-        @grid = Array.new(3) { Array.new(3, '_') }
+    def initialize(n)
+        @grid = Array.new(n) { Array.new(n, '_') }
     end
 
     def valid?(position)
