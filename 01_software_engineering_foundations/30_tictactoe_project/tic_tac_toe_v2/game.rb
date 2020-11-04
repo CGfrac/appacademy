@@ -6,7 +6,7 @@ class Game
         player_marks = [:X, :O] if player_marks.empty?
         @players = player_marks.map { |player_mark| HumanPlayer.new(player_mark) }
         @board = Board.new(board_size)
-        @current_player = @player_1
+        @current_player = @players[0]
     end
 
     def switch_turn
