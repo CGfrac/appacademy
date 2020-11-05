@@ -1,4 +1,7 @@
 class Item
+    attr_accessor :title, :description
+    attr_reader :deadline
+
     # Should use something more robust like Date but that's part of the assignment
     def self.valid_date?(date_string)
         elements = date_string.split('-')
@@ -16,5 +19,13 @@ class Item
             raise "invalid date"
         end
         @description = description
+    end
+
+    def deadline=(new_deadline)
+        if Item.valid_date?(new_deadline)
+            @deadline = new_deadline
+        else
+            raise "invalid date"
+        end
     end
 end
