@@ -31,4 +31,9 @@ class List
         @list[index_1], @list[index_2] = @list[index_2], @list[index_1]
         true
     end
+
+    def [](index)
+        return nil if !valid_index(index)
+        @items[index]
+    end
 end
