@@ -68,4 +68,14 @@ class List
     def print_priority
         self.print_full_item(0)
     end
+
+    def up(index, amount=1)
+        return false if !self.valid_index?(index)
+        while index > 0 || amount > 0
+            self.swap_index(index, index-1)
+            index -= 1
+            amount -= 1
+        end
+        true
+    end
 end
