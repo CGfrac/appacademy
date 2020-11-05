@@ -78,4 +78,14 @@ class List
         end
         true
     end
+
+    def down(index, amount=1)
+        return false if !self.valid_index?(index)
+        while index < self.size - 1 || amount > 0
+            self.swap_index(index, index+1)
+            index += 1
+            amount -= 1
+        end
+        true
+    end
 end
