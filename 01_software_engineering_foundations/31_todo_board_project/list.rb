@@ -36,4 +36,8 @@ class List
         return nil if !valid_index(index)
         @items[index]
     end
+
+    def priority
+        index[0]
+    end
 end
