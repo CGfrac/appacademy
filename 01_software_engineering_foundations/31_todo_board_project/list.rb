@@ -40,4 +40,17 @@ class List
     def priority
         @items[0]
     end
+
+    def print
+        hr = "-" * 40
+        puts hr
+        puts @label.upcase.rjust(20)
+        puts hr
+        puts "Index".ljust(6) + "| Item".ljust(20) + "| Deadline"
+        puts hr
+        @items.each_with_index do |item, idx|
+            puts "#{idx}".ljust(6) + "| #{item.title}".ljust(20) + "| #{item.deadline}"
+        end
+        puts hr
+    end
 end
