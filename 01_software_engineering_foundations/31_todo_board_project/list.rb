@@ -44,7 +44,7 @@ class List
     def print
         hr = "-" * 40
         puts hr
-        puts @label.upcase.rjust(20)
+        puts @label.upcase.rjust(20).ljust(20)
         puts hr
         puts "Index".ljust(6) + "| Item".ljust(20) + "| Deadline"
         puts hr
@@ -52,5 +52,16 @@ class List
             puts "#{idx}".ljust(6) + "| #{item.title}".ljust(20) + "| #{item.deadline}"
         end
         puts hr
+    end
+
+    def print_full_item(index)
+        if self.valid_index?(index)
+            item = self[index]
+            hr = "-" * 40
+            puts hr
+            puts item.title.ljust(20) + item.deadline.rjust(20)
+            puts item.description
+            puts hr
+        end
     end
 end
