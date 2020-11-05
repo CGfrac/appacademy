@@ -20,4 +20,9 @@ class List
     def size
         @items.length
     end
+
+    def valid_index?(index)
+        return false if index < 0 || index >= self.size
+        true
+    end
 end
