@@ -28,16 +28,16 @@ class List
     
     def swap_index(index_1, index_2)
         return false if !(valid_index?(index_1) && valid_index?(index_2))
-        @list[index_1], @list[index_2] = @list[index_2], @list[index_1]
+        @items[index_1], @items[index_2] = @items[index_2], @items[index_1]
         true
     end
 
     def [](index)
-        return nil if !valid_index(index)
+        return nil if !valid_index?(index)
         @items[index]
     end
 
     def priority
-        index[0]
+        @items[0]
     end
 end
