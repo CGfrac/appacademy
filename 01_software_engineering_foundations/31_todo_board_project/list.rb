@@ -16,4 +16,8 @@ class List
             return false
         end
     end
+
+    def size
+        @items.length
+    end
 end
