@@ -25,4 +25,10 @@ class List
         return false if index < 0 || index >= self.size
         true
     end
+    
+    def swap_index(index_1, index_2)
+        return false if !(valid_index?(index_1) && valid_index?(index_2))
+        @list[index_1], @list[index_2] = @list[index_2], @list[index_1]
+        true
+    end
 end
