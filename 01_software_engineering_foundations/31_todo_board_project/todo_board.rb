@@ -10,12 +10,12 @@ class TodoBoard
         cmd, list_label, *args = gets.chomp.split
 
         case cmd
+        when "mklist"
+            @lists[list_label] = List.new(list_label)
+        when "ls"
+            @lists.each_key { |label| puts label }
         when "mktodo"
-            if !@lists.has_key?(list_label)
-                @lists[list_label] = List.new(list_label)
-            else
-                @lists[list_label].add_item(*args)
-            end
+            @lists[list_label].add_item(*args)
         when "up"
             @lists[list_label].up(*args.map! { |arg| arg.to_i }  )
         when "down"
