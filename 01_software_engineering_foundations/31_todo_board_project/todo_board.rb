@@ -28,10 +28,12 @@ class TodoBoard
             else
                 @list.print_full_item(args[0].to_i)
             end
+        when "toggle"
+            @list.toggle_item(args[0].to_i)
         when "quit"
             return false
         else
-            "Wrong command, did you type it correctly?"
+            print "Wrong command, did you type it correctly?"
         end
 
         true
