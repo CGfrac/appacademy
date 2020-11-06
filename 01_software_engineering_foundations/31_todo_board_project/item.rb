@@ -20,6 +20,7 @@ class Item
             raise "invalid date"
         end
         @description = description
+        @done = false
     end
 
     def deadline=(new_deadline)
@@ -28,5 +29,9 @@ class Item
         else
             raise "invalid date"
         end
+    end
+
+    def toggle
+        @done = @done ? false : true   
     end
 end
