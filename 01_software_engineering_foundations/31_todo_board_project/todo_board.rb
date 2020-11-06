@@ -55,3 +55,6 @@ class TodoBoard
         end
     end
 end
+
+todo = TodoBoard.new
+todo.run
