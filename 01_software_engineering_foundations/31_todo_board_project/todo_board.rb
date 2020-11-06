@@ -14,6 +14,8 @@ class TodoBoard
             @lists[list_label] = List.new(list_label)
         when "ls"
             @lists.each_key { |label| puts label }
+        when "showall"
+            @lists.each_value { |list| list.print }
         when "mktodo"
             @lists[list_label].add_item(*args)
         when "up"
