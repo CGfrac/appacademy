@@ -103,4 +103,8 @@ class List
         @items.pop
         true
     end
+
+    def purge
+        @items.each_with_index { |item, index| self.remove_item(index) if item.done }
+    end
 end
