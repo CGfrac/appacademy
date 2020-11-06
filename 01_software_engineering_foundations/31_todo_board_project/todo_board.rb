@@ -22,6 +22,12 @@ class TodoBoard
             @list.sort_by_date!
         when "priority"
             @list.print_priority
+        when "print"
+            if args.empty?
+                @list.print
+            else
+                @list.print_full_item(args[0].to_i)
+            end
         when "quit"
             return false
         else
@@ -29,5 +35,11 @@ class TodoBoard
         end
 
         true
+    end
+
+    def run
+        while true
+            break if !get_command
+        end
     end
 end
