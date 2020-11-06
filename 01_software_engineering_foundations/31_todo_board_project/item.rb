@@ -1,6 +1,6 @@
 class Item
     attr_accessor :title, :description
-    attr_reader :deadline
+    attr_reader :deadline, :done
 
     # Should use something more robust like Date but that's part of the assignment
     def self.valid_date?(date_string)
