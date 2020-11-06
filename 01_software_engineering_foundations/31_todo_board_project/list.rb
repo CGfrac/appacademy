@@ -49,7 +49,12 @@ class List
         puts "Index".ljust(6) + "| Item".ljust(20) + "| Deadline".ljust(12) + "| Done"
         puts hr
         @items.each_with_index do |item, idx|
-            puts "#{idx}".ljust(6) + "| #{item.title}".ljust(20) + "| #{item.deadline}" + "| #{item.done}"
+            if item.done
+                checkmark = "[✓]"
+            else
+                checkmark = "[ ]"
+            end
+            puts "#{idx}".ljust(6) + "| #{item.title}".ljust(20) + "| #{item.deadline}" + " | #{checkmark}"
         end
         puts hr
     end
@@ -60,7 +65,12 @@ class List
             hr = "-" * 40
             puts hr
             puts item.title.ljust(20) + item.deadline.rjust(20)
-            puts item.description.ljust(20) + "Done: #{item.done}".rjust(20)
+            if item.done
+                checkmark = "[✓]"
+            else
+                checkmark = "[ ]"
+            end
+            puts item.description.ljust(20) + "Done: #{checkmark}".rjust(20)
             puts hr
         end
     end
