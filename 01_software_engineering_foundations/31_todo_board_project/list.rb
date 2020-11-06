@@ -96,4 +96,11 @@ class List
     def toggle_item(index)
         self[index].toggle
     end
+
+    def remove_item(index)
+        return false if !self.valid_index?(index)
+        self.down(index, self.size - index)
+        @items.pop
+        true
+    end
 end

@@ -30,6 +30,8 @@ class TodoBoard
             end
         when "toggle"
             @list.toggle_item(args[0].to_i)
+        when "rm"
+            @list.remove_item(args[0].to_i)
         when "quit"
             return false
         else
