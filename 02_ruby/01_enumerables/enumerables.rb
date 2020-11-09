@@ -90,3 +90,23 @@ p a.my_any? { |num| num > 1 } # => true
 p a.my_any? { |num| num == 4 } # => false
 p a.my_all? { |num| num > 1 } # => false
 p a.my_all? { |num| num < 4 } # => true
+
+# my_flatten should return all elements of the array into a new, one-dimensional array. 
+# Hint: use recursion!
+
+class Array
+    def my_flatten
+        return [] if self.length == 0
+        if self[0].is_a?(Array)
+            new_arr = self[0].my_flatten
+        else
+            new_arr = [self[0]]
+        end
+        new_arr + self[1..-1].my_flatten
+    end
+end
+
+puts "-----------------------------------"
+puts "my_flatten"
+puts "-----------------------------------"
+p [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten # => [1, 2, 3, 4, 5, 6, 7, 8]
