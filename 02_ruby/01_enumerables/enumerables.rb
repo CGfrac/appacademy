@@ -48,3 +48,21 @@ puts "-----------------------------------"
 a = [1, 2, 3]
 p a.my_select { |num| num > 1 } # => [2, 3]
 p a.my_select { |num| num == 4 } # => []
+
+# Write my_reject to take a block and return a new array 
+# excluding elements that satisfy the block.
+
+class Array
+    def my_reject(&prc)
+        new_arr = []
+        self.my_each { |ele| new_arr << ele if !prc.call(ele) }
+        new_arr
+    end
+end
+
+puts "-----------------------------------"
+puts "my_reject"
+puts "-----------------------------------"
+a = [1, 2, 3]
+p a.my_reject { |num| num > 1 } # => [1]
+p a.my_reject { |num| num == 4 } # => [1, 2, 3]
