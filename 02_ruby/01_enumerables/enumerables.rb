@@ -66,3 +66,27 @@ puts "-----------------------------------"
 a = [1, 2, 3]
 p a.my_reject { |num| num > 1 } # => [1]
 p a.my_reject { |num| num == 4 } # => [1, 2, 3]
+
+# Write my_any? to return true if any elements of the array satisfy 
+# the block and my_all? to return true only if all elements satisfy the block.
+
+class Array
+    def my_any?(&prc)
+        self.my_each { |ele| return true if prc.call(ele) }
+        false
+    end
+
+    def my_all?(&prc)
+        self.my_each { |ele| return false if !prc.call(ele) }
+        true
+    end
+end
+
+puts "-----------------------------------"
+puts "my_any? and my_all?"
+puts "-----------------------------------"
+a = [1, 2, 3]
+p a.my_any? { |num| num > 1 } # => true
+p a.my_any? { |num| num == 4 } # => false
+p a.my_all? { |num| num > 1 } # => false
+p a.my_all? { |num| num < 4 } # => true
