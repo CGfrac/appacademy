@@ -86,6 +86,13 @@ end
 # words).
 
 def substrings(string)
+  subs = []
+  (0...string.length).each do |i|
+    (i...string.length).each do |j|
+      subs << string[i..j]
+    end
+  end
+  subs
 end
 
 def subwords(word, dictionary)
