@@ -166,6 +166,15 @@ class Array
   end
 
   def my_inject(&blk)
+    acc = nil
+    self.my_each do |ele|
+      if acc
+        acc = blk.call(acc, ele)
+      else
+        acc = ele
+      end
+    end
+    acc
   end
 end
 
