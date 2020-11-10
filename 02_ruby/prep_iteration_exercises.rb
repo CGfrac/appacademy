@@ -96,6 +96,7 @@ def substrings(string)
 end
 
 def subwords(word, dictionary)
+  substrings(word).select { |ele| dictionary.include?(ele) }
 end
 
 # ### Doubler
