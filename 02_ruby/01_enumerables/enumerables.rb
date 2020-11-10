@@ -184,3 +184,24 @@ puts "-----------------------------------"
 a = [ "a", "b", "c", "d" ]
 p a.my_join         # => "abcd"
 p a.my_join("$")    # => "a$b$c$d"
+
+# Write a method that returns a new array containing all the elements of 
+# the original array in reverse order.
+
+class Array
+    def my_reverse
+        reversed = []
+        i = self.length - 1
+        while i >= 0
+            reversed << self[i]
+            i -= 1
+        end
+        reversed
+    end
+end
+
+puts "-----------------------------------"
+puts "my_reverse"
+puts "-----------------------------------"
+p [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
+p [ 1 ].my_reverse               #=> [1]
