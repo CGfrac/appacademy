@@ -188,4 +188,5 @@ end
 # ```
 
 def concatenate(strings)
+  strings.my_inject { |str, word| str + word }
 end
