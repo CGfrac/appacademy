@@ -48,6 +48,8 @@ end
 #
 # http://stackoverflow.com/questions/827649/what-is-the-ruby-spaceship-operator
 
+require "byebug"
+
 class Array
   def bubble_sort!(&prc)
     prc ||= Proc.new { |num1, num2| num1 <=> num2 }
@@ -64,6 +66,9 @@ class Array
   end
 
   def bubble_sort(&prc)
+    duplicate = self.dup
+    duplicate.bubble_sort!(&prc)
+    duplicate
   end
 end
 
