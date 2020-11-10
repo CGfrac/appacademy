@@ -160,6 +160,9 @@ class Array
   end
 
   def my_select(&prc)
+    new_arr = []
+    self.my_each { |ele| new_arr << ele if prc.call(ele) }
+    new_arr
   end
 
   def my_inject(&blk)
