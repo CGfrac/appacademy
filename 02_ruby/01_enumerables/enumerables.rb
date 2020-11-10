@@ -165,3 +165,22 @@ p a.my_rotate         #=> ["b", "c", "d", "a"]
 p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
 p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
 p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
+
+# my_join returns a single string containing all the elements of the array, 
+# separated by the given string separator. 
+# If no separator is given, an empty string is used.
+
+class Array
+    def my_join(separator="")
+        string = ""
+        self.my_each { |ele| string += ele.to_s + separator }
+        string[0...-1]
+    end
+end
+
+puts "-----------------------------------"
+puts "my_join"
+puts "-----------------------------------"
+a = [ "a", "b", "c", "d" ]
+p a.my_join         # => "abcd"
+p a.my_join("$")    # => "a$b$c$d"
