@@ -140,3 +140,28 @@ p [1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
 c = [10, 11, 12]
 d = [13, 14, 15]
 p [1, 2].my_zip(a, b, c, d)    # => [[1, 4, 7, 10, 13], [2, 5, 8, 11, 14]]
+
+# Write a method my_rotate that returns a new array containing all the elements of the original array in a rotated order. 
+# By default, the array should rotate by one element. 
+# If a negative value is given, the array is rotated in the opposite direction.
+
+class Array
+    def my_rotate(direction=1)
+        rotated = self[0..-1]
+        if direction > 0
+            direction.times { rotated = rotated[1..-1] + [rotated[0]] }
+        else
+            direction.abs.times { rotated = [rotated[-1]] + rotated[0...-1] }
+        end
+        rotated
+    end
+end
+
+puts "-----------------------------------"
+puts "my_rotate"
+puts "-----------------------------------"
+a = [ "a", "b", "c", "d" ]
+p a.my_rotate         #=> ["b", "c", "d", "a"]
+p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
+p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
+p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
