@@ -4,6 +4,9 @@
 # factors of a given number.
 
 def factors(num)
+  arr = []
+  (1..num).each { |i| arr << i if num % i == 0 }
+  arr
 end
 
 # ### Bubble Sort
