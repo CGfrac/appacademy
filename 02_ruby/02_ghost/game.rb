@@ -2,9 +2,11 @@ require_relative "player.rb"
 
 class Game
     ALPHABET = ('a'..'z').to_a
+    GHOST = "GHOST"
 
     def initialize
         @players = [Player.new("PLAYER1"), Player.new("PLAYER2")]
+        @losses = Hash.new(0)
         @fragment = ""
         @dictionary = File.read("dictionary.txt").split.to_set
     end
@@ -42,7 +44,12 @@ class Game
         puts "Fragment: #{@fragment}"
         if self.take_turn(self.current_player)
             puts "#{self.previous_player.name} loses"
+            @losses[self.previous_player] += 1
         end
         self.next_player!
+    end
+
+    def record(player)
+        GHOST[0...@losses[player]]
     end
 end
