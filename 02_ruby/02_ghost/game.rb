@@ -4,8 +4,9 @@ class Game
     ALPHABET = ('a'..'z').to_a
     GHOST = "GHOST"
 
-    def initialize
-        @players = [Player.new("PLAYER1"), Player.new("PLAYER2")]
+    def initialize(player_names)
+        @players = []
+        player_names.each { |name| @players << Player.new(name) }
         @losses = {}
         @players.each { |player| @losses[player] = 0 }
         @fragment = ""
