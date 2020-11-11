@@ -52,4 +52,10 @@ class Game
     def record(player)
         GHOST[0...@losses[player]]
     end
+
+    def display_standings
+        @losses.each do |player, count|
+            puts "#{player.name}".ljust(15) + self.record(player)
+        end
+    end
 end
