@@ -6,7 +6,8 @@ class Game
 
     def initialize
         @players = [Player.new("PLAYER1"), Player.new("PLAYER2")]
-        @losses = Hash.new(0)
+        @losses = {}
+        @players.each { |player| @losses[player] = 0 }
         @fragment = ""
         @dictionary = File.read("dictionary.txt").split.to_set
     end
@@ -45,8 +46,10 @@ class Game
         if self.take_turn(self.current_player)
             puts "#{self.previous_player.name} loses"
             @losses[self.previous_player] += 1
+            return true
+        else
+            return false
         end
-        self.next_player!
     end
 
     def record(player)
@@ -54,8 +57,19 @@ class Game
     end
 
     def display_standings
+        puts "Player".ljust(15) + " | " + "Losses"
+        puts "-" * 25
         @losses.each do |player, count|
-            puts "#{player.name}".ljust(15) + self.record(player)
+            puts "#{player.name}".ljust(15) + " | " + self.record(player)
         end
+    end
+
+    def run
+        while @losses[self.previous_player] < 5
+            self.display_standings
+            @fragment = ""
+            self.next_player! until self.play_round
+        end
+        puts "#{self.previous_player.name} is the GHOST!"
     end
 end
