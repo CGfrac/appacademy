@@ -66,11 +66,15 @@ class Game
     end
 
     def run
-        while @losses[self.previous_player] < 5
-            self.display_standings
-            @fragment = ""
-            self.next_player! until self.play_round
+        while @players.length > 1
+            while @losses[self.previous_player] < 5
+                self.display_standings
+                @fragment = ""
+                self.next_player! until self.play_round
+            end
+            puts "#{self.previous_player.name} is a GHOST!"
+            @players.pop
         end
-        puts "#{self.previous_player.name} is the GHOST!"
+        puts "#{self.current_player.name} is the last person standing!"
     end
 end
