@@ -4,6 +4,7 @@ require_relative "ai_player.rb"
 
 class Game
     ALPHABET = ('a'..'z').to_a
+    DICTIONARY = File.read("dictionary.txt").split.to_set
     GHOST = "GHOST"
 
     def initialize(players={"Player1"=>false, "Player2"=>false})
@@ -20,7 +21,6 @@ class Game
         @players.each { |player| @losses[player] = 0 }
 
         @fragment = ""
-        @dictionary = File.read("dictionary.txt").split.to_set
     end
 
     def number_players
@@ -40,7 +40,7 @@ class Game
     end
 
     def valid_play?(char)
-        ALPHABET.include?(char) && @dictionary.any? { |word| word.include?(@fragment + char) }
+        ALPHABET.include?(char) && DICTIONARY.any? { |word| word.include?(@fragment + char) }
     end
 
     def take_turn(player)
@@ -55,7 +55,7 @@ class Game
 
             if char.length == 1 && self.valid_play?(char)
                 @fragment += char
-                return @dictionary.include?(@fragment)
+                return DICTIONARY.include?(@fragment)
             else
                 player.alert_invalid_guess
             end
