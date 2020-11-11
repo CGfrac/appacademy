@@ -16,10 +16,7 @@ class Game
                 @players << Player.new(name)
             end
         end
-
-        @losses = {}
-        @players.each { |player| @losses[player] = 0 }
-
+        @losses = Hash.new(0)
         @fragment = ""
     end
 
@@ -82,7 +79,7 @@ class Game
         puts hr
         puts "Player".ljust(15) + " | " + "Losses"
         puts hr
-        @losses.each do |player, count|
+        @players.each do |player|
             puts "#{player.name}".ljust(15) + " | " + self.record(player)
         end
         puts hr
@@ -106,14 +103,14 @@ if __FILE__ == $PROGRAM_NAME
     players = {}
     i = 1
     while true
-        puts "Type player #{i} name: "
+        print "Type player #{i} name: "
         name = gets.chomp
-        puts "It's an AI? (type 'y' to confirm): "
-        ai = gets.chomp
+        print "It's an AI? (type 'y' to confirm): "
+        ai = gets.chomp.downcase
         players[name] = (ai == 'y')
 
         if i >= 2
-            puts "Add another player? (type 'y' to accept): "
+            print "Add another player? (type 'y' to accept): "
             yes_no = gets.chomp.downcase
             break if yes_no != "y"
         end
