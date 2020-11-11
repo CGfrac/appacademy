@@ -1,17 +1,30 @@
 require "set"
 require_relative "player.rb"
+require_relative "ai_player.rb"
 
 class Game
     ALPHABET = ('a'..'z').to_a
     GHOST = "GHOST"
 
-    def initialize(player_names=["Player1", "Player2"])
+    def initialize(players={"Player1"=>false, "Player2"=>false})
         @players = []
-        player_names.each { |name| @players << Player.new(name) }
+        players.each do |name, ai_player|
+            if ai_player
+                @players << AiPlayer.new(name)
+            else
+                @players << Player.new(name)
+            end
+        end
+
         @losses = {}
         @players.each { |player| @losses[player] = 0 }
+
         @fragment = ""
         @dictionary = File.read("dictionary.txt").split.to_set
+    end
+
+    def number_players
+        @players.length
     end
 
     def current_player
@@ -33,7 +46,13 @@ class Game
     def take_turn(player)
         while true
             print "Type a character, #{player.name}: "
-            char = player.guess
+
+            if player.is_a?(Player)
+                char = player.guess
+            else
+                char = player.guess(@fragment, self.number_players)
+            end
+
             if char.length == 1 && self.valid_play?(char)
                 @fragment += char
                 return @dictionary.include?(@fragment)
@@ -70,7 +89,7 @@ class Game
     end
 
     def run
-        while @players.length > 1
+        while self.number_players > 1
             while @losses[self.previous_player] < 5
                 self.display_standings
                 @fragment = ""
@@ -79,23 +98,28 @@ class Game
             puts "#{self.previous_player.name} is a GHOST!"
             @players.pop
         end
-        puts "#{self.current_player.name} is the last person standing!"
+        puts "#{self.current_player.name} is the last player standing!"
     end
 end
 
 if __FILE__ == $PROGRAM_NAME
-    names = []
+    players = {}
     i = 1
     while true
         puts "Type player #{i} name: "
-        names << gets.chomp
+        name = gets.chomp
+        puts "It's an AI? (type 'y' to confirm): "
+        ai = gets.chomp
+        players[name] = (ai == 'y')
+
         if i >= 2
-            puts "Add another player? (type 'y'): "
+            puts "Add another player? (type 'y' to accept): "
             yes_no = gets.chomp.downcase
             break if yes_no != "y"
         end
+
         i += 1
     end
-    game = Game.new(names)
+    game = Game.new(players)
     game.run
 end
