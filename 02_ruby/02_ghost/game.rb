@@ -1,6 +1,8 @@
 require_relative "player.rb"
 
 class Game
+    ALPHABET = ('a'..'z').to_a
+
     def initialize
         @players = [Player.new("PLAYER1"), Player.new("PLAYER2")]
         @fragment = ""
@@ -17,5 +19,9 @@ class Game
 
     def next_player!
         @players.rotate!
+    end
+
+    def valid_play?(char)
+        ALPHABET.include?(char) && @dictionary.any? { |word| word.include?(@fragment + char) }
     end
 end
