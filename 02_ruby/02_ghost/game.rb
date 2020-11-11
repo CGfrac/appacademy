@@ -28,7 +28,7 @@ class Game
     def take_turn(player)
         while true
             print "Type a character, #{player.name}: "
-            char = gets.chomp
+            char = gets.chomp.downcase
             if char.length == 1 && self.valid_play?(char)
                 @fragment += char
                 return @dictionary.include?(@fragment)
@@ -36,5 +36,13 @@ class Game
                 puts "This input is invalid."
             end
         end
+    end
+
+    def play_round
+        puts "Fragment: #{@fragment}"
+        if self.take_turn(self.current_player)
+            puts "#{self.previous_player.name} loses"
+        end
+        self.next_player!
     end
 end
