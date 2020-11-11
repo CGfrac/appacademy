@@ -28,12 +28,12 @@ class Game
     def take_turn(player)
         while true
             print "Type a character, #{player.name}: "
-            char = gets.chomp.downcase
+            char = player.guess
             if char.length == 1 && self.valid_play?(char)
                 @fragment += char
                 return @dictionary.include?(@fragment)
             else
-                puts "This input is invalid."
+                player.alert_invalid_guess
             end
         end
     end
