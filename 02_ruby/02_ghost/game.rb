@@ -24,4 +24,17 @@ class Game
     def valid_play?(char)
         ALPHABET.include?(char) && @dictionary.any? { |word| word.include?(@fragment + char) }
     end
+
+    def take_turn(player)
+        while true
+            print "Type a character, #{player.name}: "
+            char = gets.chomp
+            if char.length == 1 && self.valid_play?(char)
+                @fragment += char
+                return @dictionary.include?(@fragment)
+            else
+                puts "This input is invalid."
+            end
+        end
+    end
 end
