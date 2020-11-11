@@ -1,6 +1,8 @@
+require_relative "player.rb"
+
 class Game
     def initialize
-        @players = []
+        @players = [Player.new("PLAYER1"), Player.new("PLAYER2")]
         @fragment = ""
         @dictionary = File.read("dictionary.txt").split.to_set
     end
