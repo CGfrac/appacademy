@@ -18,7 +18,7 @@ while true
 
     case cmd
     when "display"
-        tasks.each { |task, time| puts task + time.rjust(20) }
+        tasks.each { |task, time| puts task.ljust(50) + time }
     when "new"
         puts "Input task in the following format: name_task HH_MM_SS"
         task = gets.chomp.split
