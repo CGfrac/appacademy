@@ -46,12 +46,14 @@ class Game
 
             if player.is_a?(AiPlayer)
                 char = player.guess(@fragment, self.number_players)
+                puts
             else
                 char = player.guess
             end
 
             if char.length == 1 && self.valid_play?(char)
                 @fragment += char
+                puts "Fragment: #{@fragment}"
                 return DICTIONARY.include?(@fragment)
             else
                 player.alert_invalid_guess
@@ -60,7 +62,6 @@ class Game
     end
 
     def play_round
-        puts "Fragment: #{@fragment}"
         if self.take_turn(self.current_player)
             puts "#{self.previous_player.name} loses"
             @losses[self.previous_player] += 1
