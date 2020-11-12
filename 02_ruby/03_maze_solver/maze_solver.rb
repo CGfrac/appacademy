@@ -8,7 +8,14 @@ def find_start(maze)
     end
 end
 
+def naive_pathfinding(maze, start)
+    #
+end
+
 maze = []
 File.open("maze1.txt").each_line { |line| maze << line.chomp.split("") }
+maze.each { |row| puts row.join }
 
 start = find_start(maze)
+naive_pathfinding(maze, start)
+maze.each { |row| puts row.join }
