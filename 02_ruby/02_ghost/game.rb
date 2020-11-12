@@ -37,17 +37,17 @@ class Game
     end
 
     def valid_play?(char)
-        ALPHABET.include?(char) && DICTIONARY.any? { |word| word.include?(@fragment + char) }
+        ALPHABET.include?(char) && DICTIONARY.any? { |word| word.start_with?(@fragment + char) }
     end
 
     def take_turn(player)
         while true
             print "Type a character, #{player.name}: "
 
-            if player.is_a?(Player)
-                char = player.guess
-            else
+            if player.is_a?(AiPlayer)
                 char = player.guess(@fragment, self.number_players)
+            else
+                char = player.guess
             end
 
             if char.length == 1 && self.valid_play?(char)
