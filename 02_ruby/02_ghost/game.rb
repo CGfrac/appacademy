@@ -92,6 +92,7 @@ class Game
                 self.display_standings
                 @fragment = ""
                 self.next_player! until self.play_round
+                DICTIONARY.delete(@fragment)
             end
             puts "#{self.previous_player.name} is a GHOST!"
             @players.pop
