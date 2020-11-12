@@ -16,7 +16,6 @@ end
 
 maze = []
 File.open(ARGV[0]).each_line { |line| maze << line.chomp.split("") }
-maze.each { |row| puts row.join }
 
 naive_pathfinding(maze)
 maze.each { |row| puts row.join }
