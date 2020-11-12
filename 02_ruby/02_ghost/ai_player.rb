@@ -10,7 +10,7 @@ class AiPlayer < Player
             Game::DICTIONARY.each do |word|
                 if word.start_with?(candidate)
                     distance = word.length - candidate.length
-                    if distance > 1 && distance <= n
+                    if distance % n != 1
                         winning_moves[char] += 1
                     else
                         losing_moves[char] += 1
