@@ -1,5 +1,10 @@
 require_relative "node.rb"
 
+MOVES = [
+    [-1,0], [0,-1], [1,0], [0,1], # straights
+    [-1,-1], [1,1], [1,-1], [1,1]  # diagonals
+]
+
 def find_element(maze, char)
     maze.each_with_index do |row, i|
         row.each_with_index do |cell, j|
@@ -49,11 +54,6 @@ def a_star(maze)
     addresses["#{start_x}:#{start_y}"][:open] = true
     open_count = 1
 
-    moves = [
-        [-1,0], [0,-1], [1,0], [0,1], # straights
-        [-1,-1], [1,1], [1,-1], [1,1]  # diagonals
-    ]
-
     while open_count > 0
         # look for lowest F in open list
         current = binary_heap_pop(binary_heap)
@@ -68,7 +68,7 @@ def a_star(maze)
         break if maze[x][y] == 'E'
 
         # check all 8 adjacent squares
-        moves.each_with_index do |move, index|
+        MOVES.each_with_index do |move, index|
             i = move[0] + x
             j = move[1] + y
             coord = "#{i}:#{j}"
