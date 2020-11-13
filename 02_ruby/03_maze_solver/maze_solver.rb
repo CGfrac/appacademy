@@ -15,48 +15,21 @@ def find_element(maze, char)
     end
 end
 
-def binary_heap_pop(binary_heap)
-    binary_heap[0], binary_heap[-1] = binary_heap[-1], binary_heap[0]
-    item = binary_heap.pop
-    index = 1
-    while (index * 2) <= binary_heap.length
-        a = index-1
-        b = (index * 2) - 1
-        if binary_heap[a].f > binary_heap[b].f
-            binary_heap[a], binary_heap[b] = binary_heap[b], binary_heap[a]
-        end
-        index *= 2
-    end
-    item
-end
-
-def binary_heap_sort(binary_heap)
-    index = binary_heap.length
-    while (index / 2) >= 1
-        a = (index / 2) - 1
-        b = index - 1
-        if binary_heap[a].f > binary_heap[b].f
-            binary_heap[a], binary_heap[b] = binary_heap[b], binary_heap[a]
-        end
-        index /= 2
-    end
-end
-
 # See http://archive.gamedev.net/archive/reference/articles/article2003.html for the underlying logic
 def a_star(maze)
     start_x, start_y = find_element(maze, 'S')
     target = find_element(maze, 'E')
 
     current = Node.new([start_x, start_y], target)
-    binary_heap = [current]
+    sorted_by_f = [current]
 
     addresses = Hash.new { |h, k| h[k] = { open:false, closed:false, node:nil } }
     addresses["#{start_x}:#{start_y}"][:open] = true
     open_count = 1
 
     while open_count > 0
-        # look for lowest F in open list
-        current = binary_heap_pop(binary_heap)
+        # look for lowest F in list
+        current = sorted_by_f.shift
 
         x, y = current.coordinates
         address = "#{x}:#{y}"
@@ -82,13 +55,13 @@ def a_star(maze)
                     node.g = g
                 end
             else
-                binary_heap << Node.new([i,j], target, current, g)
-                addresses[coord][:node] = binary_heap[-1]
+                sorted_by_f << Node.new([i,j], target, current, g)
+                addresses[coord][:node] = sorted_by_f[-1]
                 addresses[coord][:open] = true
                 open_count += 1
             end
-            # sort binary_heap according to F
-            binary_heap_sort(binary_heap)
+            # sort according to F
+            sorted_by_f.sort_by! { |node| node.f }
         end
     end
     # work backward from target to start and register path
