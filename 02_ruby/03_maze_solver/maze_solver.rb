@@ -9,11 +9,14 @@ def find_element(maze, char)
 end
 
 def naive_pathfinding(maze)
-    start = find_element(maze, 'S')
+    x, y = find_element(maze, 'S')
     finish = find_element(maze, 'E')
     #
 end
 
+if ARGV.length != 1
+    raise "Correct usage: maze_solver.rb <path_to_maze_txt>"
+end
 maze = []
 File.open(ARGV[0]).each_line { |line| maze << line.chomp.split("") }
 
