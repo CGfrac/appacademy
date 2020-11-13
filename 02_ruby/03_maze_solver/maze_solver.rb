@@ -12,18 +12,15 @@ end
 
 # See http://archive.gamedev.net/archive/reference/articles/article2003.html for the underlying logic
 def a_star(maze)
-    open = Array.new(maze.length) { Array.new(maze[0].length, false) }
-    closed = Array.new(maze.length) { Array.new(maze[0].length, false) }
-
     start_x, start_y = find_element(maze, 'S')
-    open[start_x][start_y] = true
-    open_count = 1
-
     target = find_element(maze, 'E')
 
     current = Node.new([start_x, start_y], target)
     binary_heap = [current]
-    addresses = {}
+
+    addresses = Hash.new { |h, k| h[k] = { open:false, closed:false, node:nil } }
+    addresses["#{start_x}:#{start_y}"][:open] = true
+    open_count = 1
 
     moves = [
         [-1,0], [0,-1], [1,0], [0,1], # straights
@@ -45,10 +42,11 @@ def a_star(maze)
         end
 
         x, y = current.coordinates
+        address = "#{x}:#{y}"
 
-        open[x][y] = false
+        addresses[address][:open] = false
         open_count -= 1
-        closed[x][y] = true
+        addresses[address][:closed] = true
 
         break if maze[x][y] == 'E'
 
@@ -56,19 +54,20 @@ def a_star(maze)
         moves.each_with_index do |move, index|
             i = move[0] + x
             j = move[1] + y
+            coord = "#{i}:#{j}"
             g = index < 4 ? 10 : 14
-            if closed[i][j] || maze[i][j] == '*'
+            if addresses[coord][:closed] || maze[i][j] == '*'
                 next
-            elsif open[i][j]
-                node = addresses["#{i}:#{j}"]
+            elsif addresses[coord][:open]
+                node = addresses[coord][:node]
                 if g < node.g
                     node.parent = current
                     node.g = g
                 end
             else
                 binary_heap << Node.new([i,j], target, current, g)
-                addresses["#{i}:#{j}"] = binary_heap[-1]
-                open[i][j] = true
+                addresses[coord][:node] = binary_heap[-1]
+                addresses[coord][:open] = true
                 open_count += 1
             end
             # sort binary_heap according to F
