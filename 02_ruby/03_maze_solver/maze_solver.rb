@@ -10,6 +10,33 @@ def find_element(maze, char)
     end
 end
 
+def binary_heap_pop(binary_heap)
+    binary_heap[0], binary_heap[-1] = binary_heap[-1], binary_heap[0]
+    item = binary_heap.pop
+    index = 1
+    while (index * 2) <= binary_heap.length
+        a = index-1
+        b = (index * 2) - 1
+        if binary_heap[a].f > binary_heap[b].f
+            binary_heap[a], binary_heap[b] = binary_heap[b], binary_heap[a]
+        end
+        index *= 2
+    end
+    item
+end
+
+def binary_heap_sort(binary_heap)
+    index = binary_heap.length
+    while (index / 2) >= 1
+        a = (index / 2) - 1
+        b = index - 1
+        if binary_heap[a].f > binary_heap[b].f
+            binary_heap[a], binary_heap[b] = binary_heap[b], binary_heap[a]
+        end
+        index /= 2
+    end
+end
+
 # See http://archive.gamedev.net/archive/reference/articles/article2003.html for the underlying logic
 def a_star(maze)
     start_x, start_y = find_element(maze, 'S')
@@ -29,17 +56,7 @@ def a_star(maze)
 
     while open_count > 0
         # look for lowest F in open list
-        binary_heap[0], binary_heap[-1] = binary_heap[-1], binary_heap[0]
-        current = binary_heap.pop
-        index = 1
-        while (index * 2) <= binary_heap.length
-            a = index-1
-            b = (index * 2) - 1
-            if binary_heap[a].f > binary_heap[b].f
-                binary_heap[a], binary_heap[b] = binary_heap[b], binary_heap[a]
-            end
-            index *= 2
-        end
+        current = binary_heap_pop(binary_heap)
 
         x, y = current.coordinates
         address = "#{x}:#{y}"
@@ -71,15 +88,7 @@ def a_star(maze)
                 open_count += 1
             end
             # sort binary_heap according to F
-            index = binary_heap.length
-            while (index / 2) >= 1
-                a = (index / 2) - 1
-                b = index - 1
-                if binary_heap[a].f > binary_heap[b].f
-                    binary_heap[a], binary_heap[b] = binary_heap[b], binary_heap[a]
-                end
-                index /= 2
-            end
+            binary_heap_sort(binary_heap)
         end
     end
     # work backward from target to start and register path
