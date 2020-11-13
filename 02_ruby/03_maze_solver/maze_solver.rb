@@ -55,19 +55,19 @@ def a_star(maze)
                 next
             elsif open[coord]
                 node = nodes[coord]
-                if g < node.g
+                if current.g + g < node.g
                     node.parent = current
-                    node.g = g
+                    node.g = current.g + g
                 end
             else
-                sorted_by_f << Node.new([i,j], target, current, g)
+                sorted_by_f << Node.new([i,j], target, current, current.g + g)
                 nodes[coord] = sorted_by_f[-1]
                 open[coord] = true
                 open_count += 1
             end
-            # sort according to F
-            sorted_by_f.sort_by! { |node| node.f }
         end
+        # sort according to F
+        sorted_by_f.sort_by! { |node| node.f }
     end
     if maze[x][y] != 'E'
         puts "There is no valid path"
