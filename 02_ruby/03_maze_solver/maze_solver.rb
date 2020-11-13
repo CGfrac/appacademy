@@ -17,14 +17,19 @@ end
 
 # See http://archive.gamedev.net/archive/reference/articles/article2003.html for the underlying logic
 def a_star(maze)
-    start_x, start_y = find_element(maze, 'S')
+    start = find_element(maze, 'S')
     target = find_element(maze, 'E')
 
-    current = Node.new([start_x, start_y], target)
+    current = Node.new(start, target)
     sorted_by_f = [current]
 
-    addresses = Hash.new { |h, k| h[k] = { open:false, closed:false, node:nil } }
-    addresses["#{start_x}:#{start_y}"][:open] = true
+    coord = "#{start[0]}:#{start[1]}"
+    nodes = {}
+    nodes[coord] = current
+
+    open = Hash.new(false)
+    closed = Hash.new(false)
+    open[coord] = true
     open_count = 1
 
     while open_count > 0
@@ -32,11 +37,11 @@ def a_star(maze)
         current = sorted_by_f.shift
 
         x, y = current.coordinates
-        address = "#{x}:#{y}"
+        coord = "#{x}:#{y}"
 
-        addresses[address][:open] = false
+        open[coord] = false
         open_count -= 1
-        addresses[address][:closed] = true
+        closed[coord] = true
 
         break if maze[x][y] == 'E'
 
@@ -46,18 +51,18 @@ def a_star(maze)
             j = move[1] + y
             coord = "#{i}:#{j}"
             g = index < 4 ? 10 : 14
-            if addresses[coord][:closed] || maze[i][j] == '*'
+            if closed[coord] || maze[i][j] == '*'
                 next
-            elsif addresses[coord][:open]
-                node = addresses[coord][:node]
+            elsif open[coord]
+                node = nodes[coord]
                 if g < node.g
                     node.parent = current
                     node.g = g
                 end
             else
                 sorted_by_f << Node.new([i,j], target, current, g)
-                addresses[coord][:node] = sorted_by_f[-1]
-                addresses[coord][:open] = true
+                nodes[coord] = sorted_by_f[-1]
+                open[coord] = true
                 open_count += 1
             end
             # sort according to F
