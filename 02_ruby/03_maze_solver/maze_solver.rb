@@ -10,8 +10,27 @@ end
 
 def naive_pathfinding(maze)
     x, y = find_element(maze, 'S')
-    finish = find_element(maze, 'E')
-    #
+    while true
+        while maze[x-1][y] == ' '
+            x -= 1
+            maze[x][y] = 'X'
+        end
+        while maze[x][y+1] == ' '
+            y += 1
+            maze[x][y] = 'X'
+        end
+        if maze[x][y+1] == 'E'
+            return
+        end
+        while maze[x][y+1] == '*'
+            x += 1
+            maze[x][y] = 'X'
+        end
+        while maze[x-1][y] != ' '
+            y += 1
+            maze[x][y] = 'X'
+        end
+    end
 end
 
 if ARGV.length != 1
