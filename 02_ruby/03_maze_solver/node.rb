@@ -1,6 +1,6 @@
 class Node
     attr_reader :coordinates, :g, :f
-    attr_accessor :parent, :open, :closed
+    attr_accessor :parent
     
     def initialize(coordinates, target, parent=nil, g=0)
         @parent = parent
