@@ -64,6 +64,10 @@ def a_star(maze)
             sorted_by_f.sort_by! { |node| node.f }
         end
     end
+    if maze[x][y] != 'E'
+        puts "There is no valid path"
+        return
+    end
     # work backward from target to start and register path
     current = current.parent
     while current.parent
