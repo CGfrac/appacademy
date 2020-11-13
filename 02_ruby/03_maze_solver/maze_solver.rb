@@ -82,7 +82,7 @@ def a_star(maze)
             end
         end
     end
-    # work backward from closed[-1] to start and register path
+    # work backward from target to start and register path
     current = current.parent
     while current.parent
         x, y = current.coordinates
