@@ -54,6 +54,19 @@ class EightQueensBoard
         end
     end
 
+    def check_diagonal_left_to_right(row, col)
+        (0..7).each do |i|
+            (0..7).each do |j|
+                if i == row && j == col
+                    next
+                elsif @board[i][j] == 'Q'
+                    @conflicts[[row,col]] += 1
+                    return
+                end
+            end
+        end
+    end
+
     def populate!
         (0..7).each do |row|
             col = rand(0..7)
