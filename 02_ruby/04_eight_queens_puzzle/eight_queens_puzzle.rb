@@ -118,14 +118,14 @@ class EightQueensBoard
         count += self.check_diagonal_top_right(row, col)
         count += self.check_diagonal_bottom_left(row, col)
         count += self.check_diagonal_bottom_right(row, col)
-        @conflicts[[row,col]] = count
+        count
     end
 
     def populate!
         (0..7).each do |row|
             col = rand(0..7)
             @board[row][col] = 'Q'
-            self.check_conflicts(row, col)
+            @conflicts[[row,col]] = self.check_conflicts(row, col)
         end
     end
 
@@ -142,7 +142,7 @@ class EightQueensBoard
 
             new_col = conflict_counts.index(conflict_counts.min)
             @board[row][new_col] = 'Q'
-            self.check_conflicts(row, new_col)
+            @conflicts[[row,col]] = conflict_counts[new_col]
 
             @conflicts.each_key { |coord| self.check_conflicts(*coord) }
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
