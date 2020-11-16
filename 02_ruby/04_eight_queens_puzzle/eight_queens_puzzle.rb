@@ -7,12 +7,24 @@
 class EightQueensBoard
     def initialize
         @board = Array.new(8) { Array.new(8, '_') }
+        @conflicts = Hash.new(0)
+    end
+
+    def check_left(row, col)
+        i = col
+        while i > 0
+            if @board[row][col] == 'Q'
+                @conflicts[[row,col]] += 1
+                return
+            end
+            i -= 1
+        end
     end
 
     def populate!
         (0..7).each do |row|
-            index = rand(0..7)
-            @board[row][index] = 'Q'
+            col = rand(0..7)
+            @board[row][col] = 'Q'
             # check conflicts here
         end
     end
