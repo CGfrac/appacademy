@@ -10,8 +10,10 @@ class EightQueensBoard
     def initialize
         @board = Array.new(8) { Array.new(8, '_') }
         @conflicts = {}
+        @steps = 0
         self.populate!
         self.resolve_conflicts!
+        puts "Board solved in #{@steps} steps"
     end
 
     def check_left(row, col)
@@ -149,6 +151,8 @@ class EightQueensBoard
 
     def resolve_conflicts!
         while true
+            @steps += 1
+
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
             break if to_move.length == 0
             to_move.sort_by! { |coord| @conflicts[coord] }
