@@ -16,17 +16,39 @@ class EightQueensBoard
         puts "Board solved in #{@steps} steps"
     end
 
+    def check_row(row, col)
+        i = 0
+        while i < 8
+            return true if @board[row][i] == 'Q' && i != col
+            i += 1
+        end
+        false
+    end
+
+    def check_diagonal_top_left(row, col)
+        i = row - 1
+        j = col - 1
+        while i >= 0 && j >= 0
+            if @board[i][j] == 'Q'
+                return true
+            end
+            i -= 1
+            j -= 1
+        end
+        false
+    end
+
     def check_diagonal_top_right(row, col)
         i = row - 1
         j = col + 1
         while i >= 0 && j < 8
             if @board[i][j] == 'Q'
-                return 1
+                return true
             end
             i -= 1
             j += 1
         end
-        0
+        false
     end
 
     def check_diagonal_bottom_left(row, col)
@@ -34,40 +56,43 @@ class EightQueensBoard
         j = col - 1
         while i < 8 && j >= 0
             if @board[i][j] == 'Q'
-                return 1
+                return true
             end
             i += 1
             j -= 1
         end
-        0
+        false
     end
 
-    def check_row(row, col)
-        i = 0
-        while i < 8
-            return 1 if @board[row][i] == 'Q' && i != col
-            i += 1
-        end
-        0
-    end
-
-    def check_diagonal_left_to_right(row, col)
-        i = row - [row, col].min
-        j = col - [row, col].min
+    def check_diagonal_bottom_right(row, col)
+        i = row + 1
+        j = col + 1
         while i < 8 && j < 8
-            return 1 if @board[i][j] == 'Q' && i != row && j != col
+            if @board[i][j] == 'Q'
+                return true
+            end
             i += 1
             j += 1
         end
-        0
+        false
+    end
+
+    def check_diagonal_left_to_right(row, col)
+        self.check_diagonal_top_left(row, col) || self.check_diagonal_bottom_right(row, col)
+    end
+
+    def check_diagonal_right_to_left(row, col)
+        self.check_diagonal_top_right(row, col) || self.check_diagonal_bottom_left(row, col)
+    end
+
+    def check_diagonals(row, col)
+        self.check_diagonal_left_to_right(row, col) || check_diagonal_right_to_left(row, col)
     end
 
     def check_conflicts(row, col)
         count = 0
-        count += self.check_row(row, col)
-        count += self.check_diagonal_left_to_right(row, col)
-        count += self.check_diagonal_top_right(row, col)
-        count += self.check_diagonal_bottom_left(row, col)
+        count += 1 if self.check_row(row, col)
+        count += 1 if self.check_diagonals(row, col)
         count
     end
 
