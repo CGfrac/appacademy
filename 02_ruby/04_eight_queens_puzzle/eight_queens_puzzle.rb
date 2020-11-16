@@ -123,13 +123,17 @@ class EightQueensBoard
         count
     end
 
+    def update_conflicts
+        @conflicts.each_key { |coord| @conflicts[coord] = self.check_conflicts(*coord) }
+    end
+
     def populate!
         (0..7).each do |row|
             col = rand(0..7)
             @board[row][col] = 'Q'
             @conflicts[[row,col]] = 0
         end
-        @conflicts.each_key { |coord| @conflicts[coord] = self.check_conflicts(*coord) }
+        self.update_conflicts
     end
 
     def resolve_conflicts
@@ -150,9 +154,9 @@ class EightQueensBoard
 
             new_col = min_indexes.sample
             @board[row][new_col] = 'Q'
-            @conflicts[[row,col]] = min_conflicts
+            @conflicts[[row, new_col]] = min_conflicts
             
-            @conflicts.each_key { |coord| @conflits[coord] = self.check_conflicts(*coord) }
+            self.update_conflicts
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
         end
     end
