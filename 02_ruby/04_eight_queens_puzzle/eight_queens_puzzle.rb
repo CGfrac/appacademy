@@ -152,11 +152,11 @@ class EightQueensBoard
     def resolve_conflicts!
         while true
             @steps += 1
-
+            
             max_conflicts = @conflicts.values.max
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 && @conflicts[coord] == max_conflicts }
             break if to_move.length == 0
-            
+
             row, col = to_move.sample
 
             @board[row][col] = '_'
@@ -168,7 +168,9 @@ class EightQueensBoard
     end
 
     def print
-        @board.each { |row| puts row.join(' ') }
+        puts '_' * 17
+        @board.each { |row| puts '|' + row.join('|') + '|' }
+        puts
     end
 end
 
