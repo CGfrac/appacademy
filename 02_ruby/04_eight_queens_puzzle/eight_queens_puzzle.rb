@@ -152,13 +152,16 @@ class EightQueensBoard
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
             break if to_move.length == 0
             to_move.sort_by! { |coord| @conflicts[coord] }
-            row, col = to_move.pop
 
-            @board[row][col] = ' '
+            i = to_move.length - 1
+            i -= 1 while @conflicts[to_move[i]] == @conflicts[to_move[-1]] && i > 0
+
+            row, col = to_move[i..-1].sample
+
+            @board[row][col] = '_'
             @conflicts.delete([row,col])
 
             self.select_best_col(row)
-            
             self.update_conflicts
         end
     end
