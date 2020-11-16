@@ -8,12 +8,22 @@ require "byebug"
 
 class EightQueensBoard
     def initialize
+        self.generate_board
+        @resets = 0
+        self.resolve_conflicts!
+        puts "Board solved in #{@steps} steps (#{@resets} resets)"
+    end
+
+    def generate_board
         @board = Array.new(8) { Array.new(8, '_') }
         @conflicts = {}
         @steps = 0
         self.populate!
-        self.resolve_conflicts!
-        puts "Board solved in #{@steps} steps"
+    end
+
+    def reset
+        self.generate_board
+        @resets += 1
     end
 
     def check_row(row, col)
@@ -121,8 +131,11 @@ class EightQueensBoard
 
     def resolve_conflicts!
         while true
-            @steps += 1
-            
+            # We do resets to avoid getting stuck in local optimums since it's a greedy approach
+            if @steps > 512
+                self.reset 
+            end
+
             max_conflicts = @conflicts.values.max
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 && @conflicts[coord] == max_conflicts }
             break if to_move.length == 0
@@ -133,6 +146,8 @@ class EightQueensBoard
             @conflicts.delete([row,col])
 
             self.select_best_row(col)
+
+            @steps += 1
         end
     end
 
