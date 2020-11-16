@@ -136,9 +136,10 @@ class EightQueensBoard
         self.update_conflicts
     end
 
-    def resolve_conflicts
-        to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
-        while to_move.length > 0
+    def resolve_conflicts!
+        while true
+            to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
+            break if to_move.length == 0
             to_move.sort_by! { |coord| @conflicts[coord] }
             row, col = to_move.pop
 
@@ -157,7 +158,6 @@ class EightQueensBoard
             @conflicts[[row, new_col]] = 0
             
             self.update_conflicts
-            to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
         end
     end
 
