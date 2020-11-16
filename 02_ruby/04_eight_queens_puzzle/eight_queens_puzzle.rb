@@ -12,12 +12,23 @@ class EightQueensBoard
 
     def check_left(row, col)
         i = col
-        while i > 0
+        while i >= 0
             if @board[row][col] == 'Q'
                 @conflicts[[row,col]] += 1
                 return
             end
             i -= 1
+        end
+    end
+
+    def check_right(row, col)
+        i = col
+        while i < 8
+            if @board[row][col] == 'Q'
+                @conflicts[[row,col]] += 1
+                return
+            end
+            i += 1
         end
     end
 
