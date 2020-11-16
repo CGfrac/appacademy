@@ -9,7 +9,7 @@ require "byebug"
 class EightQueensBoard
     def initialize
         @board = Array.new(8) { Array.new(8, '_') }
-        @conflicts = Hash.new(0)
+        @conflicts = {}
         self.populate!
         self.resolve_conflicts
     end
@@ -154,7 +154,7 @@ class EightQueensBoard
 
             new_col = min_indexes.sample
             @board[row][new_col] = 'Q'
-            @conflicts[[row, new_col]] = min_conflicts
+            @conflicts[[row, new_col]] = 0
             
             self.update_conflicts
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
