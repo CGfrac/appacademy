@@ -153,14 +153,11 @@ class EightQueensBoard
         while true
             @steps += 1
 
-            to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
+            max_conflicts = @conflicts.values.max
+            to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 && @conflicts[coord] == max_conflicts }
             break if to_move.length == 0
-            to_move.sort_by! { |coord| @conflicts[coord] }
-
-            i = to_move.length - 1
-            i -= 1 while @conflicts[to_move[i]] == @conflicts[to_move[-1]] && i > 0
-
-            row, col = to_move[i..-1].sample
+            
+            row, col = to_move.sample
 
             @board[row][col] = '_'
             @conflicts.delete([row,col])
