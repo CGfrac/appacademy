@@ -129,22 +129,22 @@ class EightQueensBoard
         @conflicts.each_key { |coord| @conflicts[coord] = self.check_conflicts(*coord) }
     end
 
-    def select_best_col(row)
+    def select_best_row(col)
         conflict_counts = []
-        (0..7).each { |i| conflict_counts << self.check_conflicts(row, i) }
+        (0..7).each { |i| conflict_counts << self.check_conflicts(i, col) }
 
         min_conflicts = conflict_counts.min
         min_indexes = []
         conflict_counts.each_with_index { |count, index| min_indexes << index if count == min_conflicts }
 
-        col = min_indexes.sample
+        row = min_indexes.sample
         @board[row][col] = 'Q'
         @conflicts[[row,col]] = 0
     end
 
     def populate!
-        (0..7).each do |row| 
-            self.select_best_col(row)
+        (0..7).each do |col| 
+            self.select_best_row(col)
             self.update_conflicts
         end
     end
@@ -162,7 +162,7 @@ class EightQueensBoard
             @board[row][col] = '_'
             @conflicts.delete([row,col])
 
-            self.select_best_col(row)
+            self.select_best_row(col)
             self.update_conflicts
         end
     end
