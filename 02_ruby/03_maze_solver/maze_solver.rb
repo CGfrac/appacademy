@@ -2,7 +2,7 @@ require_relative "node.rb"
 
 MOVES = [
     [-1,0], [0,-1], [1,0], [0,1], # straights
-    [-1,-1], [1,1], [1,-1], [1,1]  # diagonals
+    [-1,-1], [1,1], [1,-1], [-1,1]  # diagonals
 ]
 
 def find_element(maze, char)
