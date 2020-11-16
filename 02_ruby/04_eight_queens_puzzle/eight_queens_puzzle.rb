@@ -4,6 +4,8 @@
 # move biggest conflicts to least collisions column
 # repeat 2 previous steps until there is no conflict
 
+require "byebug"
+
 class EightQueensBoard
     def initialize
         @board = Array.new(8) { Array.new(8, '_') }
@@ -125,8 +127,9 @@ class EightQueensBoard
         (0..7).each do |row|
             col = rand(0..7)
             @board[row][col] = 'Q'
-            @conflicts[[row,col]] = self.check_conflicts(row, col)
+            @conflicts[[row,col]] = 0
         end
+        @conflicts.each_key { |coord| @conflicts[coord] = self.check_conflicts(*coord) }
     end
 
     def resolve_conflicts
@@ -136,6 +139,7 @@ class EightQueensBoard
             row, col = to_move.pop
 
             @board[row][col] = ' '
+            @conflicts.delete([row,col])
 
             conflict_counts = []
             (0..7).each { |i| conflict_counts << self.check_conflicts(row, i) }
@@ -147,8 +151,8 @@ class EightQueensBoard
             new_col = min_indexes.sample
             @board[row][new_col] = 'Q'
             @conflicts[[row,col]] = min_conflicts
-
-            @conflicts.each_key { |coord| self.check_conflicts(*coord) }
+            
+            @conflicts.each_key { |coord| @conflits[coord] = self.check_conflicts(*coord) }
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
         end
     end
