@@ -80,11 +80,20 @@ class EightQueensBoard
         end
     end
 
+    def check_conflicts(row, col)
+        self.check_left(row, col)
+        self.check_right(row, col)
+        self.check_up(row, col)
+        self.check_down(row, col)
+        self.check_diagonal_left_to_right(row, col)
+        self.check_diagonal_right_to_left(row, col)
+    end
+
     def populate!
         (0..7).each do |row|
             col = rand(0..7)
             @board[row][col] = 'Q'
-            # check conflicts here
+            self.check_conflicts(row, col)
         end
     end
 
