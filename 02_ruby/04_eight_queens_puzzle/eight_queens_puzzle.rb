@@ -13,7 +13,7 @@ class EightQueensBoard
     def check_left(row, col)
         i = col
         while i >= 0
-            if @board[row][col] == 'Q'
+            if @board[row][i] == 'Q'
                 @conflicts[[row,col]] += 1
                 return
             end
@@ -24,7 +24,7 @@ class EightQueensBoard
     def check_right(row, col)
         i = col
         while i < 8
-            if @board[row][col] == 'Q'
+            if @board[row][i] == 'Q'
                 @conflicts[[row,col]] += 1
                 return
             end
@@ -35,7 +35,7 @@ class EightQueensBoard
     def check_up(row, col)
         i = row
         while i >= 0
-            if @board[row][col] == 'Q'
+            if @board[i][col] == 'Q'
                 @conflicts[[row,col]] += 1
                 return
             end
@@ -46,7 +46,7 @@ class EightQueensBoard
     def check_down(row, col)
         i = row
         while i < 8
-            if @board[row][col] == 'Q'
+            if @board[i][col] == 'Q'
                 @conflicts[[row,col]] += 1
                 return
             end
