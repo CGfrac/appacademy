@@ -16,19 +16,6 @@ class EightQueensBoard
         puts "Board solved in #{@steps} steps"
     end
 
-    def check_diagonal_top_left(row, col)
-        i = row - 1
-        j = col - 1
-        while i >= 0 && j >= 0
-            if @board[i][j] == 'Q'
-                return 1
-            end
-            i -= 1
-            j -= 1
-        end
-        0
-    end
-
     def check_diagonal_top_right(row, col)
         i = row - 1
         j = col + 1
@@ -55,19 +42,6 @@ class EightQueensBoard
         0
     end
 
-    def check_diagonal_bottom_right(row, col)
-        i = row + 1
-        j = col + 1
-        while i < 8 && j < 8
-            if @board[i][j] == 'Q'
-                return 1
-            end
-            i += 1
-            j += 1
-        end
-        0
-    end
-
     def check_row(row, col)
         i = 0
         while i < 8
@@ -77,13 +51,23 @@ class EightQueensBoard
         0
     end
 
+    def check_diagonal_left_to_right(row, col)
+        i = row - [row, col].min
+        j = col - [row, col].min
+        while i < 8 && j < 8
+            return 1 if @board[i][j] == 'Q' && i != row && j != col
+            i += 1
+            j += 1
+        end
+        0
+    end
+
     def check_conflicts(row, col)
         count = 0
         count += self.check_row(row, col)
-        count += self.check_diagonal_top_left(row, col)
+        count += self.check_diagonal_left_to_right(row, col)
         count += self.check_diagonal_top_right(row, col)
         count += self.check_diagonal_bottom_left(row, col)
-        count += self.check_diagonal_bottom_right(row, col)
         count
     end
 
