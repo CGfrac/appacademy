@@ -60,10 +60,11 @@ def a_star(maze)
                     node.g = current.g + g
                 end
             else
-                sorted_by_f << Node.new([i,j], target, current, current.g + g)
-                nodes[coord] = sorted_by_f[-1]
+                new_node = Node.new([i,j], target, current, current.g + g)
+                nodes[coord] = new_node
                 open[coord] = true
                 open_count += 1
+                sorted_by_f << new_node
             end
         end
         # sort according to F
