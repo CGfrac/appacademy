@@ -32,6 +32,17 @@ class EightQueensBoard
         end
     end
 
+    def check_up(row, col)
+        i = row
+        while i >= 0
+            if @board[row][col] == 'Q'
+                @conflicts[[row,col]] += 1
+                return
+            end
+            i -= 1
+        end
+    end
+
     def populate!
         (0..7).each do |row|
             col = rand(0..7)
