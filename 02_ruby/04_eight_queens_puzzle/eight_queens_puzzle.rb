@@ -11,7 +11,7 @@ class EightQueensBoard
         @board = Array.new(8) { Array.new(8, '_') }
         @conflicts = {}
         self.populate!
-        self.resolve_conflicts
+        self.resolve_conflicts!
     end
 
     def check_left(row, col)
@@ -127,13 +127,24 @@ class EightQueensBoard
         @conflicts.each_key { |coord| @conflicts[coord] = self.check_conflicts(*coord) }
     end
 
+    def select_best_col(row)
+        conflict_counts = []
+        (0..7).each { |i| conflict_counts << self.check_conflicts(row, i) }
+
+        min_conflicts = conflict_counts.min
+        min_indexes = []
+        conflict_counts.each_with_index { |count, index| min_indexes << index if count == min_conflicts }
+
+        col = min_indexes.sample
+        @board[row][col] = 'Q'
+        @conflicts[[row,col]] = 0
+    end
+
     def populate!
-        (0..7).each do |row|
-            col = rand(0..7)
-            @board[row][col] = 'Q'
-            @conflicts[[row,col]] = 0
+        (0..7).each do |row| 
+            self.select_best_col(row)
+            self.update_conflicts
         end
-        self.update_conflicts
     end
 
     def resolve_conflicts!
@@ -146,16 +157,7 @@ class EightQueensBoard
             @board[row][col] = ' '
             @conflicts.delete([row,col])
 
-            conflict_counts = []
-            (0..7).each { |i| conflict_counts << self.check_conflicts(row, i) }
-
-            min_conflicts = conflict_counts.min
-            min_indexes = []
-            conflict_counts.each_with_index { |count, index| min_indexes << index if count == min_conflicts }
-
-            new_col = min_indexes.sample
-            @board[row][new_col] = 'Q'
-            @conflicts[[row, new_col]] = 0
+            self.select_best_col(row)
             
             self.update_conflicts
         end
