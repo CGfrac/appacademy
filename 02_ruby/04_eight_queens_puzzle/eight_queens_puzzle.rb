@@ -1,10 +1,4 @@
-# populate row by row in a random column each time
-# at each placement check conflicts
-# sort by conflicts
-# move biggest conflicts to least collisions column
-# repeat 2 previous steps until there is no conflict
-
-require "byebug"
+# Iterative repair approach inspired by https://en.wikipedia.org/wiki/Eight_queens_puzzle#Exercise_in_algorithm_design
 
 class EightQueensBoard
     def initialize
@@ -132,7 +126,7 @@ class EightQueensBoard
     def resolve_conflicts!
         while true
             # We do resets to avoid getting stuck in local optimums since it's a greedy approach
-            if @steps > 512
+            if @steps > 64
                 self.reset 
             end
 
