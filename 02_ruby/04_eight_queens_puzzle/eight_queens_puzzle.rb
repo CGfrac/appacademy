@@ -140,9 +140,13 @@ class EightQueensBoard
             conflict_counts = []
             (0..7).each { |i| conflict_counts << self.check_conflicts(row, i) }
 
-            new_col = conflict_counts.index(conflict_counts.min)
+            min_conflicts = conflict_counts.min
+            min_indexes = []
+            conflict_counts.each_with_index { |count, index| min_indexes << index if count == min_conflicts }
+
+            new_col = min_indexes.sample
             @board[row][new_col] = 'Q'
-            @conflicts[[row,col]] = conflict_counts[new_col]
+            @conflicts[[row,col]] = min_conflicts
 
             @conflicts.each_key { |coord| self.check_conflicts(*coord) }
             to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
