@@ -9,6 +9,7 @@ class EightQueensBoard
         @board = Array.new(8) { Array.new(8, '_') }
         @conflicts = Hash.new(0)
         self.populate!
+        self.resolve_conflicts
     end
 
     def check_left(row, col)
@@ -97,6 +98,26 @@ class EightQueensBoard
             col = rand(0..7)
             @board[row][col] = 'Q'
             self.check_conflicts(row, col)
+        end
+    end
+
+    def resolve_conflicts
+        to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
+        while to_move.length > 0
+            to_move.sort_by! { |coord| @conflicts[coord] }
+            row, col = to_move.pop
+
+            @board[row][col] = ' '
+
+            conflict_counts = []
+            (0..7).each { |i| conflict_counts << self.check_conflicts(row, i) }
+
+            new_col = conflict_counts.index(conflict_counts.min)
+            @board[row][new_col] = 'Q'
+            self.check_conflicts(row, new_col)
+
+            @conflicts.each_key { |coord| self.check_conflicts(*coord) }
+            to_move = @conflicts.keys.select { |coord| @conflicts[coord] > 0 }
         end
     end
 
