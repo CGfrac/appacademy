@@ -8,50 +8,51 @@ class EightQueensBoard
     def initialize
         @board = Array.new(8) { Array.new(8, '_') }
         @conflicts = Hash.new(0)
+        self.populate!
     end
 
     def check_left(row, col)
         i = col
         while i >= 0
             if @board[row][i] == 'Q'
-                @conflicts[[row,col]] += 1
-                return
+                return 1
             end
             i -= 1
         end
+        0
     end
 
     def check_right(row, col)
         i = col
         while i < 8
             if @board[row][i] == 'Q'
-                @conflicts[[row,col]] += 1
-                return
+                return 1
             end
             i += 1
         end
+        0
     end
 
     def check_up(row, col)
         i = row
         while i >= 0
             if @board[i][col] == 'Q'
-                @conflicts[[row,col]] += 1
-                return
+                return 1
             end
             i -= 1
         end
+        0
     end
 
     def check_down(row, col)
         i = row
         while i < 8
             if @board[i][col] == 'Q'
-                @conflicts[[row,col]] += 1
-                return
+                return 1
             end
             i += 1
         end
+        0
     end
 
     def check_diagonal_left_to_right(row, col)
@@ -60,11 +61,11 @@ class EightQueensBoard
                 if i == row && j == col
                     next
                 elsif @board[i][j] == 'Q'
-                    @conflicts[[row,col]] += 1
-                    return
+                    return 1
                 end
             end
         end
+        0
     end
 
     def check_diagonal_right_to_left(row, col)
@@ -73,20 +74,22 @@ class EightQueensBoard
             if i == row && j == col
                 next
             elsif @board[i][j] == 'Q'
-                @conflicts[[row,col]] += 1
-                return
+                return 1
             end
             j -= 1
         end
+        0
     end
 
     def check_conflicts(row, col)
-        self.check_left(row, col)
-        self.check_right(row, col)
-        self.check_up(row, col)
-        self.check_down(row, col)
-        self.check_diagonal_left_to_right(row, col)
-        self.check_diagonal_right_to_left(row, col)
+        count = 0
+        count += self.check_left(row, col)
+        count += self.check_right(row, col)
+        count += self.check_up(row, col)
+        count += self.check_down(row, col)
+        count += self.check_diagonal_left_to_right(row, col)
+        count += self.check_diagonal_right_to_left(row, col)
+        @conflicts[[row,col]] = count
     end
 
     def populate!
