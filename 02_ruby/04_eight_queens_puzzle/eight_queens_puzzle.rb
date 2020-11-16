@@ -86,7 +86,7 @@ class EightQueensBoard
     end
 
     def check_diagonals(row, col)
-        self.check_diagonal_left_to_right(row, col) || check_diagonal_right_to_left(row, col)
+        self.check_diagonal_left_to_right(row, col) || self.check_diagonal_right_to_left(row, col)
     end
 
     def check_conflicts(row, col)
@@ -111,13 +111,12 @@ class EightQueensBoard
         row = min_indexes.sample
         @board[row][col] = 'Q'
         @conflicts[[row,col]] = 0
+
+        self.update_conflicts
     end
 
     def populate!
-        (0..7).each do |col| 
-            self.select_best_row(col)
-            self.update_conflicts
-        end
+        (0..7).each { |col| self.select_best_row(col) }
     end
 
     def resolve_conflicts!
@@ -134,7 +133,6 @@ class EightQueensBoard
             @conflicts.delete([row,col])
 
             self.select_best_row(col)
-            self.update_conflicts
         end
     end
 
