@@ -56,28 +56,54 @@ class EightQueensBoard
         0
     end
 
-    def check_diagonal_left_to_right(row, col)
-        (0..7).each do |i|
-            (0..7).each do |j|
-                if i == row && j == col
-                    next
-                elsif @board[i][j] == 'Q'
-                    return 1
-                end
+    def check_diagonal_top_left(row, col)
+        i = row - 1
+        j = col - 1
+        while i >= 0 && j >= 0
+            if @board[i][j] == 'Q'
+                return 1
             end
+            i -= 1
+            j -= 1
         end
         0
     end
 
-    def check_diagonal_right_to_left(row, col)
-        j = 7
-        (0..7).each do |i|
-            if i == row && j == col
-                next
-            elsif @board[i][j] == 'Q'
+    def check_diagonal_top_right(row, col)
+        i = row - 1
+        j = col + 1
+        while i >= 0 && j < 8
+            if @board[i][j] == 'Q'
                 return 1
             end
+            i -= 1
+            j += 1
+        end
+        0
+    end
+
+    def check_diagonal_bottom_left(row, col)
+        i = row + 1
+        j = col - 1
+        while i < 8 && j >= 0
+            if @board[i][j] == 'Q'
+                return 1
+            end
+            i += 1
             j -= 1
+        end
+        0
+    end
+
+    def check_diagonal_bottom_right(row, col)
+        i = row + 1
+        j = col + 1
+        while i < 8 && j < 8
+            if @board[i][j] == 'Q'
+                return 1
+            end
+            i += 1
+            j += 1
         end
         0
     end
@@ -88,8 +114,10 @@ class EightQueensBoard
         count += self.check_right(row, col)
         count += self.check_up(row, col)
         count += self.check_down(row, col)
-        count += self.check_diagonal_left_to_right(row, col)
-        count += self.check_diagonal_right_to_left(row, col)
+        count += self.check_diagonal_top_left(row, col)
+        count += self.check_diagonal_top_right(row, col)
+        count += self.check_diagonal_bottom_left(row, col)
+        count += self.check_diagonal_bottom_right(row, col)
         @conflicts[[row,col]] = count
     end
 
