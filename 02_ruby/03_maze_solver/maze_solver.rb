@@ -11,6 +11,9 @@ class MazeSolver
     def initialize(filepath)
         @maze = []
         File.open(filepath).each_line { |line| @maze << line.chomp.split("") }
+        @nodes = {}
+        @open = {}
+        @closed = {}
         self.a_star
     end
 
@@ -36,12 +39,9 @@ class MazeSolver
         current = Node.new(start, target)
         sorted_by_f = [current]
 
-        nodes = {}
-        nodes[start] = current
+        @nodes[start] = current
 
-        open = Hash.new(false)
-        closed = Hash.new(false)
-        open[start] = true
+        @open[start] = true
         open_count = 1
 
         while open_count > 0
@@ -51,9 +51,9 @@ class MazeSolver
             coord = current.coordinates
             x, y = coord
 
-            open[coord] = false
+            @open[coord] = false
             open_count -= 1
-            closed[coord] = true
+            @closed[coord] = true
 
             break if @maze[x][y] == 'E'
 
@@ -63,18 +63,18 @@ class MazeSolver
                 j = move[1] + y
                 coord = [i,j]
                 g = index < 4 ? 10 : 14
-                if closed[coord] || @maze[i][j] == '*'
+                if @closed[coord] || @maze[i][j] == '*'
                     next
-                elsif open[coord]
-                    node = nodes[coord]
+                elsif @open[coord]
+                    node = @nodes[coord]
                     if current.g + g < node.g
                         node.parent = current
                         node.g = current.g + g
                     end
                 else
                     new_node = Node.new([i,j], target, current, current.g + g)
-                    nodes[coord] = new_node
-                    open[coord] = true
+                    @nodes[coord] = new_node
+                    @open[coord] = true
                     open_count += 1
                     sorted_by_f << new_node
                 end
