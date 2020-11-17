@@ -18,4 +18,17 @@ class Board
             end
         end
     end
+
+    def render
+        @grid.each do |row|
+            row.each do |card| 
+                if card.face_up
+                    print card.to_s
+                else
+                    print " "
+                end
+            end
+            puts
+        end
+    end
 end
