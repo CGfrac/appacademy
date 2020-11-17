@@ -5,6 +5,16 @@ class Board
         @grid = Array.new(4) { Array.new(4) }
     end
 
+    def [](pos)
+        row, col = pos
+        @grid[row][col]
+    end
+
+    def []=(pos, value)
+        row, col = pos
+        @grid[row][col] = value
+    end
+
     def populate
         alphabet = ('A'..'Z').to_a.shuffle!
 
@@ -14,7 +24,7 @@ class Board
 
         (0...@grid.length).each do |i|
             (0...@grid.length).each do |j|
-                @grid[i][j] = Card.new(selection.pop)
+                self[i][j] = Card.new(selection.pop)
             end
         end
     end
@@ -42,8 +52,8 @@ class Board
     end
 
     def reveal(guessed_pos)
-        i, j = guessed_pos
-        card = @grid[i][j]
+        row, col = guessed_pos
+        card = self[row][col]
         unless card.face_up
             card.reveal
             card.to_s
