@@ -14,7 +14,6 @@ class MazeSolver
         @nodes = {}
         @open = {}
         @closed = {}
-        self.a_star
     end
 
     def find_element(char)
@@ -32,7 +31,7 @@ class MazeSolver
         end
     end
 
-    def a_star
+    def solve
         start = self.find_element('S')
         target = self.find_element('E')
 
@@ -99,4 +98,5 @@ if ARGV.length != 1
 end
 
 solver = MazeSolver.new(ARGV[0])
+solver.solve
 solver.print
