@@ -5,4 +5,8 @@ class Game
         @board = Board.new
         @previous_guess = nil
     end
+
+    def over?
+        @board.won?
+    end
 end
