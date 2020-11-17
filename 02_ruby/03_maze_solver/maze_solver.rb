@@ -23,21 +23,20 @@ def a_star(maze)
     current = Node.new(start, target)
     sorted_by_f = [current]
 
-    coord = "#{start[0]}:#{start[1]}"
     nodes = {}
-    nodes[coord] = current
+    nodes[start] = current
 
     open = Hash.new(false)
     closed = Hash.new(false)
-    open[coord] = true
+    open[start] = true
     open_count = 1
 
     while open_count > 0
         # look for lowest F in list
         current = sorted_by_f.shift
 
-        x, y = current.coordinates
-        coord = "#{x}:#{y}"
+        coord = current.coordinates
+        x, y = coord
 
         open[coord] = false
         open_count -= 1
@@ -49,7 +48,7 @@ def a_star(maze)
         MOVES.each_with_index do |move, index|
             i = move[0] + x
             j = move[1] + y
-            coord = "#{i}:#{j}"
+            coord = [i,j]
             g = index < 4 ? 10 : 14
             if closed[coord] || maze[i][j] == '*'
                 next
