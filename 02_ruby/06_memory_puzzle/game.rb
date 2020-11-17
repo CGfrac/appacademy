@@ -16,10 +16,20 @@ class Game
             unless current_guess == @previous_guess
                 current_guess.hide
                 @previous_guess.hide
+                puts "Try again."
             end
             @previous_guess = nil
         else
             @previous_guess = current_guess
+        end
+    end
+
+    def play
+        until self.over?
+            @board.render
+            puts "Please enter the position that you'd like to flip (e.g. '2,3')"
+            pos = gets.chomp.split(',').map { |ele| ele.to_i }
+            self.check_guess(pos)
         end
     end
 end
