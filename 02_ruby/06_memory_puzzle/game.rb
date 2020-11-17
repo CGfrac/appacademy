@@ -1,21 +1,15 @@
 require_relative "board.rb"
+require_relative "human_player.rb"
 
 class Game
     def initialize
         @board = Board.new
         @previous_guess = nil
+        @player = HumanPlayer.new
     end
 
     def over?
         @board.won?
-    end
-
-    def prompt
-        puts "Please enter the position that you'd like to flip (e.g. '2,3')"
-    end
-
-    def get_input
-        gets.chomp.split(',').map { |ele| ele.to_i }
     end
 
     def check_guess(guessed_pos)
@@ -38,8 +32,8 @@ class Game
     def play
         until self.over?
             @board.render
-            self.prompt
-            pos = self.get_input
+            @player.prompt
+            pos = @player.get_input
             self.check_guess(pos)
         end
         @board.render
