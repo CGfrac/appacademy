@@ -15,6 +15,14 @@ def find_element(maze, char)
     end
 end
 
+def backtrack(maze, node)
+    while node.parent
+        x, y = node.coordinates
+        maze[x][y] = 'X'
+        node = node.parent
+    end
+end
+
 # See http://archive.gamedev.net/archive/reference/articles/article2003.html for the underlying logic
 def a_star(maze)
     start = find_element(maze, 'S')
@@ -74,12 +82,7 @@ def a_star(maze)
         return
     end
     # work backward from target to start and register path
-    current = current.parent
-    while current.parent
-        x, y = current.coordinates
-        maze[x][y] = 'X'
-        current = current.parent
-    end
+    backtrack(maze, current.parent)
 end
 
 if ARGV.length != 1
