@@ -23,9 +23,9 @@ class Board
         selection += selection
         selection.shuffle!
 
-        (0...@grid.length).each do |i|
-            (0...@grid.length).each do |j|
-                self[i,j] = Card.new(selection.pop)
+        (0...@grid.length).each do |row|
+            (0...@grid.length).each do |col|
+                self[row,col] = Card.new(selection.pop)
             end
         end
     end
