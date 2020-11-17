@@ -10,6 +10,14 @@ class Game
         @board.won?
     end
 
+    def prompt
+        puts "Please enter the position that you'd like to flip (e.g. '2,3')"
+    end
+
+    def get_input
+        gets.chomp.split(',').map { |ele| ele.to_i }
+    end
+
     def check_guess(guessed_pos)
         current_guess = @board[*guessed_pos]
         current_guess.reveal
@@ -30,8 +38,8 @@ class Game
     def play
         until self.over?
             @board.render
-            puts "Please enter the position that you'd like to flip (e.g. '2,3')"
-            pos = gets.chomp.split(',').map { |ele| ele.to_i }
+            self.prompt
+            pos = self.get_input
             self.check_guess(pos)
         end
         @board.render
