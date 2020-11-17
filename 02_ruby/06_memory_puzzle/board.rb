@@ -31,6 +31,7 @@ class Board
     end
 
     def render
+        system("clear")
         print "  "
         (0...@grid.length).each { |i| print i.to_s.ljust(2) }
         puts

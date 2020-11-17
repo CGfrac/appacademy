@@ -15,9 +15,11 @@ class Game
         current_guess.reveal
         if @previous_guess
             unless current_guess.to_s == @previous_guess.to_s
+                @board.render
+                puts "Try again."
+                sleep(2)
                 current_guess.hide
                 @previous_guess.hide
-                puts "Try again."
             end
             @previous_guess = nil
         else
@@ -32,5 +34,7 @@ class Game
             pos = gets.chomp.split(',').map { |ele| ele.to_i }
             self.check_guess(pos)
         end
+        @board.render
+        puts "Good job!"
     end
 end
