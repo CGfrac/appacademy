@@ -20,12 +20,17 @@ class Board
     end
 
     def render
-        @grid.each do |row|
-            row.each do |card| 
+        print "  "
+        (0...@grid.length).each { |i| print i.to_s.ljust(2) }
+        puts
+
+        @grid.each.with_index do |row, index|
+            print index.to_s.ljust(2)
+            row.each.with_index do |card|
                 if card.face_up
-                    print card.to_s
+                    print card.to_s.ljust(2)
                 else
-                    print " "
+                    print "  "
                 end
             end
             puts
