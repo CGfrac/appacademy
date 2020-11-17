@@ -31,4 +31,8 @@ class Board
             puts
         end
     end
+
+    def won?
+        @grid.all? { |row| row.all? { |card| card.face_up } }
+    end
 end
