@@ -11,9 +11,10 @@ class Game
     end
 
     def check_guess(guessed_pos)
-        current_guess = @board.reveal(guessed_pos)
+        current_guess = @board[*guessed_pos]
+        current_guess.reveal
         if @previous_guess
-            unless current_guess == @previous_guess
+            unless current_guess.to_s == @previous_guess.to_s
                 current_guess.hide
                 @previous_guess.hide
                 puts "Try again."
