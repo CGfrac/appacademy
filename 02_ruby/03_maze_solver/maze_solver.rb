@@ -1,5 +1,7 @@
 require_relative "node.rb"
 
+# See http://archive.gamedev.net/archive/reference/articles/article2003.html for the underlying logic
+
 class MazeSolver
     MOVES = [
         [-1,0], [0,-1], [1,0], [0,1], # straights
@@ -9,19 +11,16 @@ class MazeSolver
     def initialize(filepath)
         @maze = []
         File.open(filepath).each_line { |line| @maze << line.chomp.split("") }
-        a_star
+        self.a_star
     end
 
     def find_element(char)
         @maze.each_with_index do |row, i|
-            row.each_with_index do |cell, j|
-                if cell == char
-                    return [i, j]
-                end
-            end
+            row.each_with_index { |cell, j| return [i, j] if cell == char }
         end
     end
 
+    # work backward from target to start and register path
     def backtrack(node)
         while node.parent
             x, y = node.coordinates
@@ -30,10 +29,9 @@ class MazeSolver
         end
     end
 
-    # See http://archive.gamedev.net/archive/reference/articles/article2003.html for the underlying logic
     def a_star
-        start = find_element('S')
-        target = find_element('E')
+        start = self.find_element('S')
+        target = self.find_element('E')
 
         current = Node.new(start, target)
         sorted_by_f = [current]
@@ -88,8 +86,7 @@ class MazeSolver
             puts "There is no valid path"
             return
         end
-        # work backward from target to start and register path
-        backtrack(current.parent)
+        self.backtrack(current.parent)
     end
 
     def print
