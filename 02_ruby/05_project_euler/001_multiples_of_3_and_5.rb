@@ -1,7 +1,8 @@
-i = 3
-sum = 0
-while i < 1000
-    sum += i if i % 3 == 0 || i % 5 == 0
-    i += 1
+TARGET = 999
+
+def sum_divisible_by(n)
+    p = TARGET / n
+    return n * (p * (p + 1)) / 2
 end
-puts sum
+
+puts sum_divisible_by(3) + sum_divisible_by(5) - sum_divisible_by(15)
