@@ -3,14 +3,15 @@ require_relative "card.rb"
 class Board
     def initialize
         @grid = Array.new(4) { Array.new(4) }
+        self.populate
     end
 
-    def [](pos)
+    def [](*pos)
         row, col = pos
         @grid[row][col]
     end
 
-    def []=(pos, value)
+    def []=(*pos, value)
         row, col = pos
         @grid[row][col] = value
     end
@@ -24,7 +25,7 @@ class Board
 
         (0...@grid.length).each do |i|
             (0...@grid.length).each do |j|
-                self[i][j] = Card.new(selection.pop)
+                self[i,j] = Card.new(selection.pop)
             end
         end
     end
@@ -53,7 +54,7 @@ class Board
 
     def reveal(guessed_pos)
         row, col = guessed_pos
-        card = self[row][col]
+        card = self[row,col]
         unless card.face_up
             card.reveal
             card.to_s
