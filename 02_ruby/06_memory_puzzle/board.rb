@@ -35,4 +35,13 @@ class Board
     def won?
         @grid.all? { |row| row.all? { |card| card.face_up } }
     end
+
+    def reveal(guessed_pos)
+        i, j = guessed_pos
+        card = @grid[i][j]
+        unless card.face_up
+            card.reveal
+            card.to_s
+        end
+    end
 end
