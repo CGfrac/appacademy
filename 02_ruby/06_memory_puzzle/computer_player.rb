@@ -21,6 +21,10 @@ class ComputerPlayer
         @matched_cards << [pos1, pos2]
     end
 
+    def prompt
+        puts "Computer showing off its superior memory..."
+    end
+
     def get_input
         input = nil
         if @next_input
