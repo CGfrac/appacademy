@@ -2,13 +2,14 @@ LIMIT = 4000000
 
 a = 1
 b = 1
+c = a + b
 sum = 0
 
-while b < LIMIT
-    sum += b if b.even?
-    tmp = a
-    a = b
-    b = tmp + b
+while c < LIMIT
+    sum += c
+    a = b + c
+    b = c + a
+    c = a + b
 end
 
 puts sum
