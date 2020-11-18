@@ -10,6 +10,10 @@ class ComputerPlayer
     end
 
     def receive_card(pos, value)
+        if @known_cards.has_key?(value)
+            self.receive_match(pos, @known_cards[value])
+            return
+        end
         @known_cards[value] = pos
     end
 
