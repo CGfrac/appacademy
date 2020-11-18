@@ -6,7 +6,7 @@ class Game
     def initialize
         @board = Board.new
         @previous_guess = nil
-        @player = ComputerPlayer.new(4)
+        @player = ComputerPlayer.new
     end
 
     def over?
@@ -14,22 +14,27 @@ class Game
     end
     
     def check_guess(guessed_pos)
-        current_guess = @board[*guessed_pos]
         value = @board.reveal(guessed_pos)
+
         if @previous_guess
-            unless value == @previous_guess.to_s
+            previous_value = @board.reveal(@previous_guess)
+            unless value == previous_value
                 @board.render
                 puts "Try again."
                 sleep(2)
-                current_guess.hide
-                @previous_guess.hide
-                @player.receive_match(guessed_pos, value)
+                @board[*guessed_pos].hide
+                @board[*@previous_guess].hide
+                if @player.match?(value)
+                    @player.receive_match(guessed_pos, @player.get_pos(value))
+                else
+                    @player.receive_card(guessed_pos, value)
+                end
             end
             @previous_guess = nil
         else
-            @previous_guess = current_guess
+            @previous_guess = guessed_pos
+            @player.receive_card(guessed_pos, value)
         end
-        @player.receive_card(guessed_pos, value)
     end
 
     def play

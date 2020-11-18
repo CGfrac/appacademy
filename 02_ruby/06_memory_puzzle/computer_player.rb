@@ -1,40 +1,48 @@
 class ComputerPlayer
-    def initialize(board_width)
-        @positions = []
-        (0...board_width).each do |i|
-            (0...board_width).each { |j| @positions << [i, j] }
+    def initialize
+        @not_seen = []
+        (0...4).each do |row|
+            (0...4).each { |col| @not_seen << [row,col] }
         end
-        @positions.shuffle!
+        @not_seen.shuffle!
         @known_cards = {}
         @matched_cards = []
         @next_input = nil
     end
 
     def receive_card(pos, value)
-        @known_cards[value] = pos
+        if self.match?(value)
+            @next_input = self.get_pos(value)
+        else
+            @known_cards[value] = pos
+        end
     end
 
-    def receive_match(pos, value)
-        if @known_cards.has_key?(value)
-            @matched_cards << [pos, @known_cards[value]]
-        end
+    def match?(value)
+        @known_cards.has_key?(value)
+    end
+
+    def get_pos(value)
+        @known_cards[value]
+    end
+
+    def receive_match(pos1, pos2)
+        @matched_cards << pos1
+        @matched_cards << pos2
     end
 
     def prompt
         puts "Computer showing off its superior memory..."
+        sleep(1)
     end
 
     def get_input
         input = nil
-        if @next_input
-            input = @next_input[0..1]
-            @next_input = nil
-        elsif @matched_cards.length > 0
-            matched = @matched_cards.pop
-            input = matched.pop
-            @next_input = matched.pop
+        if @matched_cards.length > 0
+            input = @matched_cards.pop
         else
-            input = @positions.pop
+            input = @next_input || @not_seen.pop
+            @next_input = nil
         end
         input
     end
