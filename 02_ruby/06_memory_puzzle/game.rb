@@ -6,7 +6,7 @@ class Game
     def initialize
         @board = Board.new
         @previous_guess = nil
-        @player = ComputerPlayer.new
+        @player = HumanPlayer.new
     end
 
     def over?

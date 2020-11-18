@@ -6,4 +6,12 @@ class HumanPlayer
     def get_input
         gets.chomp.split(',').map { |ele| ele.to_i }
     end
+
+    # Dummy methods
+    def receive_card(pos, value)
+    end
+    
+    def match?(value)
+        false
+    end
 end
