@@ -3,10 +3,10 @@ require_relative "human_player.rb"
 require_relative "computer_player.rb"
 
 class Game
-    def initialize
+    def initialize(player)
         @board = Board.new
         @previous_guess = nil
-        @player = HumanPlayer.new
+        @player = player
     end
 
     def over?
