@@ -56,9 +56,7 @@ class Board
     def reveal(guessed_pos)
         row, col = guessed_pos
         card = self[row,col]
-        unless card.face_up
-            card.reveal
-            card.to_s
-        end
+        card.reveal unless card.face_up
+        card.to_s
     end
 end
