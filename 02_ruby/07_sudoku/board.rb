@@ -54,7 +54,10 @@ class Board
 
     def valid?(segment)
         counter = Hash.new(0)
-        segment.each { |tile| counter[tile.to_s] += 1 }
+        segment.each do |tile|
+            return false if tile.is_empty?
+            counter[tile.to_s] += 1
+        end
         counter.values.all? { |value| value == 1 }
     end
 

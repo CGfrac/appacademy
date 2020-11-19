@@ -16,6 +16,10 @@ class Tile
         end
     end
 
+    def is_empty?
+        @value == ' '
+    end
+
     def value=(value)
         @value = value unless @given
     end
