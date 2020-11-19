@@ -1,6 +1,8 @@
 require_relative "tile.rb"
 
 class Board
+    attr_reader :grid
+
     def self.from_file(path)
         file = File.open(path)
         lines = file.readlines.map(&:chomp)
@@ -21,6 +23,19 @@ class Board
 
     def initialize(grid)
         @grid = grid
+    end
+
+    def [](row, col)
+        @grid[row][col]
+    end
+
+    def get_tile(pos)
+        self[*pos]
+    end
+
+    def update_tile(pos, value)
+        tile = self.get_tile(pos)
+        tile.value = value unless tile.given
     end
 
     def render
