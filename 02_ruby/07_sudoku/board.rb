@@ -1,8 +1,6 @@
 require_relative "tile.rb"
 
 class Board
-    attr_reader :grid
-
     def self.from_file(path)
         file = File.open(path)
         lines = file.readlines.map(&:chomp)
@@ -48,5 +46,17 @@ class Board
             puts
             puts
         end
+    end
+
+    def valid_rows?
+        counter = Hash.new(0)
+        @grid.each do |row|
+            row.each { |tile| counter[tile.to_s] += 1 }
+        end
+        counter.values.all? { |value| value == 1 }
+    end
+
+    def solved?
+        valid_rows?
     end
 end
