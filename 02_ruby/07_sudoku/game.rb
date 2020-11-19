@@ -68,5 +68,8 @@ class Game
             coords = self.coordinates_to_i(input[0..1])
             @board.update_tile(coords, input[2])
         end
+        system("clear")
+        @board.render
+        puts "Solved!"
     end
 end
