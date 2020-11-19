@@ -22,4 +22,16 @@ class Board
     def initialize(grid)
         @grid = grid
     end
+
+    def render
+        @grid.each_with_index do |row, r_index|
+            puts if r_index % 3 == 0
+            row.each_with_index do |tile, t_index|
+                print ' ' if t_index % 3 == 0
+                print " #{tile.to_s} "
+            end
+            puts
+            puts
+        end
+    end
 end

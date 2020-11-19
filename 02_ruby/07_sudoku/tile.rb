@@ -10,7 +10,7 @@ class Tile
         if @given
             @value.light_green
         else
-            @value
+            @value.on_light_green
         end
     end
 end
