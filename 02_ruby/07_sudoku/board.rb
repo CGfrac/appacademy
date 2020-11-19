@@ -49,14 +49,27 @@ class Board
     end
 
     def valid_rows?
-        counter = Hash.new(0)
         @grid.each do |row|
+            counter = Hash.new(0)
             row.each { |tile| counter[tile.to_s] += 1 }
+            return false if counter.values.any? { |value| value != 1 }
         end
-        counter.values.all? { |value| value == 1 }
+        true
+    end
+
+    def valid_columns?
+        (0...@grid.length).each do |row|
+            counter = Hash.new(0)
+            (0...@grid.length).each do |col|
+                tile = self.get_tile([col, row])
+                counter[tile.to_s] += 1
+            end
+            return false if counter.values.any? { |value| value != 1 }
+        end
+        true
     end
 
     def solved?
-        valid_rows?
+        valid_rows? && valid_columns?
     end
 end
