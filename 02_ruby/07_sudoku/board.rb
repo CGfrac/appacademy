@@ -48,25 +48,29 @@ class Board
         end
     end
 
+    def valid?(segment)
+        counter = Hash.new(0)
+        segment.each { |tile| counter[tile.to_s] += 1 }
+        counter.values.all? { |value| value == 1 }
+    end
+
     def valid_rows?
-        @grid.each do |row|
-            counter = Hash.new(0)
-            row.each { |tile| counter[tile.to_s] += 1 }
-            return false if counter.values.any? { |value| value != 1 }
-        end
+        @grid.each { |row| return false unless valid?(row) }
         true
     end
 
     def valid_columns?
-        (0...@grid.length).each do |row|
-            counter = Hash.new(0)
-            (0...@grid.length).each do |col|
-                tile = self.get_tile([col, row])
-                counter[tile.to_s] += 1
-            end
-            return false if counter.values.any? { |value| value != 1 }
+        (0...@grid.length).each do |col|
+            column = @grid.map { |row| row[col] }
+            return false unless valid?(column)
         end
         true
+    end
+
+    def check_square(square)
+    end
+
+    def valid_squares?
     end
 
     def solved?
