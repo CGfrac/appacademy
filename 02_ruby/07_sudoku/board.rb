@@ -33,8 +33,16 @@ class Board
     end
 
     def render
+        print ' '.ljust(2)
+        (0...@grid.length).each do |i|
+            print ' ' if i % 3 == 0
+            print i.to_s.ljust(3)
+        end
+        puts
+
         @grid.each_with_index do |row, r_index|
             puts if r_index % 3 == 0
+            print r_index.to_s.ljust(1)
             row.each_with_index do |tile, t_index|
                 print ' ' if t_index % 3 == 0
                 print " #{tile.to_s} "
