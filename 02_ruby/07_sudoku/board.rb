@@ -27,12 +27,8 @@ class Board
         @grid[row][col]
     end
 
-    def get_tile(pos)
-        self[*pos]
-    end
-
     def update_tile(pos, value)
-        tile = self.get_tile(pos)
+        tile = self[*pos]
         tile.value = value unless tile.given
     end
 
@@ -67,13 +63,29 @@ class Board
         true
     end
 
-    def check_square(square)
+    def valid_square?(rows, cols)
+        square = @grid[rows].map { |row| row[cols] }
+        self.valid?(square.flatten)
+    end
+
+    def get_range(factor)
+        start = 3 * factor
+        finish = start + 3
+        start...finish
     end
 
     def valid_squares?
+        (0...2).each do |a|
+            (0...2).each do |b|
+                rows = self.get_range(a)
+                cols = self.get_range(b)
+                return false unless self.valid_square?(rows, cols)
+            end
+        end
+        true
     end
 
     def solved?
-        valid_rows? && valid_columns?
+        self.valid_rows? && self.valid_columns? && self.valid_squares?
     end
 end
