@@ -2,7 +2,6 @@ require "colorize"
 
 class Tile
     attr_reader :given
-    attr_writer :value
 
     def initialize(value, given)
         @value = value
@@ -15,5 +14,9 @@ class Tile
         else
             @value.black.on_light_green
         end
+    end
+
+    def value=(value)
+        @value = value unless @given
     end
 end

@@ -29,7 +29,7 @@ class Board
 
     def update_tile(pos, value)
         tile = self[*pos]
-        tile.value = value unless tile.given
+        tile.value = value
     end
 
     def render
