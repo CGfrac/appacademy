@@ -8,6 +8,9 @@ class HumanPlayer
     end
 
     # Dummy methods
+    def initialize(board_size)
+    end
+
     def receive_card(pos, value)
     end
     
