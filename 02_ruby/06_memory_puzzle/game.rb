@@ -3,9 +3,9 @@ require_relative "human_player.rb"
 require_relative "computer_player.rb"
 
 class Game
-    def initialize(player, board_size)
+    def initialize(player, board_size, bombs=false)
         @turn_limit = board_size * board_size
-        @board = Board.new(board_size)
+        @board = Board.new(board_size, bombs)
         @previous_guess = nil
         @player = player
     end
@@ -59,17 +59,20 @@ end
 if __FILE__ == $PROGRAM_NAME
     player = HumanPlayer.new
     board_size = 4
+    bombs = false
     while true
         puts "Welcome to the memory puzzle! Type 'help' to list available commands."
         cmd = gets.chomp
         case cmd
         when "start"
-            game = Game.new(player.new(board_size), board_size)
+            game = Game.new(player.new(board_size), board_size, bombs)
             game.play
         when "normal_mode"
             board_size = 4
         when "hard_mode"
             board_size = 6
+        when "bomb_mode"
+            bombs = true
         when "player_mode"
             player = HumanPlayer
         when "cpu_mode"
