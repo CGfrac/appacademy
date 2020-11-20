@@ -4,13 +4,14 @@ require_relative "computer_player.rb"
 
 class Game
     def initialize(player, board_size)
+        @turn_limit = board_size * board_size
         @board = Board.new(board_size)
         @previous_guess = nil
         @player = player
     end
 
     def over?
-        @board.won?
+        @board.won? || @turn_limit == 0
     end
     
     def check_guess(guessed_pos)
@@ -31,6 +32,7 @@ class Game
                 end
             end
             @previous_guess = nil
+            @turn_limit -= 1
         else
             @previous_guess = guessed_pos
             @player.receive_card(guessed_pos, value)
@@ -40,12 +42,17 @@ class Game
     def play
         until self.over?
             @board.render
+            puts "#{@turn_limit} turn(s) left."
             @player.prompt
             pos = @player.get_input
             self.check_guess(pos)
         end
         @board.render
-        puts "Good job!"
+        if @turn_limit == 0
+            puts "Game Over"
+        else
+            puts "Good job!"
+        end
     end
 end
 
