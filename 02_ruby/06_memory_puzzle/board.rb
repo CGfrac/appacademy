@@ -1,8 +1,8 @@
 require_relative "card.rb"
 
 class Board
-    def initialize
-        @grid = Array.new(4) { Array.new(4) }
+    def initialize(board_size)
+        @grid = Array.new(board_size) { Array.new(board_size) }
         self.populate
     end
 
