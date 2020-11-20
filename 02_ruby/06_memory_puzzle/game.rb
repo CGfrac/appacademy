@@ -57,24 +57,21 @@ if __FILE__ == $PROGRAM_NAME
         cmd = gets.chomp
         case cmd
         when "start"
-            game = Game.new(player, board_size.to_i)
+            game = Game.new(player.new(board_size), board_size)
             game.play
-        when "size"
-            print "Type a number between 3 and 26: "
-            input = gets.chomp.to_i
-            if input < 3 || input > 26
-                "Out of range, try again."
-            else
-                board_size = input
-            end
+        when "normal_mode"
+            board_size = 4
+        when "hard_mode"
+            board_size = 6
         when "player_mode"
-            player = HumanPlayer.new
+            player = HumanPlayer
         when "cpu_mode"
-            player = ComputerPlayer.new
+            player = ComputerPlayer
         when "quit"
             break
         when "help"
-            puts "size - set board's width (default: 4)"
+            puts "normal_mode - set board's width to 4 (default)"
+            puts "hard_mode - set board's width to 6"
             puts "player_mode - set human player (default)"
             puts "cpu_mode - set computer player"
             puts "quit - exit program"

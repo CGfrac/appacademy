@@ -1,13 +1,17 @@
 class ComputerPlayer
-    def initialize
+    def initialize(board_size)
         @not_seen = []
-        (0...4).each do |row|
-            (0...4).each { |col| @not_seen << [row,col] }
+        (0...board_size).each do |row|
+            (0...board_size).each { |col| @not_seen << [row,col] }
         end
         @not_seen.shuffle!
         @known_cards = {}
         @matched_cards = []
         @next_input = nil
+    end
+
+    def not_seen
+
     end
 
     def receive_card(pos, value)
@@ -33,7 +37,6 @@ class ComputerPlayer
 
     def prompt
         puts "Computer showing off its superior memory..."
-        sleep(1)
     end
 
     def get_input

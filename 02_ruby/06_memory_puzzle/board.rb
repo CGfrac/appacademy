@@ -1,8 +1,8 @@
 require_relative "card.rb"
 
 class Board
-    def initialize(board_size)
-        @grid = Array.new(board_size) { Array.new(board_size) }
+    def initialize(size)
+        @grid = Array.new(size) { Array.new(size) }
         self.populate
     end
 
@@ -19,7 +19,8 @@ class Board
     def populate
         alphabet = ('A'..'Z').to_a.shuffle!
 
-        selection = alphabet[0...@grid.length * 2]
+        slice = (@grid.length * @grid.length) / 2
+        selection = alphabet[0...slice]
         selection += selection
         selection.shuffle!
 
