@@ -29,12 +29,16 @@ class Game
         @turn_limit = 0
     end
 
+    def hide_guesses(guessed_pos)
+        @board[*guessed_pos].hide
+        @board[*@previous_guess].hide
+    end
+
     def turn_fail(guessed_pos, value)
         @board.render
         puts "Try again."
         sleep(2)
-        @board[*guessed_pos].hide
-        @board[*@previous_guess].hide
+        self.hide_guesses(guessed_pos)
         if @player.match?(value)
             @player.receive_match(guessed_pos, @player.get_pos(value))
         else
