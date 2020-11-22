@@ -110,8 +110,10 @@ if __FILE__ == $PROGRAM_NAME
         when "quit"
             break
         when "help"
+            puts "start - start a new game"
             puts "normal_mode - set board's width to 4 (default)"
             puts "hard_mode - set board's width to 6"
+            puts "bomb_mode - populate the board with bombs, 3 lives"
             puts "player_mode - set human player (default)"
             puts "cpu_mode - set computer player"
             puts "quit - exit program"
