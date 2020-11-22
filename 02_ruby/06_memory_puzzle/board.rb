@@ -64,7 +64,7 @@ class Board
     end
 
     def won?
-        @grid.all? { |row| row.all? { |card| card.face_up } }
+        @grid.all? { |row| row.all? { |card| card.face_up || card.to_s == '*' } }
     end
 
     def reveal_bombs
