@@ -21,15 +21,17 @@ class Board
         (0...up_to).each { |idx| alphabet[idx] = '*' }
     end
 
-    def populate(bombs)
-        alphabet = ('A'..'Z').to_a.shuffle!
-        
-        self.set_bombs(alphabet) if bombs
-
+    def select_card_values(alphabet)
         slice = (@grid.length * @grid.length) / 2
         selection = alphabet[0...slice]
         selection += selection
-        selection.shuffle!
+        selection.shuffle
+    end
+
+    def populate(bombs)
+        alphabet = ('A'..'Z').to_a.shuffle!
+        self.set_bombs(alphabet) if bombs
+        selection = self.select_card_values(alphabet)
 
         (0...@grid.length).each do |row|
             (0...@grid.length).each do |col|
