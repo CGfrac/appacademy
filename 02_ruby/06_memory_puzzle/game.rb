@@ -57,7 +57,7 @@ class Game
 end
 
 if __FILE__ == $PROGRAM_NAME
-    player = HumanPlayer.new
+    player = HumanPlayer
     board_size = 4
     bombs = false
     while true

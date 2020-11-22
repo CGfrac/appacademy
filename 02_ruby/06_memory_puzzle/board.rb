@@ -3,7 +3,7 @@ require_relative "card.rb"
 class Board
     def initialize(size, bombs=false)
         @grid = Array.new(size) { Array.new(size) }
-        self.populate
+        self.populate(bombs)
     end
 
     def [](*pos)
@@ -16,8 +16,15 @@ class Board
         @grid[row][col] = value
     end
 
-    def populate
+    def set_bombs(alphabet)
+        up_to = @grid.length / 2
+        (0...up_to).each { |idx| alphabet[idx] = '*' }
+    end
+
+    def populate(bombs)
         alphabet = ('A'..'Z').to_a.shuffle!
+        
+        self.set_bombs(alphabet) if bombs
 
         slice = (@grid.length * @grid.length) / 2
         selection = alphabet[0...slice]
