@@ -6,7 +6,7 @@ class Game
     def initialize(player, board_size, bombs=false)
         @turns_left = board_size * board_size
         @board = Board.new(board_size, bombs)
-        @previous_guess = nil
+        @previous_guesses = []
         @player = player
         @bombs = bombs
         @health = 3
@@ -34,7 +34,7 @@ class Game
 
     def hide_guesses(guessed_pos)
         @board[*guessed_pos].hide
-        @board[*@previous_guess].hide
+        @previous_guesses.each { |guess| @board[*guess].hide }
     end
 
     def turn_fail(guessed_pos, value)
@@ -42,8 +42,8 @@ class Game
         puts "Try again."
         sleep(2)
         self.hide_guesses(guessed_pos)
-        if @player.match?(value)
-            @player.receive_match(guessed_pos, @player.get_pos(value))
+        if @player.matches?(value)
+            @player.receive_matches(guessed_pos, value)
         else
             @player.receive_card(guessed_pos, value)
         end
@@ -54,13 +54,15 @@ class Game
 
         if value == '*'
             self.explode
-        elsif @previous_guess
-            previous_value = @board.reveal(@previous_guess)
-            self.turn_fail(guessed_pos, value) unless value == previous_value
-            @previous_guess = nil
+        elsif @previous_guesses.length > 0
+            previous_value = @board.reveal(@previous_guesses[-1])
+            unless value == previous_value && @previous_guesses.length + 1 == 2
+                self.turn_fail(guessed_pos, value)
+            end
+            @previous_guesses = []
             @turns_left -= 1
         else
-            @previous_guess = guessed_pos
+            @previous_guesses << guessed_pos
             @player.receive_card(guessed_pos, value)
         end
     end

@@ -5,9 +5,9 @@ class ComputerPlayer
             (0...board_size).each { |col| @not_seen << [row,col] }
         end
         @not_seen.shuffle!
-        @known_cards = {}
+        @known_cards = Hash.new { |h,k| h[k] = [] }
         @matched_cards = []
-        @next_input = nil
+        @next_inputs = []
     end
 
     def eliminate_bomb_coords(board)
@@ -17,24 +17,27 @@ class ComputerPlayer
     end
 
     def receive_card(pos, value)
-        if self.match?(value)
-            @next_input = self.get_pos(value)
+        if self.matches?(value)
+            @next_inputs = self.get_positions(value)
         else
-            @known_cards[value] = pos
+            @known_cards[value] << pos
         end
     end
 
-    def match?(value)
+    def matches?(value)
         @known_cards.has_key?(value)
     end
 
-    def get_pos(value)
+    def number_matches(value)
+        @known_cards[value].length
+    end
+
+    def get_positions(value)
         @known_cards[value]
     end
 
-    def receive_match(pos1, pos2)
-        @matched_cards << pos1
-        @matched_cards << pos2
+    def receive_matches(pos1, value)
+        @matched_cards += [pos1] + self.get_positions(value)
     end
 
     def prompt
@@ -46,8 +49,7 @@ class ComputerPlayer
         if @matched_cards.length > 0
             input = @matched_cards.pop
         else
-            input = @next_input || @not_seen.pop
-            @next_input = nil
+            input = @next_inputs.pop || @not_seen.pop
         end
         input
     end

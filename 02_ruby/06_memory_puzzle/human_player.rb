@@ -17,7 +17,7 @@ class HumanPlayer
     def receive_card(pos, value)
     end
     
-    def match?(value)
+    def matches?(value)
         false
     end
 end
