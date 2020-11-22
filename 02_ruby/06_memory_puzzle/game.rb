@@ -9,6 +9,7 @@ class Game
         @previous_guess = nil
         @player = player
         @bombs = bombs
+        @health = 3
     end
 
     def display_bombs
@@ -19,14 +20,15 @@ class Game
     end
 
     def over?
-        @board.won? || @turn_limit == 0
+        @board.won? || @turn_limit == 0 || @health == 0
     end
 
     def explode
         @board.render
         puts "BOOM"
+        @health -= 1
+        puts "Health: #{@health}"
         sleep(2)
-        @turn_limit = 0
     end
 
     def hide_guesses(guessed_pos)
@@ -64,7 +66,7 @@ class Game
 
     def game_over_message
         @board.render
-        if @board.won?
+        if @board.won? && @health > 0
             puts "Good job!"
         else
             puts "Game Over"
