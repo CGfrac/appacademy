@@ -4,7 +4,7 @@ require_relative "computer_player.rb"
 
 class Game
     def initialize(player, board_size, bombs=false)
-        @turn_limit = board_size * board_size
+        @turns_left = board_size * board_size
         @board = Board.new(board_size, bombs)
         @previous_guess = nil
         @player = player
@@ -20,7 +20,7 @@ class Game
     end
 
     def over?
-        @board.won? || @turn_limit == 0 || @health == 0
+        @board.won? || @turns_left == 0 || @health == 0
     end
 
     def explode
@@ -57,7 +57,7 @@ class Game
             previous_value = @board.reveal(@previous_guess)
             self.turn_fail(guessed_pos, value) unless value == previous_value
             @previous_guess = nil
-            @turn_limit -= 1
+            @turns_left -= 1
         else
             @previous_guess = guessed_pos
             @player.receive_card(guessed_pos, value)
@@ -77,7 +77,7 @@ class Game
         self.display_bombs if @bombs
         until self.over?
             @board.render
-            puts "#{@turn_limit} turn(s) left."
+            puts "#{@turns_left} turn(s) left."
             @player.prompt
             pos = @player.get_input
             self.check_guess(pos)
