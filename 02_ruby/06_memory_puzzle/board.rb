@@ -3,6 +3,7 @@ require_relative "card.rb"
 class Board
     def initialize(size, bombs=false)
         @grid = Array.new(size) { Array.new(size) }
+        @bombs = []
         self.populate(bombs)
     end
 
@@ -35,6 +36,7 @@ class Board
 
         (0...@grid.length).each do |row|
             (0...@grid.length).each do |col|
+                @bombs << [row,col] if selection[-1] == '*'
                 self[row,col] = Card.new(selection.pop)
             end
         end
@@ -61,6 +63,14 @@ class Board
 
     def won?
         @grid.all? { |row| row.all? { |card| card.face_up } }
+    end
+
+    def reveal_bombs
+        @bombs.each { |row, col| self[row,col].reveal }
+    end
+
+    def hide_bombs
+        @bombs.each { |row, col| self[row,col].hide }
     end
 
     def reveal(guessed_pos)

@@ -8,6 +8,14 @@ class Game
         @board = Board.new(board_size, bombs)
         @previous_guess = nil
         @player = player
+        self.display_bombs if bombs
+    end
+
+    def display_bombs
+        @board.reveal_bombs
+        @board.render
+        sleep(2)
+        @board.hide_bombs
     end
 
     def over?
@@ -17,7 +25,12 @@ class Game
     def check_guess(guessed_pos)
         value = @board.reveal(guessed_pos)
 
-        if @previous_guess
+        if value == '*'
+            @board.render
+            puts "BOOM"
+            sleep(2)
+            @turn_limit = 0
+        elsif @previous_guess
             previous_value = @board.reveal(@previous_guess)
             unless value == previous_value
                 @board.render
