@@ -48,10 +48,10 @@ class Game
             self.check_guess(pos)
         end
         @board.render
-        if @turn_limit == 0
-            puts "Game Over"
-        else
+        if @board.won?
             puts "Good job!"
+        else
+            puts "Game Over"
         end
     end
 end
