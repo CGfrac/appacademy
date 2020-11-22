@@ -8,7 +8,7 @@ class Game
         @board = Board.new(board_size, bombs)
         @previous_guess = nil
         @player = player
-        self.display_bombs if bombs
+        @bombs = bombs
     end
 
     def display_bombs
@@ -21,29 +21,35 @@ class Game
     def over?
         @board.won? || @turn_limit == 0
     end
+
+    def explode
+        @board.render
+        puts "BOOM"
+        sleep(2)
+        @turn_limit = 0
+    end
+
+    def turn_fail(guessed_pos, value)
+        @board.render
+        puts "Try again."
+        sleep(2)
+        @board[*guessed_pos].hide
+        @board[*@previous_guess].hide
+        if @player.match?(value)
+            @player.receive_match(guessed_pos, @player.get_pos(value))
+        else
+            @player.receive_card(guessed_pos, value)
+        end
+    end
     
     def check_guess(guessed_pos)
         value = @board.reveal(guessed_pos)
 
         if value == '*'
-            @board.render
-            puts "BOOM"
-            sleep(2)
-            @turn_limit = 0
+            self.explode
         elsif @previous_guess
             previous_value = @board.reveal(@previous_guess)
-            unless value == previous_value
-                @board.render
-                puts "Try again."
-                sleep(2)
-                @board[*guessed_pos].hide
-                @board[*@previous_guess].hide
-                if @player.match?(value)
-                    @player.receive_match(guessed_pos, @player.get_pos(value))
-                else
-                    @player.receive_card(guessed_pos, value)
-                end
-            end
+            self.turn_fail(guessed_pos, value) unless value == previous_value
             @previous_guess = nil
             @turn_limit -= 1
         else
@@ -52,7 +58,17 @@ class Game
         end
     end
 
+    def game_over_message
+        @board.render
+        if @board.won?
+            puts "Good job!"
+        else
+            puts "Game Over"
+        end
+    end
+
     def play
+        self.display_bombs if @bombs
         until self.over?
             @board.render
             puts "#{@turn_limit} turn(s) left."
@@ -60,12 +76,7 @@ class Game
             pos = @player.get_input
             self.check_guess(pos)
         end
-        @board.render
-        if @board.won?
-            puts "Good job!"
-        else
-            puts "Game Over"
-        end
+        self.game_over_message
     end
 end
 
