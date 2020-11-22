@@ -10,8 +10,10 @@ class ComputerPlayer
         @next_input = nil
     end
 
-    def not_seen
-
+    def eliminate_bomb_coords(board)
+        board.bombs.each do |bomb_row, bomb_col|
+            @not_seen.select! { |row, col| row != bomb_row || col != bomb_col }
+        end
     end
 
     def receive_card(pos, value)

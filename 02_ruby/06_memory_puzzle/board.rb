@@ -1,6 +1,8 @@
 require_relative "card.rb"
 
 class Board
+    attr_reader :bombs
+
     def initialize(size, bombs=false)
         @grid = Array.new(size) { Array.new(size) }
         @bombs = []

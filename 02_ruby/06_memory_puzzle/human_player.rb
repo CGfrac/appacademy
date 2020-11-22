@@ -11,6 +11,9 @@ class HumanPlayer
     def initialize(board_size)
     end
 
+    def eliminate_bomb_coords(board)
+    end
+
     def receive_card(pos, value)
     end
     

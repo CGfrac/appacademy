@@ -17,6 +17,7 @@ class Game
         @board.render
         sleep(2)
         @board.hide_bombs
+        @player.eliminate_bomb_coords(@board)
     end
 
     def over?
