@@ -18,7 +18,7 @@ class ComputerPlayer
 
     def receive_card(pos, value)
         if self.matches?(value)
-            @next_inputs = self.get_positions(value)
+            @next_inputs = self.get_positions(value)[0..-1]
         else
             @known_cards[value] << pos
         end
