@@ -1,8 +1,8 @@
 class ComputerPlayer
     def initialize(board_size)
         @not_seen = []
-        (0...board_size).each do |row|
-            (0...board_size).each { |col| @not_seen << [row,col] }
+        (0...board_size[0]).each do |row|
+            (0...board_size[1]).each { |col| @not_seen << [row,col] }
         end
         @not_seen.shuffle!
         @known_cards = Hash.new { |h,k| h[k] = [] }
