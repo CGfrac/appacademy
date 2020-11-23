@@ -23,7 +23,7 @@ class Board
     end
 
     def set_bombs(alphabet)
-        up_to = @grid.length / 2
+        up_to = [@width, @height].max / @match_num
         (0...up_to).each { |idx| alphabet[idx] = '*' }
     end
 
