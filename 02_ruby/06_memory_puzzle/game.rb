@@ -48,6 +48,17 @@ class Game
         else
             @player.receive_card(guessed_pos, value)
         end
+        self.end_turn
+    end
+
+    def update_turn(guessed_pos, value)
+        @previous_guesses << guessed_pos
+        @player.receive_card(guessed_pos, value)
+    end
+
+    def end_turn
+        @previous_guesses = []
+        @turns_left -= 1
     end
     
     def check_guess(guessed_pos)
@@ -57,14 +68,15 @@ class Game
             self.explode
         elsif @previous_guesses.length > 0
             previous_value = @board.reveal(@previous_guesses[-1])
-            unless value == previous_value && @previous_guesses.length + 1 == @match_num
+            if value != previous_value
                 self.turn_fail(guessed_pos, value)
+            elsif @previous_guesses.length + 1 == @match_num
+                self.end_turn
+            else
+                self.update_turn(guessed_pos, value)
             end
-            @previous_guesses = []
-            @turns_left -= 1
         else
-            @previous_guesses << guessed_pos
-            @player.receive_card(guessed_pos, value)
+            self.update_turn(guessed_pos, value)
         end
     end
 
@@ -103,12 +115,32 @@ if __FILE__ == $PROGRAM_NAME
             game = Game.new(player.new(board_size), board_size, match_num, bombs)
             game.play
         when "normal_mode"
-            board_size = [4,4]
+            case match_num
+            when 2
+                board_size = [4,4]
+            when 3
+                board_size = [3, 6]
+            when 4
+                board_size = [4, 6]
+            end
         when "hard_mode"
-            board_size = [6,6]
+            case match_num
+            when 2
+                board_size = [6,6]
+            when 3
+                board_size = [6, 8]
+            when 4
+                board_size = [6, 8]
+            end
+        when "match_2"
+            board_size = [4,4]
+            match_num = 2
         when "match_3"
-            match_num = 3
             board_size = [3, 6]
+            match_num = 3
+        when "match_4"
+            board_size = [4, 6]
+            match_num = 4
         when "bomb_mode"
             bombs = true
         when "player_mode"
@@ -119,8 +151,9 @@ if __FILE__ == $PROGRAM_NAME
             break
         when "help"
             puts "start - start a new game"
-            puts "normal_mode - set board's width to 4 (default)"
-            puts "hard_mode - set board's width to 6"
+            puts "normal_mode - set board's size to default"
+            puts "hard_mode - set bigger board size"
+            puts "match_3 - Match 3 board"
             puts "bomb_mode - populate the board with bombs, 3 lives"
             puts "player_mode - set human player (default)"
             puts "cpu_mode - set computer player"
