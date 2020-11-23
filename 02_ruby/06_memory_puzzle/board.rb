@@ -3,10 +3,11 @@ require_relative "card.rb"
 class Board
     attr_reader :bombs
 
-    def initialize(height, width, bombs=false)
+    def initialize(height, width, match_num, bombs=false)
         @height = height
         @width = width
         @grid = Array.new(@height) { Array.new(@width) }
+        @match_num = match_num
         @bombs = []
         self.populate(bombs)
     end
@@ -27,9 +28,10 @@ class Board
     end
 
     def select_card_values(alphabet)
-        slice = (@height * @width) / 2
-        selection = alphabet[0...slice]
-        selection += selection
+        slice_size = (@height * @width) / @match_num
+        slice = alphabet[0...slice_size]
+        selection = []
+        @match_num.times { selection += slice }
         selection.shuffle
     end
 

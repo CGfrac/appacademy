@@ -3,12 +3,13 @@ require_relative "human_player.rb"
 require_relative "computer_player.rb"
 
 class Game
-    def initialize(player, board_size, bombs=false)
-        @turns_left = board_size[0] * board_size[1]
-        @board = Board.new(*board_size, bombs)
+    def initialize(player, board_size, match_num=2, bombs=false)
+        @board = Board.new(*board_size, match_num, bombs)
         @previous_guesses = []
         @player = player
+        @match_num = match_num
         @bombs = bombs
+        @turns_left = board_size[0] * board_size[1]
         @health = 3
     end
 
@@ -56,7 +57,7 @@ class Game
             self.explode
         elsif @previous_guesses.length > 0
             previous_value = @board.reveal(@previous_guesses[-1])
-            unless value == previous_value && @previous_guesses.length + 1 == 2
+            unless value == previous_value && @previous_guesses.length + 1 == @match_num
                 self.turn_fail(guessed_pos, value)
             end
             @previous_guesses = []
@@ -92,18 +93,22 @@ end
 if __FILE__ == $PROGRAM_NAME
     player = HumanPlayer
     board_size = [4,4]
+    match_num = 2
     bombs = false
     while true
         puts "Welcome to the memory puzzle! Type 'help' to list available commands."
         cmd = gets.chomp
         case cmd
         when "start"
-            game = Game.new(player.new(board_size), board_size, bombs)
+            game = Game.new(player.new(board_size), board_size, match_num, bombs)
             game.play
         when "normal_mode"
             board_size = [4,4]
         when "hard_mode"
             board_size = [6,6]
+        when "match_3"
+            match_num = 3
+            board_size = [3, 6]
         when "bomb_mode"
             bombs = true
         when "player_mode"
