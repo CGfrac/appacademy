@@ -11,8 +11,8 @@ class ComputerPlayer
     end
 
     def eliminate_bomb_coords(board)
-        board.bombs.each do |bomb_row, bomb_col|
-            @not_seen.select! { |row, col| row != bomb_row || col != bomb_col }
+        @not_seen.select! do |row, col|
+            board.bombs.all? { |bomb_row, bomb_col| row != bomb_row || col != bomb_col }
         end
     end
 
