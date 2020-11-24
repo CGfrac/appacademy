@@ -114,7 +114,7 @@ if __FILE__ == $PROGRAM_NAME
         when "start"
             game = Game.new(player.new(board_size), board_size, match_num, bombs)
             game.play
-        when "normal_mode"
+        when "normal"
             case match_num
             when 2
                 board_size = [4,4]
@@ -123,7 +123,7 @@ if __FILE__ == $PROGRAM_NAME
             when 4
                 board_size = [4, 6]
             end
-        when "hard_mode"
+        when "hard"
             case match_num
             when 2
                 board_size = [6,6]
@@ -141,22 +141,24 @@ if __FILE__ == $PROGRAM_NAME
         when "match_4"
             board_size = [4, 6]
             match_num = 4
-        when "bomb_mode"
+        when "bombs"
             bombs = true
-        when "player_mode"
+        when "player"
             player = HumanPlayer
-        when "cpu_mode"
+        when "cpu"
             player = ComputerPlayer
         when "quit"
             break
         when "help"
             puts "start - start a new game"
-            puts "normal_mode - set board's size to default"
-            puts "hard_mode - set bigger board size"
+            puts "normal - set board's size to default"
+            puts "hard - set bigger board size"
+            puts "match_2 - Match 2 board (default)"
             puts "match_3 - Match 3 board"
-            puts "bomb_mode - populate the board with bombs, 3 lives"
-            puts "player_mode - set human player (default)"
-            puts "cpu_mode - set computer player"
+            puts "match_4 - Match 4 board"
+            puts "bombs - populate the board with bombs, 3 lives"
+            puts "player - set human player (default)"
+            puts "cpu - set computer player"
             puts "quit - exit program"
         else
             puts "Wrong command, type 'help' if necessary."
