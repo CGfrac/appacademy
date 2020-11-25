@@ -13,11 +13,16 @@ def palindrome?(num)
     num == reverse(num)
 end
 
-(100..999).each do |a|
-    (a..999).each do |b|
+a = 999
+while a >= 100
+    b = 999
+    while b >= a
         product = a * b
+        break if product <= largest_palindrome
         largest_palindrome = [largest_palindrome, product].max if palindrome?(product)
+        b -= 1
     end
+    a -= 1
 end
 
 puts largest_palindrome
