@@ -1,5 +1,3 @@
-largest_palindrome = 0
-
 def reverse(num)
     reversed = 0
     while num > 0
@@ -12,6 +10,8 @@ end
 def palindrome?(num)
     num == reverse(num)
 end
+
+largest_palindrome = 0
 
 a = 999
 while a >= 100
