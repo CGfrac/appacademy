@@ -1,4 +1,9 @@
-hr = "-" * 15
+def print_exercise_name(name)
+    hr = "-" * 15
+    puts hr
+    puts name
+    puts hr
+end
 
 # Write a function sum_to(n) that uses recursion to calculate 
 # the sum from 1 to n (inclusive of n).
@@ -10,9 +15,7 @@ def sum_to(n)
 end
 
 # Test Cases
-puts hr
-puts "sum_to"
-puts hr
+print_exercise_name("sum_to")
 p sum_to(5)  # => returns 15
 p sum_to(1)  # => returns 1
 p sum_to(9)  # => returns 45
@@ -28,9 +31,7 @@ def add_numbers(nums_array)
 end
 
 # Test Cases
-puts hr
-puts "add_numbers"
-puts hr
+print_exercise_name("add_numbers")
 p add_numbers([1,2,3,4]) # => returns 10
 p add_numbers([3]) # => returns 3
 p add_numbers([-80,34,7]) # => returns -39
@@ -46,9 +47,7 @@ def gamma_fnc(n)
 end
 
 # Test Cases
-puts hr
-puts "gamma_fnc"
-puts hr
+print_exercise_name("gamma_fnc")
 p gamma_fnc(0)  # => returns nil
 p gamma_fnc(1)  # => returns 1
 p gamma_fnc(4)  # => returns 6
