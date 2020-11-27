@@ -9,4 +9,14 @@ def range_recursive(start, stop)
     range_recursive(start, stop - 1) + [stop - 1]
 end
 
+def range_iterative(start, stop)
+    range = []
+    while start < stop
+        range << start
+        start += 1
+    end
+    range
+end
+
 p range_recursive(1,5)
+p range_iterative(1,5)
