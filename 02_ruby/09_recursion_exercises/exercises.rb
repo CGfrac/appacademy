@@ -29,23 +29,23 @@ print_exercise_name("range")
 p range_recursive(1,5)
 p range_iterative(1,5)
 
-def exponentiation_1(b, n)
-    return 1 if n == 0
-    b * exponentiation_1(b, n - 1)
+def exponentiation_1(base, exponent)
+    return 1 if exponent == 0
+    base * exponentiation_1(base, exponent - 1)
 end
 
 print_exercise_name("exponentiation_1")
 p exponentiation_1(4,0)
 p exponentiation_1(2,3)
 
-def exponentiation_2(b, n)
-    return 1 if n == 0
-    if n.even?
-        acc = exponentiation_2(b, n / 2)
+def exponentiation_2(base, exponent)
+    return 1 if exponent == 0
+    if exponent.even?
+        acc = exponentiation_2(base, exponent / 2)
         acc * acc
     else
-        acc = exponentiation_2(b, (n - 1) / 2)
-        b * acc * acc
+        acc = exponentiation_2(base, (exponent - 1) / 2)
+        base * acc * acc
     end
 end
 
