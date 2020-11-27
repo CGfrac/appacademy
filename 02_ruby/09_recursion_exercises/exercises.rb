@@ -100,6 +100,18 @@ def fibonacci_recursive(n)
     sequence + [next_value]
 end
 
+def fibonacci_iterative(n)
+    sequence = [0,1]
+    return sequence[0..n] if n <= 1
+    (2..n).each do
+        next_value = sequence[-1] + sequence[-2]
+        sequence << next_value
+    end
+    sequence
+end
+
 print_exercise_name("fibonacci")
 p fibonacci_recursive(3)
 p fibonacci_recursive(16)
+p fibonacci_iterative(3)
+p fibonacci_iterative(16)
