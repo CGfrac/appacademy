@@ -1,5 +1,5 @@
 def print_exercise_name(name)
-    hr = '-' * 15
+    hr = '-' * 17
     puts hr
     puts name
     puts hr
@@ -28,3 +28,12 @@ end
 print_exercise_name("recursive")
 p range_recursive(1,5)
 p range_iterative(1,5)
+
+def exponentiation_1(b, n)
+    return 1 if n == 0
+    b * exponentiation_1(b, n - 1)
+end
+
+print_exercise_name("exponentiation_1")
+p exponentiation_1(4,0)
+p exponentiation_1(2,3)
