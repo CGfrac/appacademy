@@ -37,3 +37,18 @@ end
 print_exercise_name("exponentiation_1")
 p exponentiation_1(4,0)
 p exponentiation_1(2,3)
+
+def exponentiation_2(b, n)
+    return 1 if n == 0
+    if n.even?
+        acc = exponentiation_2(b, n / 2)
+        acc * acc
+    else
+        acc = exponentiation_2(b, (n - 1) / 2)
+        b * acc * acc
+    end
+end
+
+print_exercise_name("exponentiation_2")
+p exponentiation_2(4,0)
+p exponentiation_2(2,3)
