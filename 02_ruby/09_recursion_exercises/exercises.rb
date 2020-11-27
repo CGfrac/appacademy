@@ -114,3 +114,35 @@ p fibonacci_recursive(3)
 p fibonacci_recursive(16)
 p fibonacci_iterative(3)
 p fibonacci_iterative(16)
+
+# Write a recursive binary search: bsearch(array, target). 
+# Note that binary search only works on sorted arrays. 
+# Make sure to return the location of the found object (or nil if not found!). 
+# Hint: you will probably want to use subarrays.
+
+def bsearch(array, target)
+    return nil if array.empty?
+    
+    middle = array.length / 2
+
+    case array[middle] <=> target
+    when -1
+        subarray = array[middle+1..-1]
+        index = bsearch(subarray, target)
+        middle + (1 + index) if index
+    when 0
+        middle
+    when 1
+        subarray = array[0...middle]
+        bsearch(subarray, target)
+    end
+end
+
+print_exercise_name("bsearch")
+p bsearch([1, 2, 3], 1) # => 0
+p bsearch([2, 3, 4, 5], 3) # => 1
+p bsearch([2, 4, 6, 8, 10], 6) # => 2
+p bsearch([1, 3, 4, 5, 9], 5) # => 3
+p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
