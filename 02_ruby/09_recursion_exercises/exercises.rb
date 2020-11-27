@@ -52,3 +52,33 @@ end
 print_exercise_name("exponentiation_2")
 p exponentiation_2(4,0)
 p exponentiation_2(2,3)
+
+class Array
+    def deep_dup
+        deep_copy = []
+        self.each do |ele|
+            if ele.is_a?(Array)
+                deep_copy << ele.deep_dup
+            else
+                deep_copy << ele
+            end
+        end
+        deep_copy
+    end
+end
+
+print_exercise_name("deep_dup")
+robot_parts = [
+  ["nuts", "bolts", "washers"],
+  ["capacitors", "resistors", "inductors"]
+]
+robot_parts_copy = robot_parts.deep_dup
+robot_parts_copy[1] << "LEDs"
+p robot_parts_copy[1]
+p robot_parts[1] # Should be unchanged
+
+mixed_array = [1, [2], [3, [4]]]
+mixed_array_copy = mixed_array.deep_dup
+mixed_array_copy[2][1][0] = 5
+p mixed_array_copy
+p mixed_array # Should be unchanged
