@@ -94,7 +94,6 @@ p mixed_array # Should be unchanged
 def fibonacci_recursive(n)
     return [0] if n == 0
     return [0,1] if n == 1
-    return [0,1,1] if n == 2
     sequence = fibonacci_recursive(n-1)
     next_value = sequence[-1] + sequence[-2]
     sequence + [next_value]
