@@ -25,7 +25,7 @@ def range_iterative(start, stop)
     range
 end
 
-print_exercise_name("recursive")
+print_exercise_name("range")
 p range_recursive(1,5)
 p range_iterative(1,5)
 
