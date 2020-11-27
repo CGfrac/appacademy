@@ -82,3 +82,24 @@ mixed_array_copy = mixed_array.deep_dup
 mixed_array_copy[2][1][0] = 5
 p mixed_array_copy
 p mixed_array # Should be unchanged
+
+# Write a recursive and an iterative Fibonacci method. 
+# The method should take in an integer n and return the first n 
+# Fibonacci numbers in an array.
+
+# You shouldn't have to pass any arrays between methods; 
+# you should be able to do this just passing a single argument 
+# for the number of Fibonacci numbers requested.
+
+def fibonacci_recursive(n)
+    return [0] if n == 0
+    return [0,1] if n == 1
+    return [0,1,1] if n == 2
+    sequence = fibonacci_recursive(n-1)
+    next_value = sequence[-1] + sequence[-2]
+    sequence + [next_value]
+end
+
+print_exercise_name("fibonacci")
+p fibonacci_recursive(3)
+p fibonacci_recursive(16)
