@@ -146,3 +146,41 @@ p bsearch([1, 3, 4, 5, 9], 5) # => 3
 p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
 p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
 p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+
+def merge_sort(array)
+    return array if array.length <= 1
+
+    middle = array.length / 2
+
+    left_arr = merge_sort(array[0...middle])
+    right_arr = merge_sort(array[middle..-1])
+
+    merge(left_arr, right_arr)
+end
+
+def merge(left_arr, right_arr)
+    merged = []
+    i, j = 0,0
+    while i < left_arr.length && j < right_arr.length
+        if left_arr[i] <= right_arr[j]
+            merged << left_arr[i]
+            i += 1
+        else
+            merged << right_arr[j]
+            j += 1
+        end
+    end
+    while i < left_arr.length
+        merged << left_arr[i]
+        i += 1
+    end
+    while j < right_arr.length
+        merged << right_arr[j]
+        j += 1
+    end
+    merged
+end
+
+print_exercise_name("merge_sort")
+arr = [22, 3, 20, 6, 4, 9, 22, 5, 8, 7, 4, 7, 2, 7, 11, 1]
+p merge_sort(arr)
