@@ -184,3 +184,20 @@ end
 print_exercise_name("merge_sort")
 arr = [22, 3, 20, 6, 4, 9, 22, 5, 8, 7, 4, 7, 2, 7, 11, 1]
 p merge_sort(arr)
+
+def subsets(arr)
+    return [[]] if arr.length == 0
+
+    subs = [[arr[-1]]]
+    (0...arr.length-1).each { |i| subs << [arr[i]] + [arr[-1]] }
+    subs << arr[0..-1] if arr.length > 2
+
+    subsets(arr[0..-2]) + sub
+end
+
+print_exercise_name("subsets")
+p subsets([]) # => [[]]
+p subsets([1]) # => [[], [1]]
+p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+p subsets([1, 2, 3])
+# => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
