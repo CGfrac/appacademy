@@ -192,7 +192,7 @@ def subsets(arr)
     (0...arr.length-1).each { |i| subs << [arr[i]] + [arr[-1]] }
     subs << arr[0..-1] if arr.length > 2
 
-    subsets(arr[0..-2]) + sub
+    subsets(arr[0..-2]) + subs
 end
 
 print_exercise_name("subsets")
@@ -201,3 +201,19 @@ p subsets([1]) # => [[], [1]]
 p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
 p subsets([1, 2, 3])
 # => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+
+def permutations(arr)
+    return [arr] if arr.length <= 1
+    perms = []
+    (0...arr.length).each do |i|
+        sub_array = arr[0...i] + arr[i+1..-1]
+        sub_perms = permutations(sub_array)
+        sub_perms.each { |sub_perm| perms << [arr[i]] + sub_perm }
+    end
+    perms
+end
+
+print_exercise_name("permutations")
+p permutations([1, 2, 3]) # => [[1, 2, 3], [1, 3, 2],
+                          #     [2, 1, 3], [2, 3, 1],
+                          #     [3, 1, 2], [3, 2, 1]]
