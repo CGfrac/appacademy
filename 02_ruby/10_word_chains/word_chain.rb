@@ -26,6 +26,7 @@ class WordChainer
 
     def explore_current_words
         new_current_words = []
+
             @current_words.each do |word|
                 self.adjacent_words(word).each do |adjacent|
                     if @all_seen_words.include?(adjacent)
@@ -37,8 +38,19 @@ class WordChainer
                 end
             end
         
-        new_current_words.each { |word| puts "#{word} from #{@all_seen_words[word]}" }
         @current_words = new_current_words
+    end
+
+    def build_path(target)
+        path = [target]
+        word = target
+
+        while @all_seen_words[word]
+            word = @all_seen_words[word]
+            path.unshift(word)
+        end
+
+        path
     end
 
     def run(source, target)
@@ -48,5 +60,7 @@ class WordChainer
         while @current_words.length > 0
             self.explore_current_words
         end
+
+        build_path(target)
     end
 end
