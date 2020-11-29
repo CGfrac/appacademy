@@ -59,6 +59,7 @@ class WordChainer
 
         while @current_words.length > 0
             self.explore_current_words
+            break if @all_seen_words.include?(target)
         end
 
         build_path(target)
