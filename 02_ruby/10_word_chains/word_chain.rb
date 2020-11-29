@@ -43,7 +43,7 @@ class WordChainer
 
     def run(source, target)
         @current_words = [source]
-        @all_seen_words = [source]
+        @all_seen_words = Set[source]
 
         while @current_words.length > 0
             self.explore_current_words
