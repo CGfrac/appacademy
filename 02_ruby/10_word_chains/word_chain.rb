@@ -32,18 +32,18 @@ class WordChainer
                         next
                     else
                         new_current_words << adjacent
-                        @all_seen_words << adjacent
+                        @all_seen_words[adjacent] = word
                     end
                 end
             end
-        p new_current_words
-        puts
+        
+        new_current_words.each { |word| puts "#{word} from #{@all_seen_words[word]}" }
         @current_words = new_current_words
     end
 
     def run(source, target)
         @current_words = [source]
-        @all_seen_words = Set[source]
+        @all_seen_words = { source => nil }
 
         while @current_words.length > 0
             self.explore_current_words
