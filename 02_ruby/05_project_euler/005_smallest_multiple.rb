@@ -10,11 +10,8 @@ end
 
 (1..MAX_FACTOR).each do |factor|
     if prime?(factor)
-        exp = 1
-        while (factor ** exp) < MAX_FACTOR
-            product *= factor 
-            exp += 1
-        end
+        exponent = (Math.log(MAX_FACTOR) / Math.log(factor)).floor
+        product *= (factor ** exponent)
     end
 end
 
