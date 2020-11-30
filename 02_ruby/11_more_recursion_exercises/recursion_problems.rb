@@ -44,9 +44,14 @@ p num_occur(arr, 1)   # 0
 # Problem 4: 
 
 def add_to_twelve?(array)
+    return false if array.length < 2
+    (array[0] + array[1] == 12) || add_to_twelve?(array[1..-1])
 end
 
 print_problem_name("add_to_twelve?")
+p add_to_twelve?([1,4,8,1])     # true
+p add_to_twelve?([8,8,9,3,2])   # true
+p add_to_twelve?([1,2,3,4,5,6]) # false
 
 # Problem 5: 
 
