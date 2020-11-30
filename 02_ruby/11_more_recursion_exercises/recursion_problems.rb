@@ -67,6 +67,10 @@ p sorted?([1, 4, 5, 7, 7, 7, 8, 9, 9, 10, 12, 12])  # true
 # Problem 6: 
 
 def reverse(string)
+    return "" if string.length == 0
+    reverse(string[1..-1]) + string[0]
 end
 
 print_problem_name("reverse")
+p reverse("canada") # "adanac"
+p reverse("pizza")  # "azzip"
