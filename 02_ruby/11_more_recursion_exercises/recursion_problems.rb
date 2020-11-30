@@ -18,9 +18,13 @@ p sum_recur([16, 16, 5, 7, 13, 8, 19, 17, 0, 8]) # 109
 #Problem 2: 
 
 def includes?(array, target)
+    return false if array.length == 0
+    array[0] == target || includes?(array[1..-1], target)
 end
 
 print_problem_name("includes?")
+p includes?([10, 6, 9, 6, 10, 10, 15, 12, 0, 2], 15) # true
+p includes?([10, 6, 9, 6, 10, 10, 15, 12, 0, 2], 1) # false
 
 # Problem 3: 
 
