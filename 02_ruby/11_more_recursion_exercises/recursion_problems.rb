@@ -56,9 +56,13 @@ p add_to_twelve?([1,2,3,4,5,6]) # false
 # Problem 5: 
 
 def sorted?(array)
+    return true if array.length <= 1
+    (array[0] <= array[1]) && sorted?(array[1..-1])
 end
 
 print_problem_name("sorted?")
+p sorted?([7, 10, 9, 7, 7, 12, 8, 9, 12, 5, 4, 1])  # false
+p sorted?([1, 4, 5, 7, 7, 7, 8, 9, 9, 10, 12, 12])  # true
 
 # Problem 6: 
 
