@@ -23,15 +23,23 @@ def includes?(array, target)
 end
 
 print_problem_name("includes?")
-p includes?([10, 6, 9, 6, 10, 10, 15, 12, 0, 2], 15) # true
-p includes?([10, 6, 9, 6, 10, 10, 15, 12, 0, 2], 1) # false
+arr = [10, 6, 9, 6, 10, 10, 15, 12, 0, 2]
+p includes?(arr, 15)  # true
+p includes?(arr, 1)   # false
 
 # Problem 3: 
 
 def num_occur(array, target)
+    return 0 if array.length == 0
+    count = (array[0] == target) ? 1 : 0
+    count + num_occur(array[1..-1], target)
 end
 
 print_problem_name("num_occur")
+p num_occur(arr, 0)   # 1
+p num_occur(arr, 10)  # 3
+p num_occur(arr, 6)   # 2
+p num_occur(arr, 1)   # 0
 
 # Problem 4: 
 
