@@ -1,13 +1,20 @@
-counter = 1
-n = 3
-
 def prime?(n)
     (3..Integer.sqrt(n)).all? { |i| n % i != 0 }
 end
 
-until counter == 10001
-    counter += 1 if prime?(n)
-    n += 2
+counter = 2
+k = 1
+
+while true
+    candidate = (6 * k) - 1
+    counter += 1 if prime?(candidate)
+    break if counter == 10001
+
+    candidate = (6 * k) + 1
+    counter += 1 if prime?(candidate)
+    break if counter == 10001
+    
+    k += 1
 end
 
-puts n - 2
+puts candidate
