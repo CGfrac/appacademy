@@ -10,8 +10,18 @@ class Board
     def set_bomb_coords
         bombs = Set.new
         while bombs.length < 12
-            bombs << [rand(0...9), rand(0...9)]
+            bombs << [rand(0...@grid.length), rand(0...@grid.length)]
         end
         bombs
+    end
+
+    def populate_grid
+        bombs = set_bomb_coords
+        (0...@grid.length).each do |row|
+            (0...@grid.length).each do |col|
+                bombed = bombs.include?([row,col])
+                @grid[row][col] = Tile.new(self, [row, col], bombed)
+            end
+        end
     end
 end
