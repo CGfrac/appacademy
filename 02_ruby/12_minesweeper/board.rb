@@ -37,4 +37,15 @@ class Board
             end
         end
     end
+
+    def render
+        print " ".ljust(2)
+        (0...self.width).each { |index| print index.to_s.ljust(2) }
+        puts
+        @grid.each_with_index do |row, index|
+            print index.to_s.ljust(2)
+            row.each { |tile| print tile.to_s.ljust(2) }
+            puts
+        end
+    end
 end
