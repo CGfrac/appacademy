@@ -20,6 +20,10 @@ class Tile
         @revealed = false
     end
 
+    def inspect
+        { pos: @pos, bombed: @bombed, flagged: @flagged, revealed: @revealed }
+    end
+
     def neighbors
         x, y = @pos
         neighbors = []
