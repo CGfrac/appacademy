@@ -12,6 +12,8 @@ class Tile
         [ 0, -1]
     ]
 
+    attr_reader :bombed
+
     def initialize(board, pos, bombed)
         @board = board
         @pos = pos
@@ -35,5 +37,10 @@ class Tile
             end
         end
         neighbors
+    end
+
+    def neighbor_bomb_count
+        @neighbors ||= neighbors
+        @neighbors.count { |neighbor| neighbor.bombed }
     end
 end
