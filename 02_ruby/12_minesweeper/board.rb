@@ -12,6 +12,14 @@ class Board
         @grid[row][col]
     end
 
+    def height
+        @grid.length
+    end
+
+    def width
+        @grid[0].length
+    end
+
     def set_bomb_coords
         bombs = Set.new
         while bombs.length < 12
