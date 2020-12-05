@@ -6,7 +6,7 @@ class Tile
         [ 1,  1], [ 1,  0], [ 1, -1], [ 0, -1]
     ]
 
-    attr_reader :bombed
+    attr_reader :bombed, :revealed
 
     def initialize(board, pos, bombed)
         @board = board
@@ -39,5 +39,11 @@ class Tile
     end
 
     def reveal
+        @revealed = true
+        if neighbor_bomb_count == 0
+            @neighbors.each do |neighbor|
+                neighbor.reveal unless neighbor.revealed
+            end
+        end
     end
 end
