@@ -7,6 +7,11 @@ class Board
         populate_grid
     end
 
+    def [](pos)
+        row, col = pos
+        @grid[row][col]
+    end
+
     def set_bomb_coords
         bombs = Set.new
         while bombs.length < 12
