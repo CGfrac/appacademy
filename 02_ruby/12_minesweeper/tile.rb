@@ -46,6 +46,21 @@ class Tile
 
     def reveal
         @revealed = true
-        self.reveal_neighbors if neighbor_bomb_count == 0
+        @neighbor_bombs = self.neighbor_bomb_count
+        self.reveal_neighbors if @neighbor_bombs == 0
+    end
+
+    def to_s
+        if self.flagged
+            "F"
+        elsif self.revealed
+            if @neighbor_bombs == 0
+                '_'
+            else
+                @neighbor_bombs.to_s
+            end
+        else
+            "*"
+        end
     end
 end
