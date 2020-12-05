@@ -2,14 +2,8 @@ require_relative "board.rb"
 
 class Tile
     DELTA = [
-        [-1, -1],
-        [-1,  0],
-        [-1,  1],
-        [ 0,  1],
-        [ 1,  1],
-        [ 1,  0],
-        [ 1, -1],
-        [ 0, -1]
+        [-1, -1], [-1,  0], [-1,  1], [ 0,  1],
+        [ 1,  1], [ 1,  0], [ 1, -1], [ 0, -1]
     ]
 
     attr_reader :bombed
@@ -42,5 +36,8 @@ class Tile
     def neighbor_bomb_count
         @neighbors ||= neighbors
         @neighbors.count { |neighbor| neighbor.bombed }
+    end
+
+    def reveal
     end
 end
