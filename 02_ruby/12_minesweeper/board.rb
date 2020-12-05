@@ -7,7 +7,7 @@ class Board
         populate_grid
     end
 
-    def [](pos)
+    def [](*pos)
         row, col = pos
         @grid[row][col]
     end
