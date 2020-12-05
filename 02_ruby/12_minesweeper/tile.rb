@@ -34,16 +34,18 @@ class Tile
     end
 
     def neighbor_bomb_count
-        @neighbors ||= neighbors
+        @neighbors ||= self.neighbors
         @neighbors.count { |neighbor| neighbor.bombed }
+    end
+
+    def reveal_neighbors
+        @neighbors.each do |neighbor|
+            neighbor.reveal unless neighbor.revealed
+        end
     end
 
     def reveal
         @revealed = true
-        if neighbor_bomb_count == 0
-            @neighbors.each do |neighbor|
-                neighbor.reveal unless neighbor.revealed
-            end
-        end
+        self.reveal_neighbors if neighbor_bomb_count == 0
     end
 end
