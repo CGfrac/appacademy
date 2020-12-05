@@ -6,7 +6,7 @@ class Tile
         [ 1,  1], [ 1,  0], [ 1, -1], [ 0, -1]
     ]
 
-    attr_reader :bombed, :revealed
+    attr_reader :bombed, :revealed, :flagged
 
     def initialize(board, pos, bombed)
         @board = board
