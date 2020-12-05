@@ -38,6 +38,12 @@ class Board
         end
     end
 
+    def remaining_tiles
+        @grid.inject(0) do |count, row|
+            count += row.count { |tile| !(tile.revealed || tile.bombed) }
+        end
+    end
+
     def render
         print " ".ljust(2)
         (0...self.width).each { |index| print index.to_s.ljust(2) }
