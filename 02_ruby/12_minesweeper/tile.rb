@@ -50,6 +50,10 @@ class Tile
         self.reveal_neighbors if @neighbor_bombs == 0
     end
 
+    def switch_flag
+        @flagged = true ? false : true
+    end
+
     def to_s
         if self.flagged
             "F"
