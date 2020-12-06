@@ -47,9 +47,21 @@ class Minesweeper
         [command, position]
     end
 
+    def reveal_tile(position)
+        if @board[*position].bombed
+            self.boom
+        else
+            @board[*position].reveal
+        end
+    end
+
     def play_turn
         command, position = self.get_input
-        @board[*position].reveal
+        if command == 'f'
+            @board[*position].switch_flag
+        else
+            self.reveal_tile(position)
+        end
     end
 
     def run
