@@ -18,7 +18,7 @@ class Minesweeper
         until cmd
             print "Enter a command ('r' to reveal, 'f' for flagging): "
             input = gets.chomp
-            cmd = input if valid_command?(input)
+            cmd = input if self.valid_command?(input)
         end
     end
 
@@ -31,12 +31,20 @@ class Minesweeper
         until pos
             print "Enter coordinates in 'row,col' form (e.g. '2,3'): "
             input = gets.chomp.split(',').map { |coord| Integer(coord) }
-            pos = input if valid_position?(input)
+            pos = input if self.valid_position?(input)
         end
     end
 
     def get_input
-        command = get_command
-        position = get_position
+        command = self.get_command
+        position = self.get_position
+    end
+
+    def run
+        until over?
+            system('clear')
+            @board.render
+            self.get_input
+        end
     end
 end
