@@ -31,8 +31,12 @@ class Minesweeper
         pos = nil
         until pos
             print "Enter coordinates in 'row,col' form (e.g. '2,3'): "
-            input = gets.chomp.split(',').map { |coord| Integer(coord) }
-            pos = input if self.valid_position?(input)
+            begin 
+                input = gets.chomp.split(',').map { |coord| Integer(coord) }
+                pos = input if self.valid_position?(input)
+            rescue
+                pos = nil
+            end
         end
         pos
     end
