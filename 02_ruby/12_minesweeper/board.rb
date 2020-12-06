@@ -45,6 +45,7 @@ class Board
     end
 
     def render
+        system('clear')
         print " ".ljust(2)
         (0...self.width).each { |index| print index.to_s.ljust(2) }
         puts
