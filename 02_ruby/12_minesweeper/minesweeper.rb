@@ -9,6 +9,10 @@ class Minesweeper
         @board.remaining_tiles == 0
     end
 
+    def valid_command?(cmd)
+        cmd == 'r' || cmd == 'f'
+    end
+
     def get_command
         cmd = nil
         until cmd
