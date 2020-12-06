@@ -23,7 +23,7 @@ class Minesweeper
     end
 
     def valid_position?(pos)
-        pos[0].between?(0...@board.height) && pos[1].between?(0...@board.width)
+        pos.length == 2 && pos[0].between?(0, @board.height) && pos[1].between?(0, @board.width)
     end
 
     def get_position
@@ -36,16 +36,7 @@ class Minesweeper
     end
 
     def get_input
-        puts "Followed by the coordinates, e.g. 'r 2,3'"
-        input = nil
-        until input
-            begin
-                command = get_command
-                position = get_position
-            rescue
-                input = nil
-            end
-        end
-        input
+        command = get_command
+        position = get_position
     end
 end
