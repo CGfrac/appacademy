@@ -51,7 +51,7 @@ class Tile
     end
 
     def switch_flag
-        @flagged = true ? false : true
+        @flagged = @flagged ? false : true
     end
 
     def to_s(bombs)
@@ -61,9 +61,9 @@ class Tile
             else
                 @neighbor_bombs.to_s
             end
-        elsif self.bombed && bombs
+        elsif @bombed && bombs
             'B'
-        elsif self.flagged
+        elsif @flagged
             "F"
         else
             "*"
