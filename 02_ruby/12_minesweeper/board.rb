@@ -44,15 +44,20 @@ class Board
         end
     end
 
-    def render
+    def render(bombs=false)
         system('clear')
         print " ".ljust(2)
         (0...self.width).each { |index| print index.to_s.ljust(2) }
         puts
         @grid.each_with_index do |row, index|
             print index.to_s.ljust(2)
-            row.each { |tile| print tile.to_s.ljust(2) }
+            row.each { |tile| print tile.to_s(bombs).ljust(2) }
             puts
         end
+    end
+
+    def boom
+        self.render(true)
+        puts "BOOOOOOOM"
     end
 end
