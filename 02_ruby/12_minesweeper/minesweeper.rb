@@ -65,10 +65,16 @@ class Minesweeper
         end
     end
 
+    def victory_message
+        @board.render
+        puts "Good job!"
+    end
+
     def run
         until over?
             @board.render
             self.play_turn
         end
+        self.victory_message unless @bombed
     end
 end
