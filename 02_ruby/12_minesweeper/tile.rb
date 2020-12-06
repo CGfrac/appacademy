@@ -54,15 +54,17 @@ class Tile
         @flagged = true ? false : true
     end
 
-    def to_s
-        if self.flagged
-            "F"
-        elsif self.revealed
+    def to_s(bombs)
+        if self.revealed
             if @neighbor_bombs == 0
                 '_'
             else
                 @neighbor_bombs.to_s
             end
+        elsif self.bombed && bombs
+            'B'
+        elsif self.flagged
+            "F"
         else
             "*"
         end
