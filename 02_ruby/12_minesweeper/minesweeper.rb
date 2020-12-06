@@ -6,7 +6,7 @@ class Minesweeper
     end
 
     def over?
-        @board.remaining_tiles == 0
+        @board.remaining_tiles == 0 || @boom
     end
 
     def valid_command?(cmd)
@@ -49,7 +49,8 @@ class Minesweeper
 
     def reveal_tile(position)
         if @board[*position].bombed
-            self.boom
+            @board.boom
+            @boom = true
         else
             @board[*position].reveal
         end
