@@ -22,6 +22,10 @@ class Minesweeper
         end
     end
 
+    def valid_position?(pos)
+        pos[0].between?(0...@board.height) && pos[1].between?(0...@board.width)
+    end
+
     def get_position
         pos = nil
         until pos
