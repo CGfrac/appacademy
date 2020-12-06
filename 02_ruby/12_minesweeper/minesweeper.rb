@@ -22,6 +22,15 @@ class Minesweeper
         end
     end
 
+    def get_position
+        pos = nil
+        until pos
+            print "Enter coordinates in 'row,col' form (e.g. '2,3'): "
+            input = gets.chomp.split(',').map { |coord| Integer(coord) }
+            pos = input if valid_position?(input)
+        end
+    end
+
     def get_input
         puts "Followed by the coordinates, e.g. 'r 2,3'"
         input = nil
