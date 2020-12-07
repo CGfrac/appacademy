@@ -1,3 +1,4 @@
+require "yaml"
 require_relative "board.rb"
 
 class Minesweeper
@@ -10,15 +11,25 @@ class Minesweeper
     end
 
     def valid_command?(cmd)
-        cmd == 'r' || cmd == 'f'
+        cmd == 'r' || cmd == 'f' || cmd == 's'
+    end
+
+    def save_game
+        print "Give your save a name: "
+        input = gets.chomp
+        File.write(input, self.to_yaml)
     end
 
     def get_command
         cmd = nil
         until cmd
-            print "Enter a command ('r' to reveal, 'f' for flagging): "
+            print "Enter a command ('r' to reveal, 'f' for flagging, 's' to save): "
             input = gets.chomp
             cmd = input if self.valid_command?(input)
+            if cmd == 's'
+                self.save_game
+                cmd = nil
+            end
         end
         cmd
     end
