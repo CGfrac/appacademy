@@ -32,7 +32,7 @@ class Minesweeper
             if cmd == 's'
                 self.save_game
                 cmd = nil
-            elsif cmd = 'q'
+            elsif cmd == 'q'
                 exit
             end
         end
@@ -102,5 +102,6 @@ if __FILE__ == $PROGRAM_NAME
     else
         game = Minesweeper.new
     end
+    sleep(5)
     game.run
 end
