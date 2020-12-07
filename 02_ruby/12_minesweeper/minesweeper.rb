@@ -26,10 +26,12 @@ class Minesweeper
     end
 
     def prompt
+        puts "Move the cursor using arrow keys"
+        puts "Type 'r' to reveal, 'f' to flag, 's' to save, 'q' to quit"
     end
 
-    def play_turn
-        self.prompt
+    def get_input
+        
     end
 
     def victory_message
@@ -40,7 +42,8 @@ class Minesweeper
     def run
         until over?
             @board.render
-            self.play_turn
+            self.prompt
+            self.get_input 
         end
         self.victory_message unless @boom
     end
