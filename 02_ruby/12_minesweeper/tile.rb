@@ -1,3 +1,4 @@
+require "colorize"
 require_relative "board.rb"
 
 class Tile
@@ -54,12 +55,26 @@ class Tile
         @flagged = @flagged ? false : true
     end
 
+    def tile_color
+        case @neighbor_bombs
+        when 1
+            :green
+        when 2
+            :yellow
+        when 3
+            :light_red
+        else
+            :red
+        end
+    end
+
     def to_s(bombs)
         if self.revealed
             if @neighbor_bombs == 0
                 '_'
             else
-                @neighbor_bombs.to_s
+                color = self.tile_color
+                @neighbor_bombs.to_s.colorize(color)
             end
         elsif @bombed && bombs
             'B'
