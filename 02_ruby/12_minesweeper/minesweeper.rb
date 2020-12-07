@@ -1,7 +1,10 @@
 require "yaml"
+require "set"
 require_relative "board.rb"
 
 class Minesweeper
+    VALID_COMMANDS = Set['r', 'f', 's', 'q']
+
     def initialize
         @board = Board.new
     end
@@ -11,7 +14,7 @@ class Minesweeper
     end
 
     def valid_command?(cmd)
-        cmd == 'r' || cmd == 'f' || cmd == 's'
+        VALID_COMMANDS.include?(cmd)
     end
 
     def save_game
@@ -23,12 +26,14 @@ class Minesweeper
     def get_command
         cmd = nil
         until cmd
-            print "Enter a command ('r' to reveal, 'f' for flagging, 's' to save): "
+            print "Enter a command ('r' to reveal, 'f' for flagging, 's' to save, 'q' to quit): "
             input = gets.chomp
             cmd = input if self.valid_command?(input)
             if cmd == 's'
                 self.save_game
                 cmd = nil
+            elsif cmd = 'q'
+                exit
             end
         end
         cmd
