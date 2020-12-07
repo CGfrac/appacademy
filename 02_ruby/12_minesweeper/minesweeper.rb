@@ -86,6 +86,6 @@ class Minesweeper
             @board.render
             self.play_turn
         end
-        self.victory_message unless @bombed
+        self.victory_message unless @boom
     end
 end
