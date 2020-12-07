@@ -89,3 +89,13 @@ class Minesweeper
         self.victory_message unless @boom
     end
 end
+
+if __FILE__ == $PROGRAM_NAME
+    save = ARGV.shift
+    if save
+        game = YAML::load_file(save)
+    else
+        game = Minesweeper.new
+    end
+    game.run
+end
