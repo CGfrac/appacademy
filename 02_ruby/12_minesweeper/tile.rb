@@ -74,7 +74,7 @@ class Tile
                 '_'
             else
                 color = self.tile_color
-                @neighbor_bombs.to_s.colorize(color)
+                @neighbor_bombs.to_s.ljust(2).colorize(color)
             end
         elsif @bombed && bombs
             'B'
