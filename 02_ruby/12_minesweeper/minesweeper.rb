@@ -87,11 +87,11 @@ class Minesweeper
     end
 
     def record_time
-        if file?("test")
+        if File.exists?("times")
             times = YAML::load_file("times")
-            if @ending_time < times[-1][1]
+            if times.length < 10 || @ending_time < times[-1][1]
                 times << [self.get_name, @ending_time]
-                times.sort!
+                times.sort_by! { |time| time[1] }
                 File.write("times", times[0..9])
             end
         else
@@ -100,8 +100,11 @@ class Minesweeper
     end
 
     def display_times
+        puts "-----------"
+        puts "Best times:"
+        puts "-----------"
         times = YAML::load_file("times")
-        times.each_with_index { |time, idx| puts "#{idx+1} - #{time[1]} - #{time[0]}" }
+        times.each_with_index { |time, idx| puts "#{idx+1}".ljust(2) + " - " + "#{time[1]}".ljust(5) + " - #{time[0]}" }
     end
 
     def run
