@@ -31,9 +31,9 @@ class Minesweeper
         puts "Type 'r' to reveal, 'f' to flag, 's' to save, 'q' to quit"
     end
 
-    def give_time
+    def get_time
         current_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        puts "Time: #{current_time - @starting_time}"
+        (current_time - @starting_time).round(3)
     end
 
     # Taken from https://gist.github.com/acook/4190379
@@ -73,14 +73,23 @@ class Minesweeper
             save_game
         when 'q'
             exit
-        else
-            sleep(1)
         end
     end
 
     def victory_message
         @board.render
-        puts "Good job!"
+        puts "Good job! Your time is #{@ending_time}"
+    end
+
+    def record_time
+        if file?("test")
+            times = YAML::load_file("times")
+        else
+            times = []
+        end
+        times << @ending_time
+        times.sort!
+        File.write("times", times[0..9])
     end
 
     def run
@@ -90,7 +99,11 @@ class Minesweeper
             self.prompt
             self.get_input 
         end
-        self.victory_message unless @boom
+        @ending_time = self.get_time
+        unless @boom
+            self.victory_message
+            self.record_time
+        end
     end
 end
 
