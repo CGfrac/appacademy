@@ -5,6 +5,7 @@ class Board
     def initialize
         @grid = Array.new(9) { Array.new(9) }
         @bombs = set_bomb_coords
+        @cursor_pos = [0,0]
         populate_grid
     end
 
@@ -49,9 +50,15 @@ class Board
         print " ".ljust(2)
         (0...self.width).each { |index| print index.to_s.ljust(2) }
         puts
-        @grid.each_with_index do |row, index|
-            print index.to_s.ljust(2)
-            row.each { |tile| print tile.to_s(bombs).ljust(2) }
+        @grid.each_with_index do |row, i|
+            print i.to_s.ljust(2)
+            row.each_with_index do |tile, j|
+                if [i,j] == @cursor_pos
+                    print tile.to_s(bombs).ljust(2).on_light_black
+                else
+                    print tile.to_s(bombs).ljust(2)
+                end
+            end
             puts
         end
     end
