@@ -84,12 +84,15 @@ class Minesweeper
     def record_time
         if file?("test")
             times = YAML::load_file("times")
+            if @ending_time < times[-1]
+                times << @ending_time
+                times.sort!
+                File.write("times", times[0..9])
+            end
         else
-            times = []
+            File.write("times", [@ending_time])
         end
-        times << @ending_time
-        times.sort!
-        File.write("times", times[0..9])
+        
     end
 
     def run
