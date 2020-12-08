@@ -81,18 +81,22 @@ class Minesweeper
         puts "Good job! Your time is #{@ending_time}"
     end
 
+    def get_name
+        puts "Enter your name: "
+        gets.chomp
+    end
+
     def record_time
         if file?("test")
             times = YAML::load_file("times")
-            if @ending_time < times[-1]
-                times << @ending_time
+            if @ending_time < times[-1][1]
+                times << [self.get_name, @ending_time]
                 times.sort!
                 File.write("times", times[0..9])
             end
         else
-            File.write("times", [@ending_time])
+            File.write("times", [[self.get_name, @ending_time]])
         end
-        
     end
 
     def run
