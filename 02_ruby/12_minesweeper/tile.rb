@@ -77,9 +77,9 @@ class Tile
                 @neighbor_bombs.to_s.ljust(2).colorize(color)
             end
         elsif @bombed && bombs
-            'B'.ljust(2)
+            'B'.ljust(2).colorize(:white)
         elsif @flagged
-            "F".ljust(2)
+            "F".ljust(2).colorize(:blue)
         else
             "*".ljust(2)
         end
