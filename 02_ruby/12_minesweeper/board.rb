@@ -69,4 +69,12 @@ class Board
         self.render(true)
         puts "BOOOOOOOM"
     end
+
+    def reveal
+        self[*@cursor_pos].reveal
+    end
+
+    def switch_flag
+        self[*@cursor_pos].switch_flag
+    end
 end

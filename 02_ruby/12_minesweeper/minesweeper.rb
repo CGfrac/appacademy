@@ -53,11 +53,22 @@ class Minesweeper
 
         case input
         when "\e[A" # up
+            @board.cursor_pos[0] = [0, @board.cursor_pos[0] - 1].max
         when "\e[B" # down
+            @board.cursor_pos[0] = [@board.height-1, @board.cursor_pos[0] + 1].min
         when "\e[C" # right
+            @board.cursor_pos[1] = [@board.width-1, @board.cursor_pos[1] + 1].min
         when "\e[D" # left
+            @board.cursor_pos[1] = [0, @board.cursor_pos[1] - 1].max
         when "r"
+            if @board[*@board.cursor_pos].bombed
+                @board.boom
+                @boom = true
+            else
+                @board.reveal
+            end
         when "f"
+            @board.switch_flag
         when 's'
             save_game
         when 'q'
