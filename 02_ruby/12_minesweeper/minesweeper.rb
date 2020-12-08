@@ -1,4 +1,5 @@
 require "yaml"
+require 'io/console'
 require_relative "board.rb"
 
 class Minesweeper
@@ -30,8 +31,21 @@ class Minesweeper
         puts "Type 'r' to reveal, 'f' to flag, 's' to save, 'q' to quit"
     end
 
-    def get_input
-        
+    # Taken from https://gist.github.com/acook/4190379
+    def read_char
+        STDIN.echo = false
+        STDIN.raw!
+
+        input = STDIN.getc.chr
+        if input == "\e" then
+            input << STDIN.read_nonblock(3) rescue nil
+            input << STDIN.read_nonblock(2) rescue nil
+        end
+    ensure
+        STDIN.echo = true
+        STDIN.cooked!
+
+        return input
     end
 
     def victory_message
