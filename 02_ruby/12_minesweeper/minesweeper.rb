@@ -17,12 +17,12 @@ class Minesweeper
         File.write(input, self.to_yaml)
     end
 
-    def reveal_tile(position)
-        if @board[*position].bombed
+    def reveal_tile
+        if @board[*@board.cursor_pos].bombed
             @board.boom
             @boom = true
         else
-            @board[*position].reveal
+            @board.reveal
         end
     end
 
@@ -61,12 +61,7 @@ class Minesweeper
         when "\e[D" # left
             @board.cursor_pos[1] = [0, @board.cursor_pos[1] - 1].max
         when "r"
-            if @board[*@board.cursor_pos].bombed
-                @board.boom
-                @boom = true
-            else
-                @board.reveal
-            end
+            self.reveal_tile
         when "f"
             @board.switch_flag
         when 's'
