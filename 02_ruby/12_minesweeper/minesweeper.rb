@@ -99,6 +99,11 @@ class Minesweeper
         end
     end
 
+    def display_times
+        times = YAML::load_file("times")
+        times.each_with_index { |time, idx| puts "#{idx+1} - #{time[1]} - #{time[0]}" }
+    end
+
     def run
         @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         until over?
@@ -110,6 +115,7 @@ class Minesweeper
         unless @boom
             self.victory_message
             self.record_time
+            self.display_times
         end
     end
 end
