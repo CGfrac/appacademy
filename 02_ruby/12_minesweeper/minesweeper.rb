@@ -48,6 +48,25 @@ class Minesweeper
         return input
     end
 
+    def get_input
+        input = read_char
+
+        case input
+        when "\e[A" # up
+        when "\e[B" # down
+        when "\e[C" # right
+        when "\e[D" # left
+        when "r"
+        when "f"
+        when 's'
+            save_game
+        when 'q'
+            exit
+        else
+            sleep(1)
+        end
+    end
+
     def victory_message
         @board.render
         puts "Good job!"
