@@ -31,6 +31,11 @@ class Minesweeper
         puts "Type 'r' to reveal, 'f' to flag, 's' to save, 'q' to quit"
     end
 
+    def give_time
+        current_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        puts "Time: #{current_time - @starting_time}"
+    end
+
     # Taken from https://gist.github.com/acook/4190379
     def read_char
         STDIN.echo = false
@@ -79,6 +84,7 @@ class Minesweeper
     end
 
     def run
+        @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         until over?
             @board.render
             self.prompt
