@@ -2,6 +2,8 @@ require "set"
 require_relative "tile.rb"
 
 class Board
+    attr_accessor :cursor_pos
+
     def initialize
         @grid = Array.new(9) { Array.new(9) }
         @bombs = set_bomb_coords
@@ -54,9 +56,9 @@ class Board
             print i.to_s.ljust(2)
             row.each_with_index do |tile, j|
                 if [i,j] == @cursor_pos
-                    print tile.to_s(bombs).ljust(2).on_light_black
+                    print tile.to_s(bombs).on_light_black
                 else
-                    print tile.to_s(bombs).ljust(2)
+                    print tile.to_s(bombs)
                 end
             end
             puts

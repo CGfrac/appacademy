@@ -71,17 +71,17 @@ class Tile
     def to_s(bombs)
         if self.revealed
             if @neighbor_bombs == 0
-                '_'
+                '_'.ljust(2)
             else
                 color = self.tile_color
                 @neighbor_bombs.to_s.ljust(2).colorize(color)
             end
         elsif @bombed && bombs
-            'B'
+            'B'.ljust(2)
         elsif @flagged
-            "F"
+            "F".ljust(2)
         else
-            "*"
+            "*".ljust(2)
         end
     end
 end
