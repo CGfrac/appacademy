@@ -31,7 +31,7 @@ class Minesweeper
         puts "Type 'r' to reveal, 'f' to flag, 's' to save, 'q' to quit"
     end
 
-    def update_time
+    def update_elapsed_time
         current_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         @elapsed_time += (current_time - @starting_time)
     end
@@ -86,21 +86,30 @@ class Minesweeper
         gets.chomp
     end
 
+    def sort_times!(times, settings)
+        times[settings].sort_by! { |time| time[1] }
+    end
+
+    def update_times(times, settings)
+        times[settings] << [self.get_name, @ending_time]
+        self.sort_times!(times, settings)
+
+        stop = [times[settings].length, 10].min
+        times[settings] = times[settings][0...stop]
+    end
+
     def record_time
         settings = "#{@board.height} x #{@board.width} and #{@board.bombs.length} bombs"
+
         if File.exists?("times")
             times = YAML::load_file("times")
-            if times[settings].length < 10 || @ending_time < times[settings][-1][1]
-                times[settings] << [self.get_name, @ending_time]
-                times[settings].sort_by! { |time| time[1] }
-                times[settings] = times[settings][0..9]
-                File.write("times", times.to_yaml)
-            end
+            times[settings] ||= []
         else
             times = Hash.new { |h,k| h[k] = [] }
-            times[settings] << [self.get_name, @ending_time]
-            File.write("times", times.to_yaml)
         end
+
+        self.update_times(times, settings)
+        File.write("times", times.to_yaml)
     end
 
     def display_times
@@ -123,7 +132,7 @@ class Minesweeper
             @board.render
             self.prompt
             self.get_input
-            self.update_time
+            self.update_elapsed_time
         end
         @ending_time = @elapsed_time.round(3)
         unless @boom
