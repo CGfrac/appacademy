@@ -31,9 +31,9 @@ class Minesweeper
         puts "Type 'r' to reveal, 'f' to flag, 's' to save, 'q' to quit"
     end
 
-    def get_time
+    def update_time
         current_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        (current_time - @starting_time).round(3)
+        @elapsed_time += (current_time - @starting_time)
     end
 
     # Taken from https://gist.github.com/acook/4190379
@@ -117,13 +117,15 @@ class Minesweeper
     end
 
     def run
-        @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        @elapsed_time ||= 0
         until over?
+            @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
             @board.render
             self.prompt
-            self.get_input 
+            self.get_input
+            self.update_time
         end
-        @ending_time = self.get_time
+        @ending_time = @elapsed_time.round(3)
         unless @boom
             self.victory_message
             self.record_time
