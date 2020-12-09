@@ -87,15 +87,19 @@ class Minesweeper
     end
 
     def record_time
+        settings = "#{@board.height} x #{@board.width} and #{@board.bombs.length} bombs"
         if File.exists?("times")
             times = YAML::load_file("times")
-            if times.length < 10 || @ending_time < times[-1][1]
-                times << [self.get_name, @ending_time]
-                times.sort_by! { |time| time[1] }
-                File.write("times", times[0..9])
+            if times[settings].length < 10 || @ending_time < times[settings][-1][1]
+                times[settings] << [self.get_name, @ending_time]
+                times[settings].sort_by! { |time| time[1] }
+                times[settings] = times[settings][0..9]
+                File.write("times", times.to_yaml)
             end
         else
-            File.write("times", [[self.get_name, @ending_time]])
+            times = Hash.new { |h,k| h[k] = [] }
+            times[settings] << [self.get_name, @ending_time]
+            File.write("times", times.to_yaml)
         end
     end
 
@@ -104,7 +108,12 @@ class Minesweeper
         puts "Best times:"
         puts "-----------"
         times = YAML::load_file("times")
-        times.each_with_index { |time, idx| puts "#{idx+1}".ljust(2) + " - " + "#{time[1]}".ljust(5) + " - #{time[0]}" }
+        times.each_key do |setting|
+            puts "-" * setting.length
+            puts "#{setting}:"
+            puts "-" * setting.length
+            times[setting].each_with_index { |time, idx| puts "#{idx+1}".ljust(2) + " - " + "#{time[1]}".ljust(5) + " - #{time[0]}" }
+        end
     end
 
     def run

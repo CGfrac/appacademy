@@ -2,6 +2,7 @@ require "set"
 require_relative "tile.rb"
 
 class Board
+    attr_reader :bombs
     attr_accessor :cursor_pos
 
     def initialize(height, width, num_bombs)
