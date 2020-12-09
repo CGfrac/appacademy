@@ -4,9 +4,9 @@ require_relative "tile.rb"
 class Board
     attr_accessor :cursor_pos
 
-    def initialize
-        @grid = Array.new(9) { Array.new(9) }
-        @bombs = set_bomb_coords
+    def initialize(height, width, num_bombs)
+        @grid = Array.new(height) { Array.new(width) }
+        @bombs = set_bomb_coords(num_bombs)
         @cursor_pos = [0,0]
         populate_grid
     end
@@ -24,9 +24,9 @@ class Board
         @grid[0].length
     end
 
-    def set_bomb_coords
+    def set_bomb_coords(num_bombs)
         bombs = Set.new
-        while bombs.length < 12
+        while bombs.length < num_bombs
             bombs << [rand(0...self.height), rand(0...self.width)]
         end
         bombs

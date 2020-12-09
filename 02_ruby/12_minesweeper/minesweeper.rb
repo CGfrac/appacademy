@@ -3,8 +3,8 @@ require 'io/console'
 require_relative "board.rb"
 
 class Minesweeper
-    def initialize
-        @board = Board.new
+    def initialize(height, width, num_bombs)
+        @board = Board.new(height, width, num_bombs)
     end
 
     def over?
@@ -128,7 +128,7 @@ if __FILE__ == $PROGRAM_NAME
     if save
         game = YAML::load_file(save)
     else
-        game = Minesweeper.new
+        game = Minesweeper.new(9,9,12)
     end
     game.run
 end
