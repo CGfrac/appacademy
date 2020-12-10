@@ -56,4 +56,8 @@ class Map
 
         @ivar << [key, value] unless found
     end
+
+    def get(key)
+        @ivar.each { |el| return el[1] if el[0] == key }
+    end
 end
