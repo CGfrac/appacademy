@@ -60,4 +60,13 @@ class Map
     def get(key)
         @ivar.each { |el| return el[1] if el[0] == key }
     end
+
+    def delete(key)
+        @ivar.each_with_index do |el, i|
+            if el[0] == key
+                @ivar = @ivar[0...i] + @ivar[i+1..-1]
+                break
+            end
+        end
+    end
 end
