@@ -37,3 +37,9 @@ class Queue
         @ivar[0]
     end
 end
+
+class Map
+    def initialize
+        @ivar = []
+    end
+end
