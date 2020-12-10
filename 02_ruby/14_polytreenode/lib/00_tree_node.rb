@@ -22,4 +22,15 @@ class PolyTreeNode
         raise "Not a child" unless @children.include?(child_node)
         child_node.parent = nil
     end
+
+    def dfs(target_value)
+        return self if @value == target_value
+
+        @children.each do |child|
+            node = child.dfs(target_value)
+            return node if node && node.value == target_value
+        end
+
+        nil
+    end
 end
