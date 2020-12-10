@@ -69,4 +69,8 @@ class Map
             end
         end
     end
+
+    def show
+        print "#{@ivar} \n"
+    end
 end
