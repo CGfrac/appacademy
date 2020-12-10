@@ -42,4 +42,18 @@ class Map
     def initialize
         @ivar = []
     end
+
+    def set(key, value)
+        found = false
+
+        @ivar.each do |el| 
+            if el[0] == key
+                el[1] = value
+                found = true
+                break
+            end
+        end
+
+        @ivar << [key, value] unless found
+    end
 end
