@@ -28,4 +28,11 @@ class KnightPathFinder
         @root_node = PolyTreeNode(starting_pos)
         @considered_positions = [starting_pos]
     end
+
+    def new_move_positions(pos)
+        moves = KnightPathFinder.valid_moves(pos)
+        moves.select! { |move| !@considered_positions.include?(move) }
+        @considered_positions += moves
+        moves
+    end
 end
