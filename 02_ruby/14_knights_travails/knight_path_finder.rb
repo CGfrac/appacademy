@@ -26,5 +26,6 @@ class KnightPathFinder
 
     def initialize(starting_pos)
         @root_node = PolyTreeNode(starting_pos)
+        @considered_positions = [starting_pos]
     end
 end
