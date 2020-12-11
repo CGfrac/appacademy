@@ -61,3 +61,9 @@ class KnightPathFinder
         self.trace_path_back(@root_node.dfs(end_pos))
     end
 end
+
+if __FILE__ == $PROGRAM_NAME
+    kpf = KnightPathFinder.new([0, 0])
+    p kpf.find_path([7, 6]) # => 6 steps
+    p kpf.find_path([6, 2]) # => 5 steps
+end
