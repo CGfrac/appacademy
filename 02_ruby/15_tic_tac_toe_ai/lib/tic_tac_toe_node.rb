@@ -17,10 +17,10 @@ class TicTacToeNode
   # the current move.
   def children
     children = []
-    @board.each_with_index do |row, i|
-      row.each_with_index do |col, j|
+    @board.rows.each_with_index do |row, i|
+      (0...row.length).each do |j|
         if @board[i,j].empty?
-          board_duplicate = @board.dup.map!(&:dup)
+          board_duplicate = @board.dup
           board_duplicate[i,j] = @next_mover_mark
           next_mark = @next_mover_mark == :o ? :x : :o
           children << TicTacToeNode.new(board_duplicate, next_mark, [i, j])
