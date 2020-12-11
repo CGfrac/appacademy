@@ -1,3 +1,4 @@
+require "set"
 require_relative "lib/00_tree_node.rb"
 
 class KnightPathFinder
@@ -26,7 +27,7 @@ class KnightPathFinder
 
     def initialize(starting_pos)
         @root_node = PolyTreeNode(starting_pos)
-        @considered_positions = [starting_pos]
+        @considered_positions = Set[starting_pos]
     end
 
     def new_move_positions(pos)
