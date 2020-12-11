@@ -47,4 +47,8 @@ class KnightPathFinder
             queue += node.children
         end
     end
+
+    def find_path(end_pos)
+        @root_node.dfs(end_pos)
+    end
 end
