@@ -31,11 +31,12 @@ class TicTacToeNode
     children = []
     @board.rows.each_with_index do |row, i|
       (0...row.length).each do |j|
-        if @board[i,j].empty?
+        pos = [i,j]
+        if @board.empty?(pos)
           board_duplicate = @board.dup
-          board_duplicate[i,j] = @next_mover_mark
+          board_duplicate[pos] = @next_mover_mark
           next_mark = @next_mover_mark == :o ? :x : :o
-          children << TicTacToeNode.new(board_duplicate, next_mark, [i, j])
+          children << TicTacToeNode.new(board_duplicate, next_mark, pos)
         end
       end
     end
