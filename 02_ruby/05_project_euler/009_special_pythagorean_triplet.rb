@@ -29,15 +29,16 @@ def multiply(matrix, vector)
     new_vector
 end
 
+target = 1000
 i = 1
 while true
     queue = [[3*i, 4*i, 5*i]]
     until queue.empty?
         triple = queue.shift
-        if triple.sum == 1000
+        if triple.sum == target
             puts triple[0] * triple[1] * triple[2]
             exit
-        elsif triple.sum < 1000
+        elsif triple.sum < target
             matrices.each { |matrix| queue << multiply(matrix, triple) }
         end
     end
