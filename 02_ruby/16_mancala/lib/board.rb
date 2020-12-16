@@ -2,6 +2,8 @@ class Board
   attr_accessor :cups
 
   def initialize(name1, name2)
+    @name1 = name1
+    @name2 = name2
     @cups = Array.new(14) { [] }
     self.place_stones
   end
@@ -17,6 +19,20 @@ class Board
   end
 
   def make_move(start_pos, current_player_name)
+    holding = @cups[start_pos]
+    @cups[start_pos] = []
+
+    pos = start_pos
+    until holding.empty?
+      pos = (pos + 1) % 14
+      unless (current_player_name == @name1 && pos == 13 || 
+              current_player_name == @name2 && pos == 6)
+        @cups[pos] << holding.pop
+      end
+    end
+
+    self.render
+    self.next_turn(pos)
   end
 
   def next_turn(ending_cup_idx)
