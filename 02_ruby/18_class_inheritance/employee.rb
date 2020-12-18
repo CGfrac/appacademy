@@ -18,4 +18,8 @@ class Manager < Employee
         super(name, title, salary, boss)
         @employees = employees
     end
+
+    def bonus(multiplier)
+        @employees.inject { |total, employee| employee.salary } * multiplier
+    end
 end
