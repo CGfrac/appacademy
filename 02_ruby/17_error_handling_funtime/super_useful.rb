@@ -31,6 +31,9 @@ end
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
+    if yrs_known < 5
+      raise ArgumentError.new "Less than five years does not make one a best friend."
+    end 
     @name = name
     @yrs_known = yrs_known
     @fav_pastime = fav_pastime
