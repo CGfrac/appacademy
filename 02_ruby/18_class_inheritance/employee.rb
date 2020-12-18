@@ -7,6 +7,10 @@ class Employee
         @salary = salary
         @boss = boss
     end
+
+    def bonus(multiplier)
+        @salary * multiplier
+    end
 end
 
 class Manager < Employee
