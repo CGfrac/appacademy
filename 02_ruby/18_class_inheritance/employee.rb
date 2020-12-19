@@ -22,18 +22,21 @@ class Manager < Employee
     end
 
     def bonus(multiplier)
-        @employees.inject(0) { |sum, employee| sum + employee.salary } * multiplier
+        @employees.inject(0) do |sum, employee|
+            sum += employee.bonus(multiplier) if employee.is_a?(Manager)
+            sum + employee.salary * multiplier
+        end
     end
 end
 
 if __FILE__ == $PROGRAM_NAME
     ned = Manager.new('Ned', 'Founder', 1_000_000, nil)
-    darren = Manager.new('Darren', 'TA Manager', 48_000, ned)
+    darren = Manager.new('Darren', 'TA Manager', 78_000, ned)
     shawna = Employee.new('Shawna', 'TA', 12_000, darren)
     david = Employee.new('David', 'TA', 10_000, darren)
 
     darren.employees = [shawna, david]
-    ned.employees = [darren, shawna, david]
+    ned.employees = [darren]
 
     p ned.bonus(5) # => 500_000
     p darren.bonus(4) # => 88_000
