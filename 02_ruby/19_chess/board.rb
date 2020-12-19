@@ -11,4 +11,14 @@ class Board
             (0...@board[0].length).each { |j| @board[i][j] = Piece }
         end
     end
+
+    def move_piece(start_pos, end_pos)
+        start_x, start_y = start_pos
+        end_x, end_y = end_pos
+
+        raise ArgumentError.new "Invalid start position" if @board[start_x][start_y] == nil
+        raise ArgumentError.new "Invalid end position" if @board[end_x][end_y] == Piece
+        
+        @board[end_x][end_y], @board[start_x][start_y] = @board[start_x][start_y], nil
+    end
 end
