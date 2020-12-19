@@ -4,4 +4,8 @@ class Piece
         @board = board
         @pos = pos
     end
+
+    def to_s
+        @color.to_s
+    end
 end
