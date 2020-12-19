@@ -18,7 +18,7 @@ class Piece
     def valid_moves
     end
 
-    def Symbol
+    def symbol
     end
 
     private
