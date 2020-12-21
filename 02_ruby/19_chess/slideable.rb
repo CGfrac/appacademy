@@ -7,12 +7,18 @@ module Slideable
     ]
 
     def horizontal_dirs
+        HORIZONTAL_DIRS
     end
 
     def diagonal_dirs
     end
 
     def moves
+        moves = []
+        self.move_dirs.each do |pos|
+            moves += self.grow_unblocked_moves_in_dir(*pos)
+        end
+        moves
     end
 
     private
