@@ -26,5 +26,15 @@ module Slideable
     end
 
     def grow_unblocked_moves_in_dir(dx, dy)
+        moves = []
+        i = 1
+        g_dx, g_dy = dx, dy
+        while g_dx.between?(0,8) && g_dy.between?(0,8)
+            g_dx = dx * i
+            g_dy = dx * i
+            moves << [g_dx, g_dy]
+            i += 1
+        end
+        moves
     end
 end
