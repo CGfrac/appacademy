@@ -6,12 +6,17 @@ class Board
         populate_board
     end
 
+    def [](*pos)
+        x, y = pos
+        @board[x][y]
+    end
+
     def populate_board
         (0...2).each do |i| 
-            (0...@board[0].length).each { |j| @board[i][j] = Piece }
+            (0...self[0].length).each { |j| self[i,j] = Piece }
         end
-        (@board.length-2...@board.length).each do |i|
-            (0...@board[0].length).each { |j| @board[i][j] = Piece }
+        (self.length-2...self.length).each do |i|
+            (0...self[0].length).each { |j| self[i,j] = Piece }
         end
     end
 
@@ -19,9 +24,9 @@ class Board
         start_x, start_y = start_pos
         end_x, end_y = end_pos
 
-        raise ArgumentError.new "Invalid start position" if @board[start_x][start_y] == nil
-        raise ArgumentError.new "Invalid end position" if @board[end_x][end_y] == Piece
+        raise ArgumentError.new "Invalid start position" if self[start_x,start_y] == nil
+        raise ArgumentError.new "Invalid end position" if self[end_x,end_y] == Piece
 
-        @board[end_x][end_y], @board[start_x][start_y] = @board[start_x][start_y], nil
+        self[end_x,end_y], self[start_x,start_y] = self[start_x,start_y], nil
     end
 end
