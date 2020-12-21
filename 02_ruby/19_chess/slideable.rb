@@ -31,11 +31,11 @@ module Slideable
         i = 1
         g_dx, g_dy = dx, dy
         while g_dx.between?(0,8) && g_dy.between?(0,8)
-            g_dx = dx * i
-            g_dy = dx * i
-            break unless board[g_dx, g_dy].empty? || board[g_dx, g_dy].color != color
-            moves << [g_dx, g_dy]
-            break unless board[g_dx, g_dy].empty?
+            g_dx, g_dy = dx * i, dy * i
+            pos = [g_dx, g_dy]
+            break unless board[*pos].empty? || board[*pos].color != color
+            moves << pos
+            break unless board[*pos].empty?
             i += 1
         end
         moves
