@@ -23,20 +23,22 @@ class Board
             (0..7).each do |j|
                 pos = [i, j]
                 if pos == [0, 0] || pos == [0, 7]
-                    self.add_piece(Rook, pos)
+                    piece = Rook.new(:white, @board, pos)
                 else
-                    self.add_piece(Piece, pos)
+                    piece = Piece
                 end
+                self.add_piece(piece, pos)
             end
         end
         (6..7).each do |i|
             (0..7).each do |j|
                 pos = [i, j]
                 if pos == [7, 0] || pos == [7, 7]
-                    self.add_piece(Rook, pos)
+                    piece = Rook.new(:black, @board, pos)
                 else
-                    self.add_piece(Piece, pos)
+                    piece = Piece
                 end
+                self.add_piece(piece, pos)
             end
         end
     end
