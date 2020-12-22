@@ -1,4 +1,6 @@
 require_relative "piece"
+require_relative "rook"
+require "byebug"
 
 class Board
     def initialize
@@ -12,15 +14,30 @@ class Board
     end
 
     def []=(pos, val)
-        self[pos] = val
+        x, y = pos
+        @grid[x][y] = val
     end
-
+    
     def populate_board
-        (0...2).each do |i| 
-            (0...self[0].length).each { |j| self[i, j] = Piece }
+        (0..1).each do |i| 
+            (0..7).each do |j|
+                pos = [i, j]
+                if pos == [0, 0] || pos == [0, 7]
+                    self.add_piece(Rook, pos)
+                else
+                    self.add_piece(Piece, pos)
+                end
+            end
         end
-        (self.length-2...self.length).each do |i|
-            (0...self[0].length).each { |j| self[i, j] = Piece }
+        (6..7).each do |i|
+            (0..7).each do |j|
+                pos = [i, j]
+                if pos == [7, 0] || pos == [7, 7]
+                    self.add_piece(Rook, pos)
+                else
+                    self.add_piece(Piece, pos)
+                end
+            end
         end
     end
 
@@ -35,6 +52,7 @@ class Board
     end
 
     def add_piece(piece, pos)
+        self[pos] = piece
     end
 
     def checkmate?(color)
@@ -50,6 +68,7 @@ class Board
     end
 
     def dup
+        @grid.map { |row| row.dup }
     end
 
     def move_piece!(color, start_pos, end_pos)
