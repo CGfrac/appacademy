@@ -2,13 +2,13 @@ require_relative "piece"
 
 class Board
     def initialize
-        @board = Array.new(8) { Array.new(8, nil) }
+        @grid = Array.new(8) { Array.new(8, nil) }
         populate_board
     end
 
     def [](*pos)
         x, y = pos
-        @board[x][y]
+        @grid[x][y]
     end
 
     def []=(pos, val)
