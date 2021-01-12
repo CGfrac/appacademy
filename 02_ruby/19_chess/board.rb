@@ -7,6 +7,7 @@ class Board
 
     def initialize
         @rows = Array.new(8) { Array.new(8, nil) }
+        @null_piece = NullPiece.instance
         populate_board
     end
 
@@ -29,8 +30,7 @@ class Board
                 when 6..7
                     color = :white
                 else
-                    piece = NullPiece.instance
-                    self.add_piece(piece, [i,j])
+                    self[[i, j]] = @null_piece
                     next
                 end
                 pos = [i, j]
@@ -39,7 +39,7 @@ class Board
                 else
                     piece = Piece.new(color, @board, pos)
                 end
-                self.add_piece(piece, pos)
+                self[pos] = piece
             end
         end
     end
@@ -50,4 +50,7 @@ class Board
 
         self[end_pos], self[start_pos] = self[start_pos], nil
     end
+
+    private
+    attr_reader :null_piece
 end
