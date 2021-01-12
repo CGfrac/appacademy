@@ -3,19 +3,21 @@ require_relative "rook"
 require_relative "null_piece"
 
 class Board
+    attr_reader :rows
+
     def initialize
-        @grid = Array.new(8) { Array.new(8, nil) }
+        @rows = Array.new(8) { Array.new(8, nil) }
         populate_board
     end
 
     def [](*pos)
         x, y = pos
-        @grid[x][y]
+        @rows[x][y]
     end
 
     def []=(pos, val)
         x, y = pos
-        @grid[x][y] = val
+        @rows[x][y] = val
     end
     
     def populate_board
