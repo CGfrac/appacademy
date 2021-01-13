@@ -35,9 +35,9 @@ class Board
                 end
                 pos = [i, j]
                 if i == 0 || i == 7 and j == 0 || j == 7
-                    piece = Rook.new(color, @board, pos)
+                    piece = Rook.new(color, self, pos)
                 else
-                    piece = Piece.new(color, @board, pos)
+                    piece = Piece.new(color, self, pos)
                 end
                 self[pos] = piece
             end
