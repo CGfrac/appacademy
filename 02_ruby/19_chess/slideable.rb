@@ -28,15 +28,13 @@ module Slideable
 
     def grow_unblocked_moves_in_dir(dx, dy)
         moves = []
-        i = 1
-        g_dx, g_dy = dx, dy
-        while g_dx.between?(0,8) && g_dy.between?(0,8)
-            g_dx, g_dy = dx * i, dy * i
-            pos = [g_dx, g_dy]
-            break unless board[*pos].empty? || board[*pos].color != color
-            moves << pos
-            break unless board[*pos].empty?
-            i += 1
+        new_pos = [@pos[0] + dx, @pos[1] + dy]
+        while new_pos[0].between?(0,8) && new_pos[1].between?(0,8)
+            break unless @board[*new_pos].empty? || @board[*new_pos].color != @color
+            moves << new_pos
+            break unless @board[*new_pos].empty?
+            new_pos[0] += dx 
+            new_pos[1] += dy
         end
         moves
     end
