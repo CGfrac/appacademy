@@ -29,7 +29,7 @@ module Slideable
     def grow_unblocked_moves_in_dir(dx, dy)
         moves = []
         new_pos = [@pos[0] + dx, @pos[1] + dy]
-        while new_pos[0].between?(0,8) && new_pos[1].between?(0,8)
+        while new_pos.all? { |coord| coord.between?(0,8) }
             break unless @board[*new_pos].empty? || @board[*new_pos].color != @color
             moves << new_pos
             break unless @board[*new_pos].empty?
