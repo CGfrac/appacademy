@@ -2,7 +2,9 @@ module Stepable
     def moves
         moves = []
         self.move_diffs.each do |pos|
-            moves << pos if @board[*pos].color != @color
+            if pos.all? { |coord| coord.between?(0,8) } && @board[*pos].color != @color
+                moves << pos
+            end
         end
         moves
     end
